@@ -1,17 +1,90 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.kotlin_version = '1.3.50'
+
+    ext.versions = [
+            gson                  : '2.8.5',
+            kotlin                : '1.3.50',
+            retrofit              : '2.6.0',
+            coroutine             : '1.2.1',
+            retrofitGsonConverter : '2.4.0',
+            kodein                : '6.1.0',
+            coroutinesAdapter     : '0.9.2',
+            androidxAppcompat     : '1.0.2',
+            constraintlayout      : '1.1.3',
+            lifecycleExtension    : '2.0.0',
+            livedata              : '2.2.0-alpha02',
+            navigation            : '2.0.0',
+            junit                 : '4.12',
+            testRunner            : '1.2.0',
+            espresso              : '3.2.0',
+            databinding           : '3.4.2',
+            picasso               : '2.71828',
+            paging                : '1.0.1',
+            pagingKtx             : '2.1.0',
+            appcompat             : '28.0.0',
+            retrofitLogging       : '3.9.0',
+    ]
+
+    ext.kotlinCore = [
+            core            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
+            coroutine       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutine",
+            kotlinxCoroutine: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1",
+            reflection      : "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+
+    ]
+
+    ext.picasso = [
+            core: "com.squareup.picasso:picasso:$versions.picasso"
+    ]
+
+    ext.kodein = [
+            core: "org.kodein.di:kodein-di-generic-jvm:$versions.kodein"
+    ]
+
+    ext.gson = [
+            core: "com.google.code.gson:gson:$versions.gson"
+    ]
+
+    ext.support = [
+            recyclerView: "com.android.support:recyclerview-v7:$versions.appcompat",
+            appcompat   : "com.android.support:appcompat-v7:$versions.appcompat",
+            design      : "com.android.support:design:$versions.appcompat"
+    ]
+
+    ext.androidx = [
+            appcompat         : "androidx.appcompat:appcompat:$versions.androidxAppcompat",
+            coreKtx           : "androidx.core:core-ktx:$versions.androidxAppcompat",
+            constraintlayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
+            lifecycle         : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleExtension",
+            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleExtension",
+            liveData          : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedata",
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+            navigationUI      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+            databinding       : "androidx.databinding:databinding-runtime:$versions.databinding",
+            paging            : "android.arch.paging:runtime:$versions.paging",
+            pagingKtx         : "androidx.paging:paging-runtime-ktx:$versions.pagingKtx",
+    ]
+
+    ext.retrofit = [
+            core             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            gsonConverter    : "com.squareup.retrofit2:converter-gson:$versions.retrofitGsonConverter",
+            coroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.coroutinesAdapter",
+            logging          : "com.squareup.okhttp3:logging-interceptor:$versions.retrofitLogging",
+    ]
+
+    ext.test = [
+            junit     : "junit:junit:$versions.junit",
+            testRunner: "androidx.test:runner:$versions.testRunner",
+            espresso  : "androidx.test.espresso:espresso-core:$versions.espresso"
+    ]
+
     repositories {
         google()
         jcenter()
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
 }
 
@@ -20,6 +93,9 @@ allprojects {
         google()
         jcenter()
 
+
+        maven { url "https://jitpack.io" }
+        maven { url "https://dl.bintray.com/shabankamel/android" }
     }
 }
 

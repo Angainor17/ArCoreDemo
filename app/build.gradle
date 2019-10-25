@@ -5,12 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.simferopol.app"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -21,14 +21,49 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation project(path: ':api')
+
+    implementation kotlinCore.core
+    implementation kotlinCore.coroutine
+    implementation kotlinCore.kotlinxCoroutine
+    implementation kotlinCore.reflection
+
+    implementation picasso.core
+    implementation kodein.core
+    implementation gson.core
+
+    implementation retrofit.core
+
+    implementation androidx.appcompat
+    implementation androidx.coreKtx
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycle
+    implementation androidx.lifecycleViewModel
+    implementation androidx.liveData
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUI
+    implementation androidx.paging
+    implementation androidx.pagingKtx
+
+    implementation support.recyclerView
+    implementation support.design
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    testImplementation test.junit
+    androidTestImplementation test.testRunner
+    androidTestImplementation test.espresso
 }
