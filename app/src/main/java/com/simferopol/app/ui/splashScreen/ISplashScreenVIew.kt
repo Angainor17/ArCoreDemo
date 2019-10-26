@@ -1,4 +1,4 @@
-package com.simferopol.app.splashScreen
+package com.simferopol.app.ui.splashScreen
 
 interface ISplashScreenVIew {
 

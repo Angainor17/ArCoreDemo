@@ -20,7 +20,7 @@
         >
 
         <activity
-            android:name="com.simferopol.app.splashScreen.SplashScreenActivity"
+            android:name="com.simferopol.app.ui.splashScreen.SplashScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 

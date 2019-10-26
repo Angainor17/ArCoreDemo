@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.simferopol.app.splashScreen.SplashScreenVm" />
+            type="com.simferopol.app.ui.splashScreen.SplashScreenVm" />
 
     </data>
 
