@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -11,9 +13,11 @@ android {
         applicationId "com.simferopol.app"
         minSdkVersion 19
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -29,6 +33,12 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -56,13 +66,18 @@ dependencies {
     implementation androidx.navigationUI
     implementation androidx.paging
     implementation androidx.pagingKtx
+    implementation androidx.legacy
+    implementation androidx.multidex
+    implementation androidx.fragmentKtx
 
     implementation support.recyclerView
     implementation support.design
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation google.material
+    implementation google.maps
 
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation test.junit
     androidTestImplementation test.testRunner
     androidTestImplementation test.espresso

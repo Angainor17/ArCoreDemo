@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.simferopol.app.utils.models.ViewState" />
 
         <variable
             name="vm"
@@ -11,25 +14,33 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Map"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <fragment
+                android:id="@+id/map"
 
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <include
+            layout="@layout/loading_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{vm.viewState==ViewState.LOADING? View.VISIBLE: View.GONE}" />
+
+    </LinearLayout>
 
 </layout>

@@ -1,13 +1,13 @@
 package com.simferopol.app
 
-import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 import com.simferopol.app.kodein.apiModule
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

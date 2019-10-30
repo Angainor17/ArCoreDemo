@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Simferopol</string>
+
+
     <string name="title_activity_nav_drawer">NavDrawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -17,5 +19,6 @@
     <string name="menu_about">О городе</string>
     <string name="menu_events">Мероприятия</string>
     <string name="menu_settings">Настройки</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

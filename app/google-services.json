@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1010939257834",
+    "firebase_url": "https://simferopol.firebaseio.com",
+    "project_id": "simferopol",
+    "storage_bucket": "simferopol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010939257834:android:3576699b34afd009250893",
+        "android_client_info": {
+          "package_name": "com.simferopol.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010939257834-isltdpuoq8f2rr8fu1l419kco4r694dv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simferopol.app",
+            "certificate_hash": "255c9e5b956babeaded0a8134f3014dee0b25b2d"
+          }
+        },
+        {
+          "client_id": "1010939257834-tkqb5tk1o1kaemm666phm3v66e85ikn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI75E1LZAF4TUIIB_LNhYX8LQDVzuhwvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010939257834-tkqb5tk1o1kaemm666phm3v66e85ikn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,7 +21,6 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenVIew {
         binding.lifecycleOwner = this
     }
 
-
     override fun startBaseApp() {
         val intent = Intent(this, NavDrawer::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
