@@ -12,7 +12,7 @@ class RouteListVm : ViewModel() {
 
     private val routeManager by kodein.instance<RouteManager>()
 
-    val list = MutableLiveData<ArrayList<RouteVm>>()
+    val list = MutableLiveData(ArrayList<RouteVm>())
 
     init {
         GlobalScope.launch {
