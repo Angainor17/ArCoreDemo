@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.simferopol.app.databinding.FragmentRoutesBinding
+import com.simferopol.app.ui.routes.vm.RouteListVm
 
 class RoutesFragment : Fragment() {
 
-    private val routesVm = RoutesVm()
+    private val routesVm = RouteListVm()
 
     override fun onCreateView(
         inflater: LayoutInflater,

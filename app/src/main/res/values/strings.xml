@@ -21,4 +21,10 @@
     <string name="menu_settings">Настройки</string>
     <string name="title_activity_maps">Map</string>
 
+    <plurals name="duration_hour">
+        <item quantity="one">\u2248 %f ЧАС.</item>
+<!--        <item quantity="one">\u2248 %f ЧАС.</item>-->
+        <item quantity="other">\u2248 %f ЧАСА.</item>
+    </plurals>
+
 </resources>
