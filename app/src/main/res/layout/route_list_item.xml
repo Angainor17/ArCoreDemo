@@ -14,20 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
+
         tools:background="@android:color/background_dark"
        >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/black">
+
             <ImageView
                 android:id="@+id/previewImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:alpha="0.3"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{vm.imageUrl}"
+
                 tools:src="@mipmap/test_route"
                 />
 
@@ -65,7 +72,7 @@
                 app:layout_constraintStart_toEndOf="@+id/distance_icon"
                 app:layout_constraintTop_toTopOf="@+id/distance_icon"
 
-                tools:text="1,0 КМ" />
+                tools:text="1,0 КМ"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,9 +84,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
                 app:layout_constraintStart_toEndOf="@+id/duration_icon"
-                app:layout_constraintTop_toTopOf="@+id/duration_icon"
-
-                />
+                app:layout_constraintTop_toTopOf="@+id/duration_icon" />
 
             <ImageView
                 android:id="@+id/distance_icon"
