@@ -20,4 +20,15 @@ internal class RouteManagerImpl(private val context: Context) : RouteManager {
             )
         }
     }
+
+    override suspend fun getRoute(): ManagerResult<Route> {
+        return wrapManagerResult {
+            Gson().fromJson<Route>(
+                readJson(
+                    context,
+                    "route.json"
+                )
+            )
+        }
+    }
 }

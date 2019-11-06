@@ -19,6 +19,6 @@ class Route(
     val distance: Float,
     val time: Float,
     val audio: String?,
-    val geoobjects: ArrayList<GeoObject>,
-    val points: ArrayList<MapPoint>
+    val geoobjects: ArrayList<GeoObject>?, //nullable for testing
+    val points: ArrayList<MapPoint>? //nullable for testing
 )

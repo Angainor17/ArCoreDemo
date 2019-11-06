@@ -1,8 +1,5 @@
 package com.simferopol.app.ui.routes
 
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
