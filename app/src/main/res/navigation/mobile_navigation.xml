@@ -83,10 +83,17 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_route"
 
+        android:id="@+id/nav_route"
         android:name="com.simferopol.app.ui.routes.RouteFragment"
 
-        tools:layout="@layout/fragment_route" />
+        tools:layout="@layout/fragment_route" >
+
+        <argument
+            android:name="routeID"
+            app:argType="integer"
+        />
+
+    </fragment>
 
 </navigation>

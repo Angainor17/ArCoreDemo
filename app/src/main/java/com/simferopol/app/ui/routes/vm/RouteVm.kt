@@ -1,6 +1,5 @@
 package com.simferopol.app.ui.routes.vm
 
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,14 @@ import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
 import com.simferopol.api.routeManager.RouteManager
 import com.simferopol.app.App
-import com.simferopol.app.R
+import com.simferopol.app.ui.routes.RoutesFragmentDirections
 import org.kodein.di.generic.instance
 
 class RouteVm(routeVm: Route) : ViewModel() {
 
     private val routeManager by App.kodein.instance<RouteManager>()
 
+    val routeId = routeVm.id
     val imageUrl = routeVm.preview
     val name = routeVm.name
     val distance = routeVm.distance
@@ -33,6 +33,7 @@ class RouteVm(routeVm: Route) : ViewModel() {
     }
 
     private fun onClick(view: View){
-        view.findNavController().navigate(R.id.nav_route)
+        val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(routeId)
+        view.findNavController().navigate(action)
     }
 }
