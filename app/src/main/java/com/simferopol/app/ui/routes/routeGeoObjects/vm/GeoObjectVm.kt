@@ -10,6 +10,7 @@ class GeoObjectVm(geoObject: GeoObject) : ViewModel() {
 
     val name = geoObject.name
     val address = geoObject.address
+    val about = geoObject.about
 
 
     fun onItemTouch(view: View, motionEvent: MotionEvent):Boolean

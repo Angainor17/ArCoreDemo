@@ -81,7 +81,7 @@
                 android:layout_marginStart="16dp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:text="@{vm.distance + `KM`}"
+                android:text="@{vm.distance + ` KM`}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
                 app:layout_constraintStart_toEndOf="@+id/distance_icon"
@@ -94,9 +94,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:textAllCaps="true"
-                android:text="@{vm.time + `ЧАСА`}"
-
                 android:textColor="@color/white"
+
+                app:pluralTime="@{vm.time}"
                 app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
                 app:layout_constraintStart_toEndOf="@+id/duration_icon"
                 app:layout_constraintTop_toTopOf="@+id/duration_icon" />
