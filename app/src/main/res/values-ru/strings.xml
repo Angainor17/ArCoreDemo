@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Симферополь</string>
+
+    <string name="menu_map">Карта</string>
+    <string name="menu_routes">Маршруты</string>
+    <string name="menu_monuments">Достопримечательности</string>
+    <string name="menu_info_marks">Инфометки</string>
+    <string name="menu_services">Услуги</string>
+    <string name="menu_history">История</string>
+    <string name="menu_about">О городе</string>
+    <string name="menu_events">Мероприятия</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="language">Язык</string>
+
+    <string name="send_statistic">Отправлять статистику</string>
+    <string name="developed_by">Разработано при участии ООО \"Joy-Dev\"</string>
+    <string name="about_app">О программе</string>
+    <string name="version">Версия</string>
+    <string name="build">сборка</string>
+
+</resources>

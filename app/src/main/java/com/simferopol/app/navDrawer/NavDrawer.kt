@@ -11,8 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.simferopol.app.R
+import com.simferopol.app.utils.ui.CustomActivity
 
-class NavDrawer : AppCompatActivity() {
+class NavDrawer : CustomActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
