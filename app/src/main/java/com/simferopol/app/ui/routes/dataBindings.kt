@@ -1,9 +1,11 @@
 package com.simferopol.app.ui.routes
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.simferopol.app.R
+import com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm
 import com.simferopol.app.ui.routes.vm.RouteVm
 import com.simferopol.app.utils.ui.FixedListAdapter
 import com.squareup.picasso.Picasso
@@ -25,6 +27,30 @@ fun initRouteList(view: RecyclerView, list: ArrayList<RouteVm>) {
 
     view.adapter = adapter
 }
+
+@BindingAdapter("app:initGeoObjectsList")
+fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
+    val adapter = object : FixedListAdapter<GeoObjectVm>(R.layout.geoobject_list_item) {
+        override fun onBindViewHolder(holder: VH<GeoObjectVm>, position: Int) {
+            super.onBindViewHolder(holder, position)
+            val item = list[position]
+            holder.bind(item)
+            holder.itemView.setOnTouchListener { view, motionEvent ->
+                item.onItemTouch(view, motionEvent)
+            }
+        }
+    }
+    adapter.setItems(list)
+
+    view.adapter = adapter
+}
+
+@BindingAdapter("app:routeClick")
+fun routeClick(view: ImageView, name: String?){
+    view.setOnClickListener {
+        Log.e("routesBtn", name)
+    }
+    }
 
 @BindingAdapter("app:loadImage")
 fun loadImage(view: ImageView, url: String?){

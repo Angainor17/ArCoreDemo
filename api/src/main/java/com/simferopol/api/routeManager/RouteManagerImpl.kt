@@ -33,9 +33,9 @@ internal class RouteManagerImpl(private val context: Context) : RouteManager {
         }
     }
 
-    override suspend fun getGeoObjects(): ManagerResult<List<GeoObject>>{
+    override suspend fun getGeoObjects(): ManagerResult<ArrayList<GeoObject>>{
         return wrapManagerResult {
-            Gson().fromJson<List<GeoObject>>(
+            Gson().fromJson<ArrayList<GeoObject>>(
                 readJson(
                     context,
                     "geoObjects.json"

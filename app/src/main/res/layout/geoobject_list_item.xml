@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        tools:background="@android:color/white"
+        >
+
+            <TextView
+                android:id="@+id/textView"
+                android:text="@{vm.address}"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:singleLine="false"
+                android:textColor="@color/colorSubTitle"
+                android:textSize="16dp"
+                android:textAllCaps="true"
+
+
+                tools:text="Улица в Енисейске" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:text="@{vm.name}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginEnd="16dp"
+                android:singleLine="false"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22dp"
+                android:drawableLeft="@drawable/ic_bullet_dot"
+                android:drawablePadding="8dp"
+
+                tools:text="Золотая лихорадка в Енисейске" />
+
+    </LinearLayout>
+
+</layout>

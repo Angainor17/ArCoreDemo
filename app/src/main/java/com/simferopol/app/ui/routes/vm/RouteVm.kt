@@ -5,14 +5,9 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
-import com.simferopol.api.routeManager.RouteManager
-import com.simferopol.app.App
 import com.simferopol.app.ui.routes.RoutesFragmentDirections
-import org.kodein.di.generic.instance
 
 class RouteVm(routeVm: Route) : ViewModel() {
-
-    private val routeManager by App.kodein.instance<RouteManager>()
 
     val routeId = routeVm.id
     val imageUrl = routeVm.preview
@@ -33,7 +28,7 @@ class RouteVm(routeVm: Route) : ViewModel() {
     }
 
     private fun onClick(view: View){
-        val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(routeId)
+        val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(routeId,name,imageUrl,distance,time)
         view.findNavController().navigate(action)
     }
 }

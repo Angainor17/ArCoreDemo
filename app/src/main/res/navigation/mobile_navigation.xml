@@ -85,7 +85,7 @@
     <fragment
 
         android:id="@+id/nav_route"
-        android:name="com.simferopol.app.ui.routes.RouteFragment"
+        android:name="com.simferopol.app.ui.routes.routeGeoObjects.RouteFragment"
 
         tools:layout="@layout/fragment_route" >
 
@@ -93,6 +93,22 @@
             android:name="routeID"
             app:argType="integer"
         />
+        <argument
+            android:name="routeName"
+            app:argType="string"
+            />
+        <argument
+            android:name="routePreview"
+            app:argType="string"
+            />
+        <argument
+            android:name="routeDistance"
+            app:argType="float"
+            />
+        <argument
+            android:name="routeTime"
+            app:argType="float"
+            />
 
     </fragment>
 

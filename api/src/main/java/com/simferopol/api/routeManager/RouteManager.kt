@@ -8,6 +8,6 @@ interface RouteManager {
 
     suspend fun getRoutes(): ManagerResult<ArrayList<Route>>
     suspend fun getRoute(): ManagerResult<Route>
-    suspend fun getGeoObjects(): ManagerResult<List<GeoObject>>
+    suspend fun getGeoObjects(): ManagerResult<ArrayList<GeoObject>>
 
 }
