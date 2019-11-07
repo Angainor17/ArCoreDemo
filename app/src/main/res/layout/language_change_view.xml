@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.simferopol.app.providers.lang.LocaleProviderKt" />
+
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.settings.vm.SettingsVm" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/settings_margin"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language"
+            android:textAllCaps="true"
+            android:fontFamily="@font/circe_light"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/lightGray"
+            android:textSize="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/round_icon_text_view"
+
+                app:onClickListener="@{()->vm.changeLocale(LocaleProviderKt.RU_LOCALE)}"
+                app:text="@{@string/russian}"
+                app:isChecked="@{vm.localeLiveData.locale.equals(LocaleProviderKt.RU_LOCALE)}"
+                />
+
+            <include
+                layout="@layout/round_icon_text_view"
+
+                app:onClickListener="@{()->vm.changeLocale(LocaleProviderKt.EN_LOCALE)}"
+                app:text="@{@string/english}"
+                app:isChecked="@{vm.localeLiveData.locale.equals(LocaleProviderKt.EN_LOCALE)}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

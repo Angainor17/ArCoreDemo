@@ -7,29 +7,51 @@
 
         <variable
             name="vm"
-            type="com.simferopol.app.ui.settings.SettingsVm" />
+            type="com.simferopol.app.ui.settings.vm.SettingsVm" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <include layout="@layout/language_change_view"
+            app:vm="@{vm}"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/SettingsSeparatorStyle" />
+
+        <include
+            layout="@layout/round_icon_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Settings"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            android:layout_marginStart="@dimen/settings_margin"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:onClickListener="@{()->vm.sendStatisticClick()}"
+            app:text="@{@string/send_statistic}"
+            app:isChecked="@{true}"
+            />
 
+        <View
+            android:layout_width="match_parent"
+            style="@style/SettingsSeparatorStyle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            layout="@layout/settings_about_app"
+
+            app:vm="@{vm}"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settings_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
 
 </layout>

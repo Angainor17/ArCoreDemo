@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#2b2b2b</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="separatorColor">#7A7A7A</color>
+    <color name="lightGray">#A3A3A3</color>
+    <color name="textGray">#808183</color>
+
+    <color name="orangeSelected">#e35205</color>
+    <color name="unselectedColor">#e7e7e7</color>
+
 </resources>
