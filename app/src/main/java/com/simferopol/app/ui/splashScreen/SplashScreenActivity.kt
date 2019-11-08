@@ -2,13 +2,13 @@ package com.simferopol.app.ui.splashScreen
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.simferopol.app.R
 import com.simferopol.app.databinding.ActivitySplashBinding
 import com.simferopol.app.navDrawer.NavDrawer
+import com.simferopol.app.utils.ui.CustomActivity
 
-class SplashScreenActivity : AppCompatActivity(), ISplashScreenVIew {
+class SplashScreenActivity : CustomActivity(), ISplashScreenVIew {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)

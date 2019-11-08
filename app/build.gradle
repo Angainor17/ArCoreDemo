@@ -8,6 +8,8 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
+def buildNumber = 1
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -20,11 +22,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        archivesBaseName = "Simf ${versionName}(${buildNumber})(${new Date().format('dd.MM.yyyy')}) versionCode($versionCode)"
     }
     buildTypes {
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            debuggable = true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "int", "APP_BUILD_NUMBER", "$buildNumber"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "int", "APP_BUILD_NUMBER", "$buildNumber"
         }
     }
 
