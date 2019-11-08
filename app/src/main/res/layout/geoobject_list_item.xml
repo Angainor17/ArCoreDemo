@@ -17,9 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        tools:background="@android:color/white"
         tools:layout_height="wrap_content">
 
+        <View
+            android:id="@+id/geoObjectView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/lightGray"
+            android:alpha="0"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/icon"
@@ -67,17 +78,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:singleLine="false"
             android:text="@{vm.address}"
-            android:textAllCaps="true"
-            android:textColor="@color/colorSubTitle"
-            android:textSize="12dp"
+            style="@style/RouteSubTitle"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
             app:layout_constraintTop_toTopOf="parent"
 
-            tools:text="Адресс asdy uasydu aysduyasiudyasud yiuysd auyasudyuasydusdy " />
+            tools:text="Адресс " />
 
         <TextView
             android:id="@+id/titleTv"
@@ -88,11 +96,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:drawablePadding="8dp"
-            android:singleLine="false"
             android:text="@{vm.name}"
-            android:textAllCaps="true"
+            style="@style/RouteTitle"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
@@ -107,10 +113,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:singleLine="false"
             android:text="@{vm.about}"
-            android:textColor="@color/colorSubTitle"
-            android:textSize="16dp"
+            style="@style/RouteDescription"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +122,6 @@
 
             app:layout_constraintTop_toBottomOf="@+id/titleTv"
             tools:text="Описание asdasd asdasd sd asd asdsadasdasdasdasdasdsadasdasds sad sds" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

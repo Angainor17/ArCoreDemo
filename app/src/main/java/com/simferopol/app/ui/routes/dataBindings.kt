@@ -10,6 +10,7 @@ import com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm
 import com.simferopol.app.ui.routes.vm.RouteVm
 import com.simferopol.app.utils.ui.FixedListAdapter
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.geoobject_list_item.view.*
 import kotlinx.android.synthetic.main.route_list_item.view.*
 
 @BindingAdapter("app:initRouteList")
@@ -38,7 +39,7 @@ fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
             item.index = position
             item.totalItems = itemCount
             holder.bind(item)
-            holder.itemView.setOnTouchListener { view, motionEvent ->
+            holder.itemView.geoObjectView.setOnTouchListener { view, motionEvent ->
                 item.onItemTouch(view, motionEvent)
             }
         }

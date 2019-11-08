@@ -18,7 +18,8 @@ class RouteVm(routeVm: Route) : ViewModel() {
 
     fun onTouch(view: View, motionEvent: MotionEvent):Boolean {
         when (motionEvent.action){
-            MotionEvent.ACTION_DOWN -> { view.alpha = 0.9f }
+            MotionEvent.ACTION_DOWN -> view.alpha = 0.9f
+            MotionEvent.ACTION_CANCEL -> view.alpha = 0.3f
             MotionEvent.ACTION_UP -> {
                 view.alpha = 0.3f
                 onClick(view)

@@ -21,9 +21,10 @@ class GeoObjectVm(geoObject: GeoObject) : ViewModel() {
 
     fun onItemTouch(view: View, motionEvent: MotionEvent): Boolean {
         when (motionEvent.action) {
-            MotionEvent.ACTION_DOWN -> {
-            }
+            MotionEvent.ACTION_DOWN -> view.alpha = 0.3f
+            MotionEvent.ACTION_CANCEL -> view.alpha = 0f
             MotionEvent.ACTION_UP -> {
+                view.alpha = 0f
                 onItemClick(view)
             }
         }
