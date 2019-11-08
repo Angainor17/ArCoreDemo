@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.monuments.vm.MonumentVm" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+
+        tools:background="@android:color/background_dark">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            >
+
+            <ImageView
+                android:id="@+id/monumentImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:alpha="1"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{vm.imageUrl}"/>
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:text="@{vm.name}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="48dp"
+                style="@style/RouteTitle"
+
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.8"
+
+                tools:text="Золотая лихорадка в Енисейске" />
+
+            <ImageView
+                android:id="@+id/btn_3d"
+
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_3d"
+                android:layout_marginEnd="16dp"
+
+                app:layout_constraintStart_toEndOf="@+id/titleTv"
+                app:layout_constraintTop_toTopOf="@+id/titleTv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>
+
+

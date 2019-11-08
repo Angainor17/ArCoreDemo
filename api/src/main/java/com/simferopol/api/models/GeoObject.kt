@@ -6,6 +6,7 @@ class GeoObject(
     val category_id: Int?,
     val lat: Float?,
     val lon: Float?,
+    val preview: String?,
     val address: String?,
     val about: String?,
     val content: String?,
