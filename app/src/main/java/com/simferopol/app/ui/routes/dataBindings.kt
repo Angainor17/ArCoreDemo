@@ -35,9 +35,9 @@ fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
         override fun onBindViewHolder(holder: VH<GeoObjectVm>, position: Int) {
             super.onBindViewHolder(holder, position)
             val item = list[position]
+            item.index = position
+            item.totalItems = itemCount
             holder.bind(item)
-          //  val location = IntArray(2)
-          //  holder.itemView.getLocationOnScreen(location)
             holder.itemView.setOnTouchListener { view, motionEvent ->
                 item.onItemTouch(view, motionEvent)
             }
@@ -49,15 +49,15 @@ fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
 }
 
 @BindingAdapter("app:routeClick")
-fun routeClick(view: ImageView, name: String?){
+fun routeClick(view: ImageView, name: String?) {
     view.setOnClickListener {
         Log.e("routesBtn", name)
     }
 }
 
 @BindingAdapter("app:loadImage")
-fun loadImage(view: ImageView, url: String?){
-    if(!url.isNullOrEmpty()){
+fun loadImage(view: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()) {
         Picasso.get()
             .load(url)
             .into(view)
@@ -65,10 +65,10 @@ fun loadImage(view: ImageView, url: String?){
 }
 
 @BindingAdapter("app:pluralTime")
-fun pluralTime(view: TextView, time: Float){
+fun pluralTime(view: TextView, time: Float) {
     val plural = if (time == 1f) " Час"
     else " Часа"
-    val text =  String(Character.toChars(0x2248)) + time.toString() + plural
+    val text = String(Character.toChars(0x2248)) + time.toString() + plural
     view.text = text
 }
 

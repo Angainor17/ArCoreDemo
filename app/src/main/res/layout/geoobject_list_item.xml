@@ -1,71 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
 
         tools:background="@android:color/white"
-        >
-
-            <TextView
-                android:id="@+id/textView"
-                android:text="@{vm.address}"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:singleLine="false"
-                android:textColor="@color/colorSubTitle"
-                android:textSize="12dp"
-                android:textAllCaps="true"
+        tools:layout_height="wrap_content">
 
 
-                tools:text="Адресс" />
-        <!-- <View style="@style/Divider.Horizontal"/> -->
+        <View
+            android:id="@+id/icon"
 
-            <TextView
-                android:id="@+id/textView2"
-                android:text="@{vm.name}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/ic_bullet_dot"
 
-                android:layout_marginEnd="16dp"
-                android:singleLine="false"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="22dp"
-                android:drawableLeft="@drawable/ic_bullet_dot"
-                android:drawablePadding="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/titleTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleTv" />
 
-                tools:text="Золотая лихорадка в Енисейске" />
+        <View
+            android:id="@+id/bottomLine"
+
+            style="@style/RouteLineStyle"
+            android:layout_height="0dp"
+            android:visibility="@{vm.isLast() ? View.GONE: View.VISIBLE }"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/icon"
+            app:layout_constraintStart_toStartOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@id/icon" />
+
+        <View
+            android:id="@+id/topLine"
+
+            style="@style/RouteLineStyle"
+            android:layout_height="0dp"
+            android:visibility="@{vm.isFirst() ? View.GONE: View.VISIBLE }"
+
+            app:layout_constraintBottom_toTopOf="@id/icon"
+            app:layout_constraintEnd_toEndOf="@id/icon"
+            app:layout_constraintStart_toStartOf="@id/icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
-            android:id="@+id/textView3"
-            android:text="@{vm.about}"
+            android:id="@+id/addressTv"
+
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:singleLine="false"
+            android:text="@{vm.address}"
+            android:textAllCaps="true"
+            android:textColor="@color/colorSubTitle"
+            android:textSize="12dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:text="Адресс asdy uasydu aysduyasiudyasud yiuysd auyasudyuasydusdy " />
+
+        <TextView
+            android:id="@+id/titleTv"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:drawablePadding="8dp"
+            android:singleLine="false"
+            android:text="@{vm.name}"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@+id/addressTv"
+            tools:text="Золотая лихорадка в Енисейске" />
+
+        <TextView
+            android:id="@+id/descriptionTv"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:singleLine="false"
+            android:text="@{vm.about}"
             android:textColor="@color/colorSubTitle"
             android:textSize="16dp"
 
-            tools:text="Описание" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/titleTv"
 
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/titleTv"
+            tools:text="Описание asdasd asdasd sd asd asdsadasdasdasdasdasdsadasdasds sad sds" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

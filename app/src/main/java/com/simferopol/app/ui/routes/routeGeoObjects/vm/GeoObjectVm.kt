@@ -12,19 +12,25 @@ class GeoObjectVm(geoObject: GeoObject) : ViewModel() {
     val address = geoObject.address
     val about = geoObject.about
 
+    var index = 0
+    var totalItems = 0
 
-    fun onItemTouch(view: View, motionEvent: MotionEvent):Boolean
-    {
-        when (motionEvent.action){
-            MotionEvent.ACTION_DOWN -> { }
+    fun isFirst(): Boolean = index == 0
+
+    fun isLast(): Boolean = index == totalItems - 1
+
+    fun onItemTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+            }
             MotionEvent.ACTION_UP -> {
                 onItemClick(view)
             }
         }
-        return  true
+        return true
     }
 
-    private fun onItemClick(view: View){
-    Log.e("object", name)//todo navigation to geoObject Screen
+    private fun onItemClick(view: View) {
+        Log.e("object", name)//todo navigation to geoObject Screen
     }
 }
