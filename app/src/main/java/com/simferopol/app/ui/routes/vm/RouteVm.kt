@@ -1,20 +1,22 @@
 package com.simferopol.app.ui.routes.vm
 
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
 import com.simferopol.app.ui.routes.RoutesFragmentDirections
 
 class RouteVm(routeVm: Route) : ViewModel() {
-
+    val route = routeVm
     val routeId = routeVm.id
     val imageUrl = routeVm.preview
     val name = routeVm.name
     val distance = routeVm.distance
     val time = routeVm.time
-    val geoObjects = routeVm.geoobjects
+    val geoObjects = routeVm.geoObjects
 
     fun onTouch(view: View, motionEvent: MotionEvent):Boolean {
         when (motionEvent.action){
@@ -29,7 +31,13 @@ class RouteVm(routeVm: Route) : ViewModel() {
     }
 
     private fun onClick(view: View){
-        val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(routeId,name,imageUrl,distance,time)
+        val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(route)
         view.findNavController().navigate(action)
+    }
+
+    fun routeClick(view: ImageView, name: String?) {
+        view.setOnClickListener {
+            Log.e("routesBtn", name)
+        }
     }
 }

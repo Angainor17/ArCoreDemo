@@ -90,26 +90,9 @@
         tools:layout="@layout/fragment_route" >
 
         <argument
-            android:name="routeID"
-            app:argType="integer"
+            android:name="route"
+            app:argType="com.simferopol.api.models.Route"
         />
-        <argument
-            android:name="routeName"
-            app:argType="string"
-            />
-        <argument
-            android:name="routePreview"
-            app:argType="string"
-            />
-        <argument
-            android:name="routeDistance"
-            app:argType="float"
-            />
-        <argument
-            android:name="routeTime"
-            app:argType="float"
-            />
-
     </fragment>
 
 </navigation>

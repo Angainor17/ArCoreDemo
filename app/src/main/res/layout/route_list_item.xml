@@ -74,7 +74,7 @@
                 android:layout_marginStart="16dp"
                 style="@style/RouteData"
 
-                app:pluralTime="@{vm.time}"
+                app:hourText="@{vm.time}"
                 app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
                 app:layout_constraintStart_toEndOf="@+id/duration_icon"
                 app:layout_constraintTop_toTopOf="@+id/duration_icon" />

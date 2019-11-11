@@ -17,5 +17,6 @@
     <string name="about_app">О программе</string>
     <string name="version">Версия</string>
     <string name="build">сборка</string>
+    <string name="distance_km">КМ</string>
 
 </resources>

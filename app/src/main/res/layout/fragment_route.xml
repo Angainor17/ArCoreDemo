@@ -4,18 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<data>
+    <data>
 
-    <variable
-        name="vm"
-        type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectListVm" />
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectListVm" />
 
-</data>
+    </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<<<<<<< Updated upstream
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -140,27 +141,151 @@
 
             <ImageView
                 android:id="@+id/children_icon"
+=======
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="32dp"
-                android:src="@drawable/ic_kids"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
 
-                app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
-                app:layout_constraintStart_toEndOf="@+id/disabled_icon"
-                app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+                tools:background="@android:color/background_dark">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black">
 
-    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/previewImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.3"
+                        android:scaleType="centerCrop"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadImage="@{vm.imageUrl}" />
 
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:initGeoObjectsList="@{vm.list}"/>
+                    <TextView
+                        android:id="@+id/titleTv"
+                        style="@style/RouteTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="52dp"
+                        android:text="@{vm.name}"
 
-</LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.8"
+
+                        tools:text="Золотая лихорадка в Енисейске" />
+
+                    <ImageView
+                        android:id="@+id/route_button"
+
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@mipmap/ic_view_route"
+
+                        app:layout_constraintStart_toEndOf="@+id/titleTv"
+                        app:layout_constraintTop_toTopOf="@+id/titleTv"
+                        app:routeClick="@{vm.name}" />
+
+                    <TextView
+                        android:id="@+id/distanceTv"
+                        style="@style/RouteData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@{vm.distance + ` KM`}"
+
+                        app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
+                        app:layout_constraintStart_toEndOf="@+id/distance_icon"
+                        app:layout_constraintTop_toTopOf="@+id/distance_icon"
+
+                        tools:text="1,0 КМ" />
+
+                    <TextView
+                        android:id="@+id/timeTv"
+                        style="@style/RouteData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+
+                        app:hourText="@{vm.time}"
+                        app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
+                        app:layout_constraintStart_toEndOf="@+id/duration_icon"
+                        app:layout_constraintTop_toTopOf="@+id/duration_icon" />
+
+                    <ImageView
+                        android:id="@+id/distance_icon"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:src="@mipmap/ic_distance"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+                    <ImageView
+                        android:id="@+id/duration_icon"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="32dp"
+                        android:src="@mipmap/ic_duration"
+
+                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                        app:layout_constraintStart_toEndOf="@+id/distanceTv"
+                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+                    <ImageView
+                        android:id="@+id/disabled_icon"
+
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="32dp"
+                        android:src="@drawable/ic_disabled"
+
+                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                        app:layout_constraintStart_toEndOf="@+id/timeTv"
+                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+                    <ImageView
+                        android:id="@+id/children_icon"
+
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="32dp"
+                        android:src="@drawable/ic_kids"
+>>>>>>> Stashed changes
+
+                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                        app:layout_constraintStart_toEndOf="@+id/disabled_icon"
+                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                app:initGeoObjectsList="@{vm.list}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

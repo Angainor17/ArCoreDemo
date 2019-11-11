@@ -1,5 +1,6 @@
 package com.simferopol.app.ui.routes
 
+import android.content.Context
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -65,8 +66,8 @@ fun loadImage(view: ImageView, url: String?) {
     }
 }
 
-@BindingAdapter("app:pluralTime")
-fun pluralTime(view: TextView, time: Float) {
+@BindingAdapter("app:hourText")
+fun hourText(view: TextView, time: Float) {
     val plural = if (time == 1f) " Час"
     else " Часа"
     val text = String(Character.toChars(0x2248)) + time.toString() + plural
