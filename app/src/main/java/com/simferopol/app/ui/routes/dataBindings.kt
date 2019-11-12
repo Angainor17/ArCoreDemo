@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.simferopol.app.R
+import com.simferopol.app.providers.res.ResProvider
 import com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm
 import com.simferopol.app.ui.routes.vm.RouteVm
 import com.simferopol.app.utils.ui.FixedListAdapter
@@ -68,9 +69,10 @@ fun loadImage(view: ImageView, url: String?) {
 
 @BindingAdapter("app:hourText")
 fun hourText(view: TextView, time: Float) {
-    val plural = if (time == 1f) " Час"
-    else " Часа"
-    val text = String(Character.toChars(0x2248)) + time.toString() + plural
+
+    var plural = if (time == 1.0f) view.context.resources.getQuantityString(R.plurals.time_hours,1, time.toString())
+    else view.context.resources.getQuantityString(R.plurals.time_hours,2, time.toString())
+    val text = String(Character.toChars(0x2248)) + plural
     view.text = text
 }
 

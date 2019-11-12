@@ -23,9 +23,7 @@
             android:id="@+id/geoObjectView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/lightGray"
-            android:alpha="0"
-
+            android:background="@drawable/geoobject_item_background"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,13 +71,13 @@
         <TextView
             android:id="@+id/addressTv"
 
+            style="@style/RouteSubTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@{vm.address}"
-            style="@style/RouteSubTitle"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
@@ -90,6 +88,7 @@
         <TextView
             android:id="@+id/titleTv"
 
+            style="@style/RouteTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -97,7 +96,6 @@
             android:layout_marginEnd="16dp"
             android:drawablePadding="8dp"
             android:text="@{vm.name}"
-            style="@style/RouteTitle"
             android:textColor="@color/colorPrimaryDark"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,13 +106,13 @@
         <TextView
             android:id="@+id/descriptionTv"
 
+            style="@style/RouteDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@{vm.about}"
-            style="@style/RouteDescription"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
