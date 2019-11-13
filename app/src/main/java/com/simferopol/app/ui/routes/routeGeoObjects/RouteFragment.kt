@@ -19,7 +19,7 @@ class RouteFragment: Fragment() {
     ): View? {
         val args: RouteFragmentArgs by navArgs()
         val geoObjectListVm =
-            GeoObjectListVm(args.routeName,args.routePreview,args.routeDistance,args.routeTime)
+            GeoObjectListVm(args.route)
         val binding = FragmentRouteBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = geoObjectListVm

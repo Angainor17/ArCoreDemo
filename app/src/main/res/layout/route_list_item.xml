@@ -5,18 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.simferopol.app.ui.routes.vm.RouteVm" />
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical"
+        android:id="@+id/parent"
 
-        tools:background="@android:color/background_dark"
-       >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:onClick="@{()->vm.onClick(parent)}"
+
+        tools:background="@android:color/background_dark">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,23 +30,34 @@
             <ImageView
                 android:id="@+id/previewImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:alpha="0.3"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadImage="@{vm.imageUrl}" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/transparent_img_bg"
+
+                app:layout_constraintEnd_toEndOf="@id/previewImage"
+                app:layout_constraintTop_toTopOf="@id/previewImage"
+                app:layout_constraintBottom_toBottomOf="@id/previewImage"
+                app:layout_constraintStart_toStartOf="@id/previewImage"
+
+                />
+
             <TextView
                 android:id="@+id/titleTv"
-                android:text="@{vm.name}"
+                style="@style/RouteTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                style="@style/RouteTitle"
+                android:text="@{vm.name}"
 
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,26 +69,25 @@
 
             <TextView
                 android:id="@+id/distanceTv"
+                style="@style/RouteData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/RouteData"
-                android:text="@{vm.distance + ` KM`}"
+                android:layout_marginStart="8dp"
+                app:distanceText="@{vm.distance}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
                 app:layout_constraintStart_toEndOf="@+id/distance_icon"
                 app:layout_constraintTop_toTopOf="@+id/distance_icon"
 
-                tools:text="1,0 КМ"/>
+                tools:text="1,0 КМ" />
 
             <TextView
                 android:id="@+id/timeTv"
+                style="@style/RouteData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/RouteData"
 
-                app:pluralTime="@{vm.time}"
+                app:hourText="@{vm.time}"
                 app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
                 app:layout_constraintStart_toEndOf="@+id/duration_icon"
                 app:layout_constraintTop_toTopOf="@+id/duration_icon" />
@@ -86,6 +99,7 @@
                 android:layout_height="28dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
+
                 android:src="@mipmap/ic_distance"
 
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +111,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:src="@mipmap/ic_duration"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
@@ -109,7 +123,7 @@
 
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:src="@drawable/ic_disabled"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
@@ -121,7 +135,7 @@
 
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:src="@drawable/ic_kids"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distanceTv"

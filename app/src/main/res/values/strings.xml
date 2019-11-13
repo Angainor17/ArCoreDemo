@@ -20,5 +20,14 @@
     <string name="about_app">About app</string>
     <string name="version">Version</string>
     <string name="build">build</string>
+    <string name="distance_km">KM</string>
+
+    <plurals name="time_hours">
+        <item quantity="one">%s hour</item>
+        <item quantity="other">%s hours</item>
+        <item quantity="few">%s hours</item>
+        <item quantity="many">%s hours</item>
+    </plurals>
+
 
 </resources>

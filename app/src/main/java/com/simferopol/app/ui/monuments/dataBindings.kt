@@ -14,9 +14,6 @@ fun initMonumentsList(view: RecyclerView, list: ArrayList<MonumentVm>) {
             super.onBindViewHolder(holder, position)
             val item = list[position]
             holder.bind(item)
-            holder.itemView.monumentImage.setOnTouchListener { view, motionEvent ->
-                item.onItemTouch(view, motionEvent)
-            }
         }
     }
     adapter.setItems(list)
