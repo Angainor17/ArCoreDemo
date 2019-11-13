@@ -68,10 +68,10 @@
                         android:layout_height="42dp"
                         android:layout_marginEnd="16dp"
                         android:src="@mipmap/ic_view_route"
+                        android:onClick="@{()->vm.onRouteClick()}"
 
                         app:layout_constraintStart_toEndOf="@+id/titleTv"
-                        app:layout_constraintTop_toTopOf="@+id/titleTv"
-                        app:routeClick="@{vm.name}" />
+                        app:layout_constraintTop_toTopOf="@+id/titleTv"/>
 
                     <TextView
                         android:id="@+id/distanceTv"

@@ -1,6 +1,5 @@
 package com.simferopol.app.ui.routes
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -43,13 +42,6 @@ fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
     adapter.setItems(list)
 
     view.adapter = adapter
-}
-
-@BindingAdapter("app:routeClick")
-fun routeClick(view: ImageView, name: String?) {
-    view.setOnClickListener {
-        Log.e("routesBtn", name)
-    }
 }
 
 @BindingAdapter("app:loadImage")
