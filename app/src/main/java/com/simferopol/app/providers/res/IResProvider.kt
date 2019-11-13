@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 interface IResProvider {
     fun getText(stringRes: Int): CharSequence
     fun getString(stringRes: Int): String
-    fun getQuantityString(stringRes: Int, quantity: Int): String
+    fun getQuantityString(stringRes: Int, quantity: Int, vararg formatArgs: Any): String
     fun getTextArray(arrayRes: Int): Array<CharSequence>
     fun getStringArray(arrayRes: Int): Array<String>
     fun getIntArray(arrayRes: Int): IntArray

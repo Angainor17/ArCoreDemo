@@ -38,6 +38,7 @@ open class FixedListAdapter<T>(
 
         fun bind(viewModel: T) {
             binding.setVariable(BR.vm, viewModel)
+            binding.executePendingBindings()
         }
     }
 }

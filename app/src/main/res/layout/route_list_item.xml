@@ -9,40 +9,56 @@
         <variable
             name="vm"
             type="com.simferopol.app.ui.routes.vm.RouteVm" />
-
     </data>
 
     <LinearLayout
+        android:id="@+id/parent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:onClick="@{()->vm.onClick(parent)}"
 
-        tools:background="@android:color/background_dark"
-        tools:layout_height="300dp">
-
-        <!--        <ImageView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:src="@{vm.imageUrl}"-->
-
-        <!--            tools:src="@mipmap/test_route">-->
+        tools:background="@android:color/background_dark">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/black">
+
+            <ImageView
+                android:id="@+id/previewImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{vm.imageUrl}" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/transparent_img_bg"
+
+                app:layout_constraintEnd_toEndOf="@id/previewImage"
+                app:layout_constraintTop_toTopOf="@id/previewImage"
+                app:layout_constraintBottom_toBottomOf="@id/previewImage"
+                app:layout_constraintStart_toStartOf="@id/previewImage"
+
+                />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/titleTv"
+                style="@style/RouteTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:singleLine="false"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="22dp"
+                android:text="@{vm.name}"
+
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +68,12 @@
                 tools:text="Золотая лихорадка в Енисейске" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/distanceTv"
+                style="@style/RouteData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                app:distanceText="@{vm.distance}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
                 app:layout_constraintStart_toEndOf="@+id/distance_icon"
@@ -66,17 +82,15 @@
                 tools:text="1,0 КМ" />
 
             <TextView
+                android:id="@+id/timeTv"
+                style="@style/RouteData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textAllCaps="true"
 
-                android:textColor="@color/white"
+                app:hourText="@{vm.time}"
                 app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
                 app:layout_constraintStart_toEndOf="@+id/duration_icon"
-                app:layout_constraintTop_toTopOf="@+id/duration_icon"
-
-                />
+                app:layout_constraintTop_toTopOf="@+id/duration_icon" />
 
             <ImageView
                 android:id="@+id/distance_icon"
@@ -85,28 +99,50 @@
                 android:layout_height="28dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
+
                 android:src="@mipmap/ic_distance"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/titleTv" />
 
             <ImageView
                 android:id="@+id/duration_icon"
 
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:src="@mipmap/ic_duration"
 
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
+                app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                app:layout_constraintStart_toEndOf="@+id/distanceTv"
+                app:layout_constraintTop_toTopOf="@+id/distanceTv" />
 
+            <ImageView
+                android:id="@+id/disabled_icon"
+
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_disabled"
+
+                app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                app:layout_constraintStart_toEndOf="@+id/timeTv"
+                app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+            <ImageView
+                android:id="@+id/children_icon"
+
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_kids"
+
+                app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                app:layout_constraintStart_toEndOf="@+id/disabled_icon"
+                app:layout_constraintTop_toTopOf="@+id/distanceTv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--        </ImageView>-->
 
     </LinearLayout>
 

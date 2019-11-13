@@ -17,5 +17,13 @@
     <string name="about_app">О программе</string>
     <string name="version">Версия</string>
     <string name="build">сборка</string>
+    <string name="distance_km">КМ</string>
+
+    <plurals name="time_hours">
+        <item quantity="one">%s час</item>
+        <item quantity="other">%s часа</item>
+        <item quantity="few">%s часа</item>
+        <item quantity="many">%s часа</item>
+    </plurals>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.simferopol.api.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class Route(
     val id: Int,
@@ -19,6 +20,6 @@ class Route(
     val distance: Float,
     val time: Float,
     val audio: String?,
-    val geoobjects: ArrayList<GeoObject>,
-    val points: ArrayList<MapPoint>
-)
+    val geoObjects: ArrayList<GeoObject>?, //FIXME nullable for testing
+    val points: ArrayList<MapPoint>? //FIXME nullable for testing
+): Serializable

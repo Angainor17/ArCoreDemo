@@ -19,7 +19,11 @@
         android:name="com.simferopol.app.ui.routes.RoutesFragment"
         android:label="@string/menu_routes"
 
-        tools:layout="@layout/fragment_routes" />
+        tools:layout="@layout/fragment_routes" >
+        <action
+            android:id="@+id/action_nav_routes_to_nav_route"
+            app:destination="@+id/nav_route" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_monuments"
@@ -77,5 +81,18 @@
         android:label="@string/menu_settings"
 
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+
+        android:id="@+id/nav_route"
+        android:name="com.simferopol.app.ui.routes.routeGeoObjects.RouteFragment"
+
+        tools:layout="@layout/fragment_route" >
+
+        <argument
+            android:name="route"
+            app:argType="com.simferopol.api.models.Route"
+        />
+    </fragment>
 
 </navigation>
