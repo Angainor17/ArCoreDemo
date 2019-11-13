@@ -14,21 +14,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true"
+        android:onClick="@{()->vm.onItemClick(parent)}"
 
         tools:layout_height="wrap_content">
-
-        <View
-            android:id="@+id/geoObjectView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/geoobject_item_background"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/icon"

@@ -21,8 +21,6 @@
     <string name="version">Version</string>
     <string name="build">build</string>
     <string name="distance_km">KM</string>
-    <string name="hour">Hour</string>
-    <string name="hours">Hours</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s hour</item>

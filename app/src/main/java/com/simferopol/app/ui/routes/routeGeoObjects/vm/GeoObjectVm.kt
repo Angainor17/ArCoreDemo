@@ -19,19 +19,7 @@ class GeoObjectVm(geoObject: GeoObject) : ViewModel() {
 
     fun isLast(): Boolean = index == totalItems - 1
 
-    fun onItemTouch(view: View, motionEvent: MotionEvent): Boolean {
-        when (motionEvent.action) {
-            MotionEvent.ACTION_DOWN -> view.isPressed = true
-            MotionEvent.ACTION_CANCEL -> view.isPressed= false
-            MotionEvent.ACTION_UP -> {
-                view.isPressed = false
-                onItemClick(view)
-            }
-        }
-        return true
-    }
-
-    private fun onItemClick(view: View) {
+     fun onItemClick(view: View) {
         Log.e("object", name)//todo navigation to geoObject Screen
     }
 }

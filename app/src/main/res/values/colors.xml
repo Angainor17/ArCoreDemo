@@ -15,4 +15,7 @@
     <color name="black">#000000</color>
     <color name="colorSubTitle">#ff2b2a2c</color>
     <color name="iconLight">#bfc0c0</color>
+
+    <color name="black_alpha_07">#B3000000</color>
+    <color name="black_alpha_03">#4D000000</color>
 </resources>

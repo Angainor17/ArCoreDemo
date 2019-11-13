@@ -1,19 +1,19 @@
 package com.simferopol.app.ui.routes
 
-import android.content.Context
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.R
-import com.simferopol.app.providers.res.ResProvider
+import com.simferopol.app.providers.res.IResProvider
 import com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm
 import com.simferopol.app.ui.routes.vm.RouteVm
 import com.simferopol.app.utils.ui.FixedListAdapter
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.geoobject_list_item.view.*
-import kotlinx.android.synthetic.main.route_list_item.view.*
+import org.kodein.di.direct
+import org.kodein.di.generic.instance
 
 @BindingAdapter("app:initRouteList")
 fun initRouteList(view: RecyclerView, list: ArrayList<RouteVm>) {
@@ -22,9 +22,6 @@ fun initRouteList(view: RecyclerView, list: ArrayList<RouteVm>) {
             super.onBindViewHolder(holder, position)
             val item = list[position]
             holder.bind(item)
-            holder.itemView.previewImage.setOnTouchListener { view, motionEvent ->
-                item.onTouch(view, motionEvent)
-            }
         }
     }
     adapter.setItems(list)
@@ -41,9 +38,6 @@ fun initGeoObjectsList(view: RecyclerView, list: ArrayList<GeoObjectVm>) {
             item.index = position
             item.totalItems = itemCount
             holder.bind(item)
-            holder.itemView.geoObjectView.setOnTouchListener { view, motionEvent ->
-                item.onItemTouch(view, motionEvent)
-            }
         }
     }
     adapter.setItems(list)
@@ -69,10 +63,19 @@ fun loadImage(view: ImageView, url: String?) {
 
 @BindingAdapter("app:hourText")
 fun hourText(view: TextView, time: Float) {
-
-    var plural = if (time == 1.0f) view.context.resources.getQuantityString(R.plurals.time_hours,1, time.toString())
-    else view.context.resources.getQuantityString(R.plurals.time_hours,2, time.toString())
+    val plural = if (time == 1.0f) view.context.resources.getQuantityString(
+        R.plurals.time_hours,
+        1,
+        time.toString()
+    )
+    else view.context.resources.getQuantityString(R.plurals.time_hours, 2, time.toString())
     val text = String(Character.toChars(0x2248)) + plural
     view.text = text
 }
 
+@BindingAdapter("app:distanceText")
+fun distanceText(view: TextView, distance: Float) {
+    val resProvider: IResProvider = kodein.direct.instance()
+    val formattedText = "$distance " + resProvider.getString(R.string.distance_km)
+    view.text = formattedText
+}
