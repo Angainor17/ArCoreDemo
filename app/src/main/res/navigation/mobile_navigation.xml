@@ -96,6 +96,10 @@
         <argument
             android:name="route"
             app:argType="com.simferopol.api.models.Route" />
+
+        <action
+            android:id="@+id/action_nav_route_to_nav_route_map"
+            app:destination="@+id/nav_route_map" />
     </fragment>
 
     <fragment
@@ -106,6 +110,20 @@
         <argument
             android:name="monument"
             app:argType="com.simferopol.api.models.GeoObject" />
+
+    </fragment>
+
+    <fragment
+
+        android:id="@+id/nav_route_map"
+        android:name="com.simferopol.app.ui.routes.RouteMapFragment"
+
+        tools:layout="@layout/fragment_route_map" >
+
+        <argument
+            android:name="route"
+            app:argType="com.simferopol.api.models.Route"
+            />
     </fragment>
 
 </navigation>

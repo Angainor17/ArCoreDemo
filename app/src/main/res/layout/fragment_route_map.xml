@@ -8,24 +8,31 @@
 
         <variable
             name="vm"
-            type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectListVm" />
+            type="com.simferopol.app.ui.routes.vm.RouteVm" />
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <fragment
+                android:id="@+id/map"
+
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/footerContainer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/footerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
                     android:id="@+id/previewImage"
@@ -56,19 +63,6 @@
 
 
                     tools:text="Золотая лихорадка в Енисейске" />
-
-                <ImageView
-                    android:id="@+id/route_button"
-
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@mipmap/ic_view_route"
-                        android:onClick="@{()->vm.onRouteClick(parent)}"
-
-                    app:layout_constraintBottom_toBottomOf="@+id/titleTv"
-                    app:layout_constraintStart_toEndOf="@+id/titleTv"
-                    app:layout_constraintTop_toTopOf="@+id/titleTv" />
 
 
                 <TextView
@@ -146,13 +140,5 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                app:initGeoObjectsList="@{vm.list}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
