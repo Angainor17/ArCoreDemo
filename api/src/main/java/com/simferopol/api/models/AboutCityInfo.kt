@@ -1,6 +1,6 @@
 package com.simferopol.api.models
 
-class About(
+class AboutCityInfo(
     val preview: String,
     val audio: String,
     val content: String
