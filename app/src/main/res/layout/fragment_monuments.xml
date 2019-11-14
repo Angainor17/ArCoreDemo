@@ -7,29 +7,23 @@
 
         <variable
             name="vm"
-            type="com.simferopol.app.ui.monuments.MonumentsVm" />
+            type="com.simferopol.app.ui.monuments.vm.MonumentListVm" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Monuments"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            android:layout_height="match_parent"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:initMonumentsList="@{vm.list}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>
