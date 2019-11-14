@@ -1,12 +1,13 @@
 package com.simferopol.app.ui.routes.routeGeoObjects.vm
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
 import com.simferopol.api.routeManager.RouteManager
 import com.simferopol.app.App.Companion.kodein
+import com.simferopol.app.ui.routes.routeGeoObjects.RouteFragmentDirections
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
@@ -30,7 +31,8 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
         }
     }
 
-    fun onRouteClick() {
-            Log.e("routesBtn", name) //todo navigate to map 1 screen
+    fun onRouteClick(view: View) {
+        val action = RouteFragmentDirections.actionNavRouteToNavRouteMap(route)
+        view.findNavController().navigate(action)
         }
 }

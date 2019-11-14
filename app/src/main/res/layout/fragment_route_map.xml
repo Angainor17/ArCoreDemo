@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.routes.vm.RouteVm" />
+
+    </data>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/map"
+
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/footerContainer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/footerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/previewImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:alpha="0.3"
+                    android:scaleType="centerCrop"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{vm.imageUrl}" />
+
+
+                <TextView
+                    android:id="@+id/titleTv"
+                    style="@style/Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{vm.name}"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.8"
+
+
+                    tools:text="Золотая лихорадка в Енисейске" />
+
+
+                <TextView
+                    android:id="@+id/distanceTv"
+                    style="@style/RouteData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:distanceText="@{vm.distance}"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
+                    app:layout_constraintStart_toEndOf="@+id/distance_icon"
+                    app:layout_constraintTop_toTopOf="@+id/distance_icon"
+
+                    tools:text="1,0 КМ" />
+
+                <TextView
+                    android:id="@+id/timeTv"
+                    style="@style/RouteData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:hourText="@{vm.time}"
+                    app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
+                    app:layout_constraintStart_toEndOf="@+id/duration_icon"
+                    app:layout_constraintTop_toTopOf="@+id/duration_icon" />
+
+                <ImageView
+                    android:id="@+id/distance_icon"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@mipmap/ic_distance"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleTv"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+                <ImageView
+                    android:id="@+id/duration_icon"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@mipmap/ic_duration"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/distanceTv"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+                <ImageView
+                    android:id="@+id/disabled_icon"
+
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_disabled"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/timeTv"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+                <ImageView
+                    android:id="@+id/children_icon"
+
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_kids"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/disabled_icon"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

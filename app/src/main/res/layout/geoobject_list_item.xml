@@ -65,7 +65,7 @@
         <TextView
             android:id="@+id/addressTv"
 
-            style="@style/RouteSubTitle"
+            style="@style/SubTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -82,7 +82,7 @@
         <TextView
             android:id="@+id/titleTv"
 
-            style="@style/RouteTitle"
+            style="@style/Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
