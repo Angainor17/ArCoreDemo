@@ -2,6 +2,7 @@ package com.simferopol.api.routeManager
 
 import android.content.Context
 import com.google.gson.Gson
+import com.simferopol.api.models.About
 import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.Route
 import com.simferopol.api.utils.ManagerResult
@@ -22,8 +23,8 @@ internal class RouteManagerImpl(private val context: Context) : RouteManager {
         }
     }
 
-     override suspend fun getRoute(): ManagerResult<Route> {
-       return wrapManagerResult {
+    override suspend fun getRoute(): ManagerResult<Route> {
+        return wrapManagerResult {
             Gson().fromJson<Route>(
                 readJson(
                     context,
@@ -33,12 +34,23 @@ internal class RouteManagerImpl(private val context: Context) : RouteManager {
         }
     }
 
-    override suspend fun getGeoObjects(): ManagerResult<ArrayList<GeoObject>>{
+    override suspend fun getGeoObjects(): ManagerResult<ArrayList<GeoObject>> {
         return wrapManagerResult {
             Gson().fromJson<ArrayList<GeoObject>>(
                 readJson(
                     context,
                     "geoObjects.json"
+                )
+            )
+        }
+    }
+
+    override suspend fun getAbout(): ManagerResult<About> {
+        return wrapManagerResult {
+            Gson().fromJson<About>(
+                readJson(
+                    context,
+                    "about.json"
                 )
             )
         }
