@@ -16,8 +16,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:onClick="@{()->vm.onClick(parent)}"
+        android:orientation="vertical"
 
         tools:background="@android:color/background_dark">
 
@@ -30,7 +30,7 @@
             <ImageView
                 android:id="@+id/previewImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:scaleType="centerCrop"
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,24 +42,22 @@
                 android:layout_height="0dp"
                 android:background="@drawable/transparent_img_bg"
 
-                app:layout_constraintEnd_toEndOf="@id/previewImage"
-                app:layout_constraintTop_toTopOf="@id/previewImage"
                 app:layout_constraintBottom_toBottomOf="@id/previewImage"
+                app:layout_constraintEnd_toEndOf="@id/previewImage"
                 app:layout_constraintStart_toStartOf="@id/previewImage"
+                app:layout_constraintTop_toTopOf="@id/previewImage"
 
                 />
 
             <TextView
                 android:id="@+id/titleTv"
-                style="@style/RouteTitle"
+                style="@style/Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@{vm.name}"
 
-
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -96,21 +94,20 @@
                 android:id="@+id/distance_icon"
 
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="21dp"
+                android:layout_marginBottom="8dp"
 
                 android:src="@mipmap/ic_distance"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleTv"
                 app:layout_constraintTop_toBottomOf="@+id/titleTv" />
 
             <ImageView
                 android:id="@+id/duration_icon"
 
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
+                android:layout_height="21dp"
                 android:layout_marginStart="16dp"
                 android:src="@mipmap/ic_duration"
 
@@ -121,8 +118,8 @@
             <ImageView
                 android:id="@+id/disabled_icon"
 
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_disabled"
 
@@ -133,8 +130,8 @@
             <ImageView
                 android:id="@+id/children_icon"
 
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_kids"
 
