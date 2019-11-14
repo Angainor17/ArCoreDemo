@@ -30,7 +30,7 @@
                 <ImageView
                     android:id="@+id/previewImage"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="130dp"
                     android:alpha="0.3"
                     android:scaleType="centerCrop"
 
@@ -40,11 +40,10 @@
 
                 <TextView
                     android:id="@+id/titleTv"
-                    style="@style/RouteTitle"
+                    style="@style/Title"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="40dp"
                     android:text="@{vm.name}"
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -57,12 +56,13 @@
                 <ImageView
                     android:id="@+id/map_button"
 
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginEnd="16dp"
                     android:onClick="@{()->vm.onMapClick()}"
                     android:src="@mipmap/ic_location"
 
+                    app:layout_constraintBottom_toBottomOf="@+id/titleTv"
                     app:layout_constraintStart_toEndOf="@+id/titleTv"
                     app:layout_constraintTop_toTopOf="@+id/titleTv" />
 
@@ -70,8 +70,8 @@
 
             <ImageView
                 android:id="@+id/model_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ic_play_button"
                 android:onClick="@{()->vm.onModelClick()}"
@@ -83,9 +83,9 @@
 
             <ImageView
                 android:id="@+id/play_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="120dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ic_play_button"
                 android:onClick="@{()->vm.onPlayClick()}"
@@ -113,12 +113,12 @@
                 android:id="@+id/photos_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
 
                 app:layout_constraintEnd_toEndOf="@id/description"
                 app:layout_constraintStart_toStartOf="@id/description"
-                app:layout_constraintTop_toBottomOf="@id/description"></androidx.viewpager.widget.ViewPager>
+                app:layout_constraintTop_toBottomOf="@id/description" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/pager_tab"

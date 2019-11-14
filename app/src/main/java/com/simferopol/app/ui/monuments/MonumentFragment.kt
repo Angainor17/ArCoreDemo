@@ -30,8 +30,7 @@ class MonumentFragment : Fragment() {
             adapter.setItems(args.monument.slides!!)
             binding.photosViewpager.adapter = adapter
             binding.pagerTab.setupWithViewPager(binding.photosViewpager)
-        }
-        else  binding.photosViewpager.visibility = View.GONE
+        } else binding.photosViewpager.visibility = View.GONE
         return binding.root
     }
 

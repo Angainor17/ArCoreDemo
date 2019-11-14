@@ -21,135 +21,129 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:background="@color/black">
 
-                tools:background="@android:color/background_dark">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
+                    android:id="@+id/previewImage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/black">
+                    android:layout_height="130dp"
+                    android:alpha="0.3"
+                    android:scaleType="centerCrop"
 
-                    <ImageView
-                        android:id="@+id/previewImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:alpha="0.3"
-                        android:scaleType="centerCrop"
-
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:loadImage="@{vm.imageUrl}" />
-
-                    <TextView
-                        android:id="@+id/titleTv"
-                        style="@style/RouteTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="52dp"
-                        android:text="@{vm.name}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{vm.imageUrl}" />
 
 
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.8"
+                <TextView
+                    android:id="@+id/titleTv"
+                    style="@style/Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{vm.name}"
 
-                        tools:text="Золотая лихорадка в Енисейске" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.8"
 
-                    <ImageView
-                        android:id="@+id/route_button"
 
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@mipmap/ic_view_route"
-                        android:onClick="@{()->vm.onRouteClick()}"
+                    tools:text="Золотая лихорадка в Енисейске" />
 
-                        app:layout_constraintStart_toEndOf="@+id/titleTv"
-                        app:layout_constraintTop_toTopOf="@+id/titleTv"/>
+                <ImageView
+                    android:id="@+id/route_button"
 
-                    <TextView
-                        android:id="@+id/distanceTv"
-                        style="@style/RouteData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        app:distanceText="@{vm.distance}"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{()->vm.onRouteClick()}"
+                    android:src="@mipmap/ic_view_route"
 
-                        app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
-                        app:layout_constraintStart_toEndOf="@+id/distance_icon"
-                        app:layout_constraintTop_toTopOf="@+id/distance_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/titleTv"
+                    app:layout_constraintStart_toEndOf="@+id/titleTv"
+                    app:layout_constraintTop_toTopOf="@+id/titleTv" />
 
-                        tools:text="1,0 КМ" />
 
-                    <TextView
-                        android:id="@+id/timeTv"
-                        style="@style/RouteData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/distanceTv"
+                    style="@style/RouteData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:distanceText="@{vm.distance}"
 
-                        app:hourText="@{vm.time}"
-                        app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
-                        app:layout_constraintStart_toEndOf="@+id/duration_icon"
-                        app:layout_constraintTop_toTopOf="@+id/duration_icon" />
+                    app:layout_constraintBottom_toBottomOf="@+id/distance_icon"
+                    app:layout_constraintStart_toEndOf="@+id/distance_icon"
+                    app:layout_constraintTop_toTopOf="@+id/distance_icon"
 
-                    <ImageView
-                        android:id="@+id/distance_icon"
+                    tools:text="1,0 КМ" />
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:src="@mipmap/ic_distance"
+                <TextView
+                    android:id="@+id/timeTv"
+                    style="@style/RouteData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+                    app:hourText="@{vm.time}"
+                    app:layout_constraintBottom_toBottomOf="@+id/duration_icon"
+                    app:layout_constraintStart_toEndOf="@+id/duration_icon"
+                    app:layout_constraintTop_toTopOf="@+id/duration_icon" />
 
-                    <ImageView
-                        android:id="@+id/duration_icon"
+                <ImageView
+                    android:id="@+id/distance_icon"
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@mipmap/ic_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@mipmap/ic_distance"
 
-                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
-                        app:layout_constraintStart_toEndOf="@+id/distanceTv"
-                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/titleTv"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTv" />
 
-                    <ImageView
-                        android:id="@+id/disabled_icon"
+                <ImageView
+                    android:id="@+id/duration_icon"
 
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/ic_disabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@mipmap/ic_duration"
 
-                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
-                        app:layout_constraintStart_toEndOf="@+id/timeTv"
-                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/distanceTv"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
 
-                    <ImageView
-                        android:id="@+id/children_icon"
+                <ImageView
+                    android:id="@+id/disabled_icon"
 
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/ic_kids"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_disabled"
 
-                        app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
-                        app:layout_constraintStart_toEndOf="@+id/disabled_icon"
-                        app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/timeTv"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/children_icon"
 
-            </LinearLayout>
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_kids"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
+                    app:layout_constraintStart_toEndOf="@+id/disabled_icon"
+                    app:layout_constraintTop_toTopOf="@+id/distanceTv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
