@@ -13,7 +13,7 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     private val monument = monumentVm
     val imageUrl = monumentVm.preview
     val name = monumentVm.name
-    val content = monumentVm.content!!.parseAsHtml()
+    val content = monumentVm.content?.parseAsHtml()
 
     fun onClick(view: View) {
         val action = MonumentsFragmentDirections.actionNavMonumentsToNavMonument(monument)

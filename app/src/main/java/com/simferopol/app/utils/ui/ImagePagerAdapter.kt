@@ -9,10 +9,6 @@ import com.simferopol.app.R
 import com.squareup.picasso.Picasso
 import android.widget.LinearLayout
 
-
-
-
-
 open class ImagePagerAdapter : PagerAdapter() {
 
     private val imagesList = ArrayList<String>()
