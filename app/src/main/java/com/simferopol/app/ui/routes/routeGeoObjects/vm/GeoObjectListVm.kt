@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
-import com.simferopol.api.dataManager.DataManager
+import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.ui.routes.routeGeoObjects.RouteFragmentDirections
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +18,7 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
     val distance = route.distance
     val time = route.time
 
-    private val routeManager by kodein.instance<DataManager>()
+    private val routeManager by kodein.instance<ApiManager>()
 
     val list = MutableLiveData(ArrayList<GeoObjectVm>())
 

@@ -1,7 +1,7 @@
 package com.simferopol.api.kodein
 
-import com.simferopol.api.dataManager.DataManager
-import com.simferopol.api.dataManager.DataManagerImpl
+import com.simferopol.api.apiManager.ApiManager
+import com.simferopol.api.apiManager.ApiManagerImpl
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -9,5 +9,5 @@ import org.kodein.di.generic.singleton
 
 val managersModule = Kodein.Module("ManagersModule") {
 
-    bind<DataManager>() with singleton { DataManagerImpl(instance()) }
+    bind<ApiManager>() with singleton { ApiManagerImpl(instance()) }
 }

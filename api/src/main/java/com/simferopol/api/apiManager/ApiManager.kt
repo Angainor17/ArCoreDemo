@@ -1,11 +1,11 @@
-package com.simferopol.api.dataManager
+package com.simferopol.api.apiManager
 
 import com.simferopol.api.models.AboutCityInfo
 import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.Route
 import com.simferopol.api.utils.ManagerResult
 
-interface DataManager {
+interface ApiManager {
 
     suspend fun getRoutes(): ManagerResult<ArrayList<Route>>
     suspend fun getRoute(): ManagerResult<Route>

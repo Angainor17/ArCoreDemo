@@ -5,7 +5,7 @@ import androidx.core.text.parseAsHtml
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.simferopol.api.models.AboutCityInfo
-import com.simferopol.api.dataManager.DataManager
+import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.app.App
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import org.kodein.di.generic.instance
 
 class AboutVm : ViewModel() {
 
-    private val routeManager by App.kodein.instance<DataManager>()
+    private val routeManager by App.kodein.instance<ApiManager>()
 
     val about = MutableLiveData<AboutCityInfo>()
 
