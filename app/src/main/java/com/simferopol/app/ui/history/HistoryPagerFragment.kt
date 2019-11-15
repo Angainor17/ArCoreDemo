@@ -13,10 +13,11 @@ class HistoryPagerFragment : Fragment() {
 
     private val historyListVm = HistoryListVm()
 
-   // val args: HistoryPagerFragmentArgs by navArgs()
+    val args: HistoryPagerFragmentArgs by navArgs()
 
-  //  val startId = args.storyId
+  //  val startId = args.storyId// todo fix id passing from HistoryFragment
     val startId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +28,7 @@ class HistoryPagerFragment : Fragment() {
         binding.lifecycleOwner = this
         historyListVm.id = startId
         binding.vm = historyListVm
-      //  binding.pagerTab.setupWithViewPager(binding.storiesPager)
+        binding.pagerTab.setupWithViewPager(binding.storiesPager)
         return binding.root
     }
 }

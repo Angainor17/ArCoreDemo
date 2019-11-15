@@ -14,9 +14,11 @@ class HistoryVm(historyVm: Story) : ViewModel() {
     val preview = historyVm.preview
     val audio = historyVm.audio
     val events = historyVm.events
+    val eventList = (ArrayList(events.map { EventVm(it) } ?: ArrayList()))
+
 
     fun onClick(view: View) {
-        val action = HistoryFragmentDirections.actionNavHistoryToNavHistoryPager(id)
+        val action = HistoryFragmentDirections.actionNavHistoryToNavHistoryPager(storyId = id)
         view.findNavController().navigate(action)
     }
 

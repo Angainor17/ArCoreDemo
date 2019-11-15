@@ -19,11 +19,11 @@
         <TextView
             android:id="@+id/title"
             style="@style/Title"
-            android:textColor="@color/orangeSelected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@{vm.title}"
+            android:textColor="@color/orangeSelected"
 
             tools:text="Название" />
 
@@ -57,8 +57,6 @@
             android:text="@{vm.content}"
 
             tools:text="Контент" />
-
-
 
     </LinearLayout>
 
