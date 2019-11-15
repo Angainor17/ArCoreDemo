@@ -18,7 +18,7 @@ abstract class QrCodeVM : ViewModel() {
 
     val context by App.kodein.instance<Context>()
 
-    abstract fun ascannerResult(result: Result)
+    abstract fun scannerResult(result: Result)
 
     abstract fun errorCallback(exception: Exception)
 

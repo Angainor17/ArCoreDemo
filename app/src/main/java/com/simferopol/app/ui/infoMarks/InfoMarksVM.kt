@@ -4,7 +4,7 @@ import com.google.zxing.Result
 
 class InfoMarksVM : QrCodeVM() {
 
-    override fun ascannerResult(result: Result) {
+    override fun scannerResult(result: Result) {
         //TODO implement
     }
 
