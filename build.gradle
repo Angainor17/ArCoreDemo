@@ -27,6 +27,7 @@ buildscript {
             googleMap            : '17.0.0',
             multidex             : '2.0.1',
             fragmentKtx          : '1.2.0-rc01',
+            qrCodeView           : '2.1.0',
     ]
 
     ext.kotlinCore = [
@@ -39,6 +40,10 @@ buildscript {
 
     ext.picasso = [
             core: "com.squareup.picasso:picasso:$versions.picasso"
+    ]
+
+    ext.qrCodeView = [
+            core: "com.budiyev.android:code-scanner:$versions.qrCodeView"
     ]
 
     ext.kodein = [
