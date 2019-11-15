@@ -5,22 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.simferopol.app.databinding.FragmentHistoryBinding
+import androidx.navigation.fragment.navArgs
+import com.simferopol.app.databinding.FragmentHistoryPagerBinding
 import com.simferopol.app.ui.history.vm.HistoryListVm
 
-class HistoryFragment : Fragment() {
+class HistoryPagerFragment : Fragment() {
 
     private val historyListVm = HistoryListVm()
+
+    val args: HistoryPagerFragmentArgs by navArgs()
+
+    //  val startId = args.storyId// todo fix id passing from HistoryFragment
+    val startId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        val binding = FragmentHistoryPagerBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
+        historyListVm.id = startId
         binding.vm = historyListVm
-
         return binding.root
     }
 }

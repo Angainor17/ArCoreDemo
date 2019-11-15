@@ -53,14 +53,19 @@
 
         tools:layout="@layout/fragment_service" />
 
-
     <fragment
         android:id="@+id/nav_history"
 
         android:name="com.simferopol.app.ui.history.HistoryFragment"
         android:label="@string/menu_history"
 
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history">
+
+        <action
+            android:id="@+id/action_nav_history_to_nav_history_pager"
+            app:destination="@+id/nav_history_pager" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_about"
@@ -118,12 +123,22 @@
         android:id="@+id/nav_route_map"
         android:name="com.simferopol.app.ui.routes.RouteMapFragment"
 
-        tools:layout="@layout/fragment_route_map" >
+        tools:layout="@layout/fragment_route_map">
 
         <argument
             android:name="route"
-            app:argType="com.simferopol.api.models.Route"
-            />
+            app:argType="com.simferopol.api.models.Route" />
+    </fragment>
+
+    <fragment
+
+        android:id="@+id/nav_history_pager"
+        android:name="com.simferopol.app.ui.history.HistoryPagerFragment">
+
+        <argument
+            android:name="storyId"
+            app:argType="integer"/>
+
     </fragment>
 
 </navigation>
