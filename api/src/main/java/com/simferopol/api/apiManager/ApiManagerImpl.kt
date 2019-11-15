@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.simferopol.api.models.AboutCityInfo
 import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.Route
+import com.simferopol.api.models.Story
 import com.simferopol.api.utils.ManagerResult
 import com.simferopol.api.utils.fromJson
 import com.simferopol.api.utils.readJson
@@ -51,6 +52,17 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
                 readJson(
                     context,
                     "about.json"
+                )
+            )
+        }
+    }
+
+    override suspend fun getStories(): ManagerResult<ArrayList<Story>> {
+        return wrapManagerResult {
+            Gson().fromJson<ArrayList<Story>>(
+                readJson(
+                    context,
+                    "stories.json"
                 )
             )
         }
