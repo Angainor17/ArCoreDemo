@@ -11,9 +11,7 @@ import org.kodein.di.generic.instance
 class HistoryListVm : ViewModel() {
 
     private val routeManager by kodein.instance<ApiManager>()
-
     val list = MutableLiveData(ArrayList<HistoryVm>())
-
     var id = 0
 
     init {

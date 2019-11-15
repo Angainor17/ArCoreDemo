@@ -4,11 +4,8 @@ import android.view.View
 import androidx.viewpager.widget.PagerAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.simferopol.app.R
-import com.squareup.picasso.Picasso
 import android.widget.LinearLayout
-import com.simferopol.api.models.Story
+import androidx.viewpager.widget.ViewPager
 import com.simferopol.app.databinding.StoryPagerItemBinding
 import com.simferopol.app.ui.history.vm.HistoryVm
 
@@ -25,6 +22,8 @@ open class StoriesPagerAdapter : PagerAdapter() {
 
         binding.vm = list[position]
         binding.executePendingBindings()
+        binding.pagerTab.setupWithViewPager(container as ViewPager)
+        binding.pagerTab.isTabIndicatorFullWidth = true
         container.addView(binding.root)
 
         return binding.root
@@ -38,5 +37,9 @@ open class StoriesPagerAdapter : PagerAdapter() {
         list.clear()
         list.addAll(newItems)
         notifyDataSetChanged()
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return list[position].name
     }
 }

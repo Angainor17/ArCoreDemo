@@ -4,7 +4,6 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.simferopol.api.models.HistoricalEvent
 import com.simferopol.app.R
 import com.simferopol.app.ui.history.vm.EventVm
 import com.simferopol.app.ui.history.vm.HistoryVm

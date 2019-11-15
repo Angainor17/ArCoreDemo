@@ -62,7 +62,6 @@
                 app:layout_constraintWidth_percent="0.8"
                 tools:text="Золотая лихорадка в Енисейске" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
