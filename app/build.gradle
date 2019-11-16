@@ -58,6 +58,8 @@ android {
 
 dependencies {
     implementation project(path: ':api')
+    
+    implementation qrCodeView.core
 
     implementation kotlinCore.core
     implementation kotlinCore.coroutine
