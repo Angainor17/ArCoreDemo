@@ -24,7 +24,7 @@
             android:icon="@mipmap/ic_menu_qr"
             android:title="@string/menu_info_marks" />
         <item
-            android:id="@+id/nav_services"
+            android:id="@+id/nav_category"
             android:icon="@mipmap/ic_menu_service"
             android:title="@string/menu_services" />
         <item

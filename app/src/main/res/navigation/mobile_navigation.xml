@@ -46,12 +46,43 @@
         tools:layout="@layout/fragment_info_marks" />
 
     <fragment
-        android:id="@+id/nav_services"
+        android:id="@+id/nav_category"
 
-        android:name="com.simferopol.app.ui.services.ServiceFragment"
+        android:name="com.simferopol.app.ui.services.CategoryFragment"
         android:label="@string/menu_services"
 
-        tools:layout="@layout/fragment_service" />
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_nav_category_to_nav_services"
+            app:destination="@+id/nav_services" />
+    </fragment>
+
+    <fragment
+
+        android:id="@+id/nav_services"
+        android:name="com.simferopol.app.ui.services.ServicesFragment"
+
+        tools:layout="@layout/fragment_services">
+
+        <argument
+            android:name="category"
+            app:argType="com.simferopol.api.models.Category" />
+
+        <action
+            android:id="@+id/action_nav_services_to_nav_service"
+            app:destination="@+id/nav_service" />
+    </fragment>
+
+    <fragment
+
+        android:id="@+id/nav_service"
+        android:name="com.simferopol.app.ui.services.ServiceFragment">
+
+        <argument
+            android:name="service"
+            app:argType="com.simferopol.api.models.GeoObject" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_history"

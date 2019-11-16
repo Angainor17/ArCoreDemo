@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.simferopol.app.ui.services.vm.CategoryVm" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:onClick="@{()->vm.onClick(parent)}"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+
+            app:loadImage="@{vm.icon}" />
+
+        <TextView
+            style="@style/Title"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@{vm.name}"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+</layout>
