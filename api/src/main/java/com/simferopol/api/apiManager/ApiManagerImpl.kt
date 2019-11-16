@@ -2,10 +2,7 @@ package com.simferopol.api.apiManager
 
 import android.content.Context
 import com.google.gson.Gson
-import com.simferopol.api.models.AboutCityInfo
-import com.simferopol.api.models.GeoObject
-import com.simferopol.api.models.Route
-import com.simferopol.api.models.Story
+import com.simferopol.api.models.*
 import com.simferopol.api.utils.ManagerResult
 import com.simferopol.api.utils.fromJson
 import com.simferopol.api.utils.readJson
@@ -35,14 +32,14 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
         }
     }
 
-    override suspend fun getGeoObjects(): ManagerResult<ArrayList<GeoObject>> {
+    override suspend fun getGeoObjects(categoryId: Int): ManagerResult<List<GeoObject>> {
         return wrapManagerResult {
-            Gson().fromJson<ArrayList<GeoObject>>(
+            Gson().fromJson<List<GeoObject>>(
                 readJson(
                     context,
                     "geoObjects.json"
                 )
-            )
+            ).filter { geoObject -> geoObject.categoryId == categoryId  }
         }
     }
 
@@ -63,6 +60,17 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
                 readJson(
                     context,
                     "stories.json"
+                )
+            )
+        }
+    }
+
+    override suspend fun getCategories(): ManagerResult<ArrayList<Category>> {
+        return wrapManagerResult {
+            Gson().fromJson<ArrayList<Category>>(
+                readJson(
+                    context,
+                    "categories.json"
                 )
             )
         }

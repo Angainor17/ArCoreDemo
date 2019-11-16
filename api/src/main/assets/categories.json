@@ -1,0 +1,32 @@
+[
+  {
+    "id": 2,
+    "name": "Автовокзал",
+    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/2/busstation.png",
+    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/2/busstation_hover.png"
+  },
+  {
+    "id": 3,
+    "name": "Гостиницы",
+    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/3/hotels.png",
+    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/3/hotels_hover.png"
+  },
+  {
+    "id": 4,
+    "name": "Речной вокзал",
+    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/4/riverstation.png",
+    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/4/riverstation_hover.png"
+  },
+  {
+    "id": 5,
+    "name": "Еда",
+    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/5/eat.png",
+    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/5/eat_hover.png"
+  },
+  {
+    "id": 6,
+    "name": "Музеи",
+    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/6/museums.png",
+    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/6/museums_hover.png"
+  }
+]

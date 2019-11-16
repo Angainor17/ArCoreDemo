@@ -16,7 +16,7 @@ class MonumentListVm : ViewModel() {
 
     init {
         GlobalScope.launch {
-            val result = routeManager.getGeoObjects()
+            val result = routeManager.getGeoObjects(1)
             if (result.success) {
                 list.postValue(ArrayList(result.data?.map { MonumentVm(it) } ?: ArrayList()))
             }
