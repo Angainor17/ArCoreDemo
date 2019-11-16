@@ -18,6 +18,10 @@
     <string name="version">Версия</string>
     <string name="build">сборка</string>
     <string name="distance_km">КМ</string>
+    <string name="address">Адрес</string>
+    <string name="contacts">Контакты</string>
+    <string name="site">Сайт</string>
+    <string name="worktime">Время работы</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s час</item>

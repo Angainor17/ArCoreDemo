@@ -13,7 +13,7 @@ import org.kodein.di.generic.instance
 
 class AboutVm : ViewModel() {
 
-    private val routeManager by App.kodein.instance<ApiManager>()
+    private val apiManager by App.kodein.instance<ApiManager>()
 
     val about = MutableLiveData<AboutCityInfo>()
 
@@ -21,7 +21,7 @@ class AboutVm : ViewModel() {
 
     init {
         GlobalScope.launch {
-            val result = routeManager.getAbout()
+            val result = apiManager.getAbout()
             var content: String?
             if (result.success) {
                 about.postValue(result.data)
