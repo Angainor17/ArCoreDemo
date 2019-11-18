@@ -28,6 +28,7 @@ buildscript {
             multidex             : '2.0.1',
             fragmentKtx          : '1.2.0-rc01',
             qrCodeView           : '2.1.0',
+            ar                   : '1.13.0'
     ]
 
     ext.kotlinCore = [
@@ -36,6 +37,10 @@ buildscript {
             kotlinxCoroutine: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1",
             reflection      : "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
+    ]
+
+    ext.ar = [
+            core: "com.google.ar:core:$versions.ar"
     ]
 
     ext.picasso = [
