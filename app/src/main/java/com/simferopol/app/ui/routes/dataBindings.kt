@@ -60,7 +60,12 @@ fun hourText(view: TextView, time: Float) {
         1,
         time.toString()
     )
-    else view.context.resources.getQuantityString(R.plurals.time_hours, 2, time.toString())
+    else if (time < 5.0f) view.context.resources.getQuantityString(
+        R.plurals.time_hours,
+        2,
+        time.toString()
+    )
+    else view.context.resources.getQuantityString(R.plurals.time_hours, 5, time.toString())
     val text = String(Character.toChars(0x2248)) + plural
     view.text = text
 }
