@@ -9,8 +9,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.simferopol.app.utils.models.ViewState
 
-val sydney = LatLng((-34).toDouble(), 151.toDouble())
-val RUSSIA_RECT = LatLngBounds(LatLng(41.191055, 20.223023), LatLng(80.213079, 150.141353))
+val simferopol = LatLng(44.949684, 34.102521)
+val SIMFER_RECT = LatLngBounds(LatLng(44.888679, 34.010726), LatLng(45.009175, 34.191087))
 
 class MapVM : ViewModel(), OnMapReadyCallback {
 
@@ -46,7 +46,8 @@ class MapVM : ViewModel(), OnMapReadyCallback {
     }
 
     private fun initMapPosition() {
-        map?.setLatLngBoundsForCameraTarget(RUSSIA_RECT)
-        map?.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map?.setLatLngBoundsForCameraTarget(SIMFER_RECT)
+        map?.moveCamera(CameraUpdateFactory.newLatLng(simferopol))
+        map?.animateCamera(CameraUpdateFactory.zoomTo(14f), 400, null)
     }
 }
