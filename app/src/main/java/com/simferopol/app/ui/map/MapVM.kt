@@ -41,7 +41,7 @@ class MapVM : ViewModel(), OnMapReadyCallback {
         map?.isTrafficEnabled = false
         map?.isBuildingsEnabled = false
 
-        map?.setMinZoomPreference(2f)
+        map?.setMinZoomPreference(10f)
     }
 
     private fun initMapPosition() {
