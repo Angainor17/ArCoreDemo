@@ -41,7 +41,6 @@ class MapVM : ViewModel(), OnMapReadyCallback {
         map?.isTrafficEnabled = false
         map?.isBuildingsEnabled = false
 
-        map?.setMaxZoomPreference(5f)
         map?.setMinZoomPreference(2f)
     }
 
