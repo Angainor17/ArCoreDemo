@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.simferopol.app.utils.models.ViewState
 
-val simferopol = LatLng(44.949684, 34.102521)
+val simfer = LatLng(44.949684, 34.102521)
 val simferBounds = LatLngBounds(LatLng(44.888679, 34.010726), LatLng(45.009175, 34.191087))
 
 class MapVM : ViewModel(), OnMapReadyCallback {
@@ -46,7 +46,7 @@ class MapVM : ViewModel(), OnMapReadyCallback {
 
     private fun initMapPosition() {
         map?.setLatLngBoundsForCameraTarget(simferBounds)
-        map?.moveCamera(CameraUpdateFactory.newLatLng(simferopol))
+        map?.moveCamera(CameraUpdateFactory.newLatLng(simfer))
         map?.animateCamera(CameraUpdateFactory.zoomTo(14f), 400, null)
     }
 }
