@@ -32,14 +32,23 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
         }
     }
 
-    override suspend fun getGeoObjects(categoryId: Int): ManagerResult<List<GeoObject>> {
-        return wrapManagerResult {
+    override suspend fun getGeoObjects(categoryId: Int?): ManagerResult<List<GeoObject>> {
+        if (categoryId != null)
+            return wrapManagerResult {
+                Gson().fromJson<List<GeoObject>>(
+                    readJson(
+                        context,
+                        "geoObjects.json"
+                    )
+                ).filter { geoObject -> geoObject.categoryId == categoryId }
+            }
+        else return wrapManagerResult {
             Gson().fromJson<List<GeoObject>>(
                 readJson(
                     context,
                     "geoObjects.json"
                 )
-            ).filter { geoObject -> geoObject.categoryId == categoryId  }
+            )
         }
     }
 

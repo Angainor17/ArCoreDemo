@@ -6,9 +6,13 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="com.simferopol.app.utils.models.ViewState" />
+
         <variable
             name="vm"
-            type="com.simferopol.app.ui.routes.vm.RouteVm" />
+            type="com.simferopol.app.ui.routes.vm.RouteMapVm" />
 
     </data>
 
@@ -18,14 +22,37 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/map"
-
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/footerContainer"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">
+
+                    <fragment
+                        android:id="@+id/map"
+
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <include
+                    layout="@layout/loading_view"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{vm.viewState==ViewState.LOADING? View.VISIBLE: View.GONE}" />
+
+            </LinearLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/footerContainer"

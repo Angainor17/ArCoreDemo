@@ -31,7 +31,7 @@ class NavDrawer : CustomActivity() {
             setOf(
                 R.id.nav_map, R.id.nav_routes, R.id.nav_monuments,
                 R.id.nav_info_marks, R.id.nav_category, R.id.nav_history,
-                R.id.nav_about, R.id.nav_events, R.id.nav_settings
+                R.id.nav_about, R.id.nav_settings
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

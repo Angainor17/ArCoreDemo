@@ -13,17 +13,17 @@ class HistoryPagerFragment : Fragment() {
 
     private val historyListVm = HistoryListVm()
 
-    val args: HistoryPagerFragmentArgs by navArgs()
 
-    //  val startId = args.storyId// todo fix id passing from HistoryFragment
-    val startId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val args: HistoryPagerFragmentArgs by navArgs()
+        var startId = args.storyId
         val binding = FragmentHistoryPagerBinding.inflate(inflater, container, false)
+
         binding.lifecycleOwner = this
         historyListVm.id = startId
         binding.vm = historyListVm

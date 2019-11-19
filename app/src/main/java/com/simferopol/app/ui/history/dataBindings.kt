@@ -30,7 +30,7 @@ fun initStoriesPager(view: ViewPager, list: ArrayList<HistoryVm>, id: Int) {
     val adapter = object : StoriesPagerAdapter() {}
     adapter.setItems(list)
     view.adapter = adapter
-    view.currentItem = id
+    view.currentItem = id-1
 }
 
 @BindingAdapter("app:initEventList")
