@@ -22,6 +22,7 @@
     <string name="contacts">Контакты</string>
     <string name="site">Сайт</string>
     <string name="worktime">Время работы</string>
+    <string name="select_route">Выберите маршрут</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s час</item>

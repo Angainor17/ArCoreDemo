@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,33 +15,114 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">
+            android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/map"
 
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">
+
+                <fragment
+                    android:id="@+id/map"
+
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/loading_view"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{vm.viewState==ViewState.LOADING? View.VISIBLE: View.GONE}" />
 
         </LinearLayout>
 
-        <include
-            layout="@layout/loading_view"
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{vm.viewState==ViewState.LOADING? View.VISIBLE: View.GONE}" />
+        <ImageView
+            android:id="@+id/zoomIn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/round_map_icon"
+            android:onClick="@{()->vm.onZoomInClick()}"
+            android:padding="10dp"
+            android:src="@mipmap/ic_map_plus"
 
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+        <ImageView
+            android:id="@+id/zoomOut"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_map_icon"
+            android:onClick="@{()->vm.onZoomOutClick()}"
+            android:padding="10dp"
+            android:src="@mipmap/ic_map_minus"
+
+            app:layout_constraintEnd_toEndOf="@id/zoomIn"
+            app:layout_constraintTop_toBottomOf="@id/zoomIn" />
+
+        <ImageView
+            android:id="@+id/geoLocation"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_map_icon"
+            android:onClick="@{()->vm.onLocateClick()}"
+            android:padding="10dp"
+            android:src="@mipmap/ic_map_locate"
+
+            app:layout_constraintEnd_toEndOf="@id/zoomOut"
+            app:layout_constraintTop_toBottomOf="@id/zoomOut" />
+
+        <ImageView
+            android:id="@+id/find"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_map_icon"
+            android:onClick="@{()->vm.onArClick()}"
+            android:padding="8dp"
+            android:src="@mipmap/ic_ar"
+
+            app:layout_constraintBottom_toTopOf="@id/route_button"
+            app:layout_constraintStart_toStartOf="@id/route_button" />
+
+        <TextView
+            android:id="@+id/route_button"
+            style="@style/SelectRoute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/transparent_btn_bg"
+            android:onClick="@{()->vm.onSelectRouteClick()}"
+            android:paddingVertical="14dp"
+            android:text="@string/select_route"
+            android:textAlignment="center"
+
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintWidth_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

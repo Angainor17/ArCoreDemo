@@ -25,6 +25,7 @@
     <string name="contacts">Contacts</string>
     <string name="site">Website</string>
     <string name="worktime">Worktime</string>
+    <string name="select_route">Select route</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s hour</item>
