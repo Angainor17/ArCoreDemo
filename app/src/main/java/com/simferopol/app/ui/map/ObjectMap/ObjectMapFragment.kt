@@ -17,7 +17,7 @@ import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 
 
-class MapFragment : Fragment() {
+class ObjectMapFragment : Fragment() {
 
     private val mapVM = MapVM()
     lateinit var mapview: MapView
@@ -32,6 +32,9 @@ class MapFragment : Fragment() {
         val binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = mapVM
+
+        val args: ObjectMapFragmentArgs by navArgs()
+        mapVM.currentObject.postValue(args.geoObject)
 
         // Укажите имя activity вместо map.
         mapview = binding.mapview as MapView

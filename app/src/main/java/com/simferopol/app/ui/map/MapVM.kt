@@ -24,6 +24,8 @@ val simferBounds = LatLngBounds(LatLng(44.888679, 34.010726), LatLng(45.009175, 
 class MapVM : ViewModel(), OnMapReadyCallback {
 
     var currentZoom = 14f
+    val currentObject = MutableLiveData<GeoObject>()
+    val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
 
 
     fun onSelectRouteClick() {
@@ -56,13 +58,12 @@ class MapVM : ViewModel(), OnMapReadyCallback {
 
     private val routeManager by App.kodein.instance<ApiManager>()
 
-    val list = MutableLiveData(ArrayList<GeoObject>())
 
     init {
         GlobalScope.launch {
             val result = routeManager.getGeoObjects(null)
             if (result.success) {
-                list.postValue(ArrayList(result.data?.map { it } ?: ArrayList()))
+                listOfGeoObjects.postValue(ArrayList(result.data?.map { it } ?: ArrayList()))
             }
         }
     }

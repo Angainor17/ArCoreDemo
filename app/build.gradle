@@ -111,6 +111,9 @@ dependencies {
     implementation google.material
     implementation google.maps
 
+    implementation 'com.yandex.android:mapkit:3.4.0'
+    implementation 'com.yandex.android:transport:3.4.0'
+
     testImplementation test.junit
     androidTestImplementation test.testRunner
     androidTestImplementation test.espresso
