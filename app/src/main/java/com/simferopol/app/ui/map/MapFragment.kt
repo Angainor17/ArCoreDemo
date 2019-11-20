@@ -16,6 +16,9 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 
+val apiKey = "30d70067-9f77-4a49-b74d-35fe453e79a1"
+val simfer = Point(44.949684, 34.102521)
+//val simferBounds = LatLngBounds(LatLng(44.888679, 34.010726), LatLng(45.009175, 34.191087))
 
 class MapFragment : Fragment() {
 
@@ -27,16 +30,16 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        MapKitFactory.setApiKey("30d70067-9f77-4a49-b74d-35fe453e79a1")
+        MapKitFactory.setApiKey(apiKey)
         MapKitFactory.initialize(this.context)
         val binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = mapVM
 
-        // Укажите имя activity вместо map.
         mapview = binding.mapview as MapView
+        mapVM.mapview = mapview
         mapview.getMap().move(
-            CameraPosition(Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
+            CameraPosition(simfer, mapVM.currentZoom, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
             null
         )
@@ -65,13 +68,9 @@ class MapFragment : Fragment() {
         super.onStart()
         mapview.onStart()
         MapKitFactory.getInstance().onStart()
-    }
+        mapVM.listOfGeoObjects.value?.forEach {
+            mapview.map.mapObjects.addPlacemark(Point(it.lon!!, it.lat!!))
+        }
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-       // val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-       // mapFragment.getMapAsync(mapVM)
     }
 }

@@ -16,7 +16,6 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 
-
 class ObjectMapFragment : Fragment() {
 
     private val mapVM = MapVM()
@@ -27,7 +26,7 @@ class ObjectMapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        MapKitFactory.setApiKey("30d70067-9f77-4a49-b74d-35fe453e79a1")
+        MapKitFactory.setApiKey(apiKey)
         MapKitFactory.initialize(this.context)
         val binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -36,10 +35,10 @@ class ObjectMapFragment : Fragment() {
         val args: ObjectMapFragmentArgs by navArgs()
         mapVM.currentObject.postValue(args.geoObject)
 
-        // Укажите имя activity вместо map.
         mapview = binding.mapview as MapView
+        mapVM.mapview = mapview
         mapview.getMap().move(
-            CameraPosition(Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
+            CameraPosition(simfer, mapVM.currentZoom, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
             null
         )
@@ -47,12 +46,11 @@ class ObjectMapFragment : Fragment() {
         binding.playButton.visibility = binding.footerContainer.visibility
         binding.modelButton.visibility = binding.footerContainer.visibility
 
-        if (mapVM.currentObject.value != null)
-        {
+
             binding.footerContainer.visibility = View.VISIBLE
             binding.playButton.visibility = binding.footerContainer.visibility
             binding.modelButton.visibility = binding.footerContainer.visibility
-        }
+        
 
 
         return binding.root

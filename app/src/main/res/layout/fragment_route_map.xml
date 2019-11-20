@@ -29,20 +29,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}">-->
 
-                    <fragment
-                        android:id="@+id/map"
+<!--                    <fragment-->
+<!--                        android:id="@+id/map"-->
 
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+<!--                        android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <include
                     layout="@layout/loading_view"
