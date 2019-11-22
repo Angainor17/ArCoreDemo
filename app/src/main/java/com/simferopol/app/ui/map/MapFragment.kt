@@ -9,12 +9,19 @@ import androidx.fragment.app.Fragment
 //import com.simferopol.app.R
 import com.simferopol.app.databinding.FragmentMapBinding
 import com.yandex.mapkit.MapKitFactory
-import android.R
-import androidx.navigation.fragment.navArgs
+import android.util.Log
+import com.simferopol.api.apiManager.ApiManager
+import com.simferopol.api.models.GeoObject
+import com.simferopol.app.App
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.*
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.runtime.image.ImageProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.kodein.di.generic.instance
 
 val apiKey = "30d70067-9f77-4a49-b74d-35fe453e79a1"
 val simfer = Point(44.949684, 34.102521)
@@ -24,6 +31,8 @@ class MapFragment : Fragment() {
 
     private val mapVM = MapVM()
     lateinit var mapview: MapView
+    lateinit var binding: FragmentMapBinding
+    private val listener = YandexMapObjectTapListener()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +41,7 @@ class MapFragment : Fragment() {
     ): View? {
         MapKitFactory.setApiKey(apiKey)
         MapKitFactory.initialize(this.context)
-        val binding = FragmentMapBinding.inflate(inflater, container, false)
+        binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = mapVM
 
@@ -52,9 +61,8 @@ class MapFragment : Fragment() {
             binding.footerContainer.visibility = View.VISIBLE
             binding.playButton.visibility = binding.footerContainer.visibility
             binding.modelButton.visibility = binding.footerContainer.visibility
+
         }
-
-
         return binding.root
     }
 
@@ -65,12 +73,46 @@ class MapFragment : Fragment() {
     }
 
     override fun onStart() {
+        val routeManager by App.kodein.instance<ApiManager>()
         super.onStart()
-        mapview.onStart()
-        MapKitFactory.getInstance().onStart()
-        mapVM.listOfGeoObjects.value?.forEach {
-            mapview.map.mapObjects.addPlacemark(Point(it.lon!!, it.lat!!))
+        lateinit var temp: MapObject
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val result = routeManager.getGeoObjects(null)
+            if (result.success) {
+                mapVM.listOfGeoObjects.postValue(ArrayList(result.data?.map { it } ?: ArrayList()))
+                result.data?.forEach {
+                    if (it.lon != null){
+                       temp = mapview.map.mapObjects.addPlacemark(
+                            Point(it.lat!!, it.lon!!),
+                            ImageProvider.fromAsset(context,it.icon)
+                        )
+                    temp.userData = it
+
+                    temp.addTapListener(listener)
+//                    var mark = temp as PlacemarkMapObject
+//                    var icon = mark.useCompositeIcon()
+//                    icon.setIcon("pin", ImageProvider.fromAsset(context, it.icon),IconStyle())
+//                    icon.setIcon("icon", ImageProvider.fromAsset(context, it.activeIcon),IconStyle())
+                }
+                }
+                mapview.onStart()
+                MapKitFactory.getInstance().onStart()
+            }
         }
 
+
+    }
+    private inner class YandexMapObjectTapListener : MapObjectTapListener {
+        override fun onMapObjectTap(mapObject: MapObject, point: Point): Boolean {
+            lateinit var temp: MapObject
+            var info = mapObject.userData as GeoObject
+            Log.e("tap",info.name)
+            var mark = mapObject as PlacemarkMapObject
+            mark.setIcon(ImageProvider.fromAsset(context,info.activeIcon))
+            mapVM.currentObject.postValue(info)
+            binding.footerContainer.visibility = View.VISIBLE
+            return true
+        }
     }
 }

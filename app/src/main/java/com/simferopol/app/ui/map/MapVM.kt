@@ -17,6 +17,7 @@ import com.simferopol.app.utils.models.ViewState
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
@@ -27,6 +28,7 @@ class MapVM : ViewModel(){
     var currentZoom = 14f
     val currentObject = MutableLiveData<GeoObject>()
     val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
+    val viewState = MutableLiveData(ViewState.LOADING)
 
 
     fun onSelectRouteClick() {
@@ -52,21 +54,6 @@ class MapVM : ViewModel(){
         Log.e("zoomOut", "click")// todo zoomOut
         currentZoom -= 1f
         mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
-    }
-
-
-    val viewState = MutableLiveData(ViewState.LOADING)
-
-    private val routeManager by App.kodein.instance<ApiManager>()
-
-
-    init {
-        GlobalScope.launch {
-            val result = routeManager.getGeoObjects(null)
-            if (result.success) {
-                listOfGeoObjects.postValue(ArrayList(result.data?.map { it } ?: ArrayList()))
-            }
-        }
     }
 
 }
