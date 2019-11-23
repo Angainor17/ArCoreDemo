@@ -15,7 +15,10 @@ import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.layers.GeoObjectTapEvent
+import com.yandex.mapkit.layers.GeoObjectTapListener
 import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.image.ImageProvider
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +36,8 @@ class MapFragment : Fragment() {
     lateinit var mapview: MapView
     lateinit var binding: FragmentMapBinding
     private val listener = YandexMapObjectTapListener()
+    private val listener2 = MyInputListener()
+    private val visitor = MyVisitor()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,6 +69,7 @@ class MapFragment : Fragment() {
 
         }
         return binding.root
+
     }
 
     override fun onStop() {
@@ -71,7 +77,6 @@ class MapFragment : Fragment() {
         mapview.onStop()
         MapKitFactory.getInstance().onStop()
     }
-
     override fun onStart() {
         val routeManager by App.kodein.instance<ApiManager>()
         super.onStart()
@@ -96,23 +101,90 @@ class MapFragment : Fragment() {
 //                    icon.setIcon("icon", ImageProvider.fromAsset(context, it.activeIcon),IconStyle())
                 }
                 }
+                mapview.map.addInputListener(listener2)
                 mapview.onStart()
                 MapKitFactory.getInstance().onStart()
             }
         }
-
 
     }
     private inner class YandexMapObjectTapListener : MapObjectTapListener {
         override fun onMapObjectTap(mapObject: MapObject, point: Point): Boolean {
             lateinit var temp: MapObject
             var info = mapObject.userData as GeoObject
-            Log.e("tap",info.name)
             var mark = mapObject as PlacemarkMapObject
+//            mapview.map.mapObjects.clear()
+//            mapVM.listOfGeoObjects.value?.forEach {
+//                if (it.lon != null){
+//                    temp = mapview.map.mapObjects.addPlacemark(
+//                        Point(it.lat!!, it.lon!!),
+//                        ImageProvider.fromAsset(context,it.icon)
+//                    )
+//                    temp.userData = it
+//                    temp.addTapListener(listener)
+//
+//                }
+//            }
+            mapview.map.mapObjects.traverse(visitor)
             mark.setIcon(ImageProvider.fromAsset(context,info.activeIcon))
             mapVM.currentObject.postValue(info)
             binding.footerContainer.visibility = View.VISIBLE
             return true
+        }
+    }
+
+
+    private inner class MyInputListener : InputListener{
+        override fun onMapLongTap(p0: Map, p1: Point) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onMapTap(p0: Map, p1: Point) {
+            binding.footerContainer.visibility = View.GONE
+            lateinit var temp: MapObject
+            mapview.map.mapObjects.clear()
+            mapVM.listOfGeoObjects.value?.forEach {
+                if (it.lon != null){
+                    temp = mapview.map.mapObjects.addPlacemark(
+                        Point(it.lat!!, it.lon!!),
+                        ImageProvider.fromAsset(context,it.icon)
+                    )
+                    temp.userData = it
+                    temp.addTapListener(listener)
+
+                }
+            }
+    }
+}
+
+    private inner class MyVisitor: MapObjectVisitor {
+        override fun onPolygonVisited(p0: PolygonMapObject) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onCircleVisited(p0: CircleMapObject) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onPolylineVisited(p0: PolylineMapObject) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onColoredPolylineVisited(p0: ColoredPolylineMapObject) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onCollectionVisitEnd(p0: MapObjectCollection) {
+           Log.e("visit","end")
+        }
+
+        override fun onCollectionVisitStart(p0: MapObjectCollection): Boolean {
+           return true
+        }
+
+        override fun onPlacemarkVisited(p0: PlacemarkMapObject) {
+            var info = p0.userData as GeoObject
+            p0.setIcon(ImageProvider.fromAsset(context,info.icon))
         }
     }
 }
