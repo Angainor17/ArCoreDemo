@@ -30,6 +30,7 @@
     <string name="sceneform_opengl_version_error">Sceneform requires OpenGL ES 3.0 or later</string>
     <string name="image_database_error">Could not setup augmented image database</string>
     <string name="dismiss">Dismiss</string>
+    <string name="model_3d">Model 3D</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s hour</item>
