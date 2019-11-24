@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
 
     <group
-        android:id="@+id/grp1"
+        android:id="@+id/main_group"
         android:checkableBehavior="none">
 
         <item
@@ -37,13 +37,13 @@
             android:title="@string/menu_about" />
 
         <item
-            android:id="@+id/nav_events"
-            android:icon="@mipmap/ic_menu_events"
-            android:title="@string/menu_events" />
+            android:id="@+id/nav_ar"
+            android:icon="@mipmap/ic_menu_ar"
+            android:title="@string/menu_ar" />
     </group>
 
     <group
-        android:id="@+id/grp2"
+        android:id="@+id/bottom_group"
         android:checkableBehavior="none">
 
         <item

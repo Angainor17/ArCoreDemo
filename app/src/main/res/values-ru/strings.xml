@@ -8,7 +8,7 @@
     <string name="menu_services">Услуги</string>
     <string name="menu_history">История</string>
     <string name="menu_about">О городе</string>
-    <string name="menu_events">Мероприятия</string>
+    <string name="menu_ar">AR</string>
     <string name="menu_settings">Настройки</string>
     <string name="language">Язык</string>
 
@@ -22,6 +22,11 @@
     <string name="contacts">Контакты</string>
     <string name="site">Сайт</string>
     <string name="worktime">Время работы</string>
+
+    <string name="sceneform_opengl_version_error">Sceneform requires OpenGL ES 3.0 or later</string>
+    <string name="sceneform_android_version_error">Sceneform requires Android N or later</string>
+    <string name="image_database_error">Could not setup augmented image database</string>
+    <string name="dismiss">Dismiss</string>
 
     <plurals name="time_hours">
         <item quantity="one">%s час</item>
