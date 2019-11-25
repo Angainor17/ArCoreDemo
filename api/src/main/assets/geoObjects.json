@@ -28,7 +28,7 @@
   {
     "id": 2,
     "name": "Неаполь Скифский",
-    "category_id": 5,
+    "category_id": 1,
     "lat": 44.940098,
     "lon": 34.119770,
     "preview": "http://simftur.ru/images/products/11688.jpg",
@@ -54,7 +54,7 @@
   {
     "id": 3,
     "name": "Ботанический сад",
-    "category_id": 5,
+    "category_id": 1,
     "lat": 44.941990,
     "lon": 34.131759,
     "preview": "http://simftur.ru/images/products/11681.jpg",
@@ -237,7 +237,7 @@
   {
     "id": 11,
     "name": "Неаполь Скифский",
-    "category_id": 1,
+    "category_id": 5,
     "lat": null,
     "lon": null,
     "preview": "http://simftur.ru/images/products/11688.jpg",
@@ -263,7 +263,7 @@
   {
     "id": 12,
     "name": "Ботанический сад",
-    "category_id": 1,
+    "category_id": 5,
     "lat": null,
     "lon": null,
     "preview": "http://simftur.ru/images/products/11681.jpg",

@@ -20,6 +20,6 @@ class Route(
     val distance: Float,
     val time: Float,
     val audio: String?,
-    val geoObjects: ArrayList<GeoObject>?, //FIXME nullable for testing
+    @SerializedName("geoobjects") var geoObjects: ArrayList<GeoObject>?, //FIXME nullable for testing
     val points: ArrayList<MapPoint>? //FIXME nullable for testing
 ): Serializable

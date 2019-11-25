@@ -1,5 +1,6 @@
 package com.simferopol.app.ui.routes.vm
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +10,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.Route
+import com.simferopol.app.ui.map.MapFragmentDirections
+import com.simferopol.app.ui.routes.RouteMapFragmentDirections
 import com.simferopol.app.ui.routes.RoutesFragmentDirections
 import com.simferopol.app.utils.models.ViewState
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.mapview.MapView
 
 class RouteMapVm(routeVm: Route) : ViewModel() {
 
@@ -23,4 +29,39 @@ class RouteMapVm(routeVm: Route) : ViewModel() {
     val time = routeVm.time
     val geoObjects = routeVm.geoObjects
 
+    lateinit var mapview: MapView
+    var currentZoom = 14f
+    val currentObject = MutableLiveData<GeoObject>()
+    val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
+    val viewState = MutableLiveData(ViewState.LOADING)
+
+    fun onMonumentClick(view: View, monument: GeoObject) {
+        val action = RouteMapFragmentDirections.actionNavRouteMapToNavMonument(monument)
+        view.findNavController().navigate(action)
+    }
+
+    fun onRouteClick(view: View) {
+        val action = RouteMapFragmentDirections.actionNavRouteMapToNavRoute(route)
+        view.findNavController().navigate(action)
+    }
+
+    fun onArClick() {
+        Log.e("ar", "click")// todo navigate to AR Screen
+    }
+
+    fun onLocateClick() {
+        Log.e("locate", "click")// todo locate
+    }
+
+    fun onZoomInClick() {
+        Log.e("zoomIn", "click")// todo zoomIn
+        currentZoom += 1f
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+    }
+
+    fun onZoomOutClick() {
+        Log.e("zoomOut", "click")// todo zoomOut
+        currentZoom -= 1f
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+    }
 }

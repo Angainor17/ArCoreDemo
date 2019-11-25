@@ -12,19 +12,14 @@
 
         tools:layout="@layout/fragment_map">
 
-    </fragment>
+        <action
+            android:id="@+id/action_nav_map_to_nav_monument"
+            app:destination="@+id/nav_monument" />
 
-    <fragment
-        android:id="@+id/nav_object_map"
-        android:name="com.simferopol.app.ui.map.ObjectMapFragment"
+        <action
+            android:id="@+id/action_nav_map_to_nav_routes"
+            app:destination="@+id/nav_routes" />
 
-        tools:layout="@layout/fragment_map">
-
-        <argument
-            android:name="geoObject"
-            app:argType="com.simferopol.api.models.GeoObject"
-            app:nullable="true"
-            android:defaultValue="@null" />
     </fragment>
 
     <fragment
@@ -96,10 +91,6 @@
             android:name="service"
             app:argType="com.simferopol.api.models.GeoObject" />
 
-        <action
-            android:id="@+id/action_nav_service_to_nav_object_map"
-            app:destination="@+id/nav_object_map" />
-
     </fragment>
 
     <fragment
@@ -154,6 +145,10 @@
         <action
             android:id="@+id/action_nav_route_to_nav_route_map"
             app:destination="@+id/nav_route_map" />
+
+        <action
+            android:id="@+id/action_nav_route_to_nav_monument"
+            app:destination="@+id/nav_monument" />
     </fragment>
 
     <fragment
@@ -164,10 +159,6 @@
         <argument
             android:name="monument"
             app:argType="com.simferopol.api.models.GeoObject" />
-
-        <action
-            android:id="@+id/action_nav_monument_to_nav_object_map"
-            app:destination="@+id/nav_object_map" />
 
     </fragment>
 
@@ -181,6 +172,14 @@
         <argument
             android:name="route"
             app:argType="com.simferopol.api.models.Route" />
+
+        <action
+            android:id="@+id/action_nav_route_map_to_nav_monument"
+            app:destination="@+id/nav_monument" />
+
+        <action
+            android:id="@+id/action_nav_route_map_to_nav_route"
+            app:destination="@+id/nav_route" />
     </fragment>
 
     <fragment

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.Route
 import com.simferopol.api.apiManager.ApiManager
+import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.ui.routes.routeGeoObjects.RouteFragmentDirections
 import kotlinx.coroutines.GlobalScope
@@ -17,6 +18,7 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
     val imageUrl = route.preview
     val distance = route.distance
     val time = route.time
+    var geoObjects = route.geoObjects
 
     private val routeManager by kodein.instance<ApiManager>()
 
@@ -26,7 +28,15 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
         GlobalScope.launch {
             val result = routeManager.getGeoObjects(1)
             if (result.success) {
-                list.postValue(ArrayList(result.data?.map { GeoObjectVm(it) } ?: ArrayList()))
+                var tempGeoObject: GeoObject?
+                var tempList = ArrayList<GeoObject>()
+                geoObjects?.forEach {
+                    tempGeoObject = result.data?.find { geoObject -> geoObject.id == it.id }
+                    if (tempGeoObject != null) tempList.add(tempGeoObject!!)
+                    tempGeoObject = null
+                }
+                list.postValue(ArrayList(tempList.map { GeoObjectVm(it) }))
+                route.geoObjects = tempList
             }
         }
     }
@@ -34,5 +44,5 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
     fun onRouteClick(view: View) {
         val action = RouteFragmentDirections.actionNavRouteToNavRouteMap(route)
         view.findNavController().navigate(action)
-        }
+    }
 }

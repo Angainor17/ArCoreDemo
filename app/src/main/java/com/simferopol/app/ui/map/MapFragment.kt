@@ -95,10 +95,6 @@ class MapFragment : Fragment() {
                     temp.userData = it
 
                     temp.addTapListener(listener)
-//                    var mark = temp as PlacemarkMapObject
-//                    var icon = mark.useCompositeIcon()
-//                    icon.setIcon("pin", ImageProvider.fromAsset(context, it.icon),IconStyle())
-//                    icon.setIcon("icon", ImageProvider.fromAsset(context, it.activeIcon),IconStyle())
                 }
                 }
                 mapview.map.addInputListener(listener2)
@@ -113,18 +109,6 @@ class MapFragment : Fragment() {
             lateinit var temp: MapObject
             var info = mapObject.userData as GeoObject
             var mark = mapObject as PlacemarkMapObject
-//            mapview.map.mapObjects.clear()
-//            mapVM.listOfGeoObjects.value?.forEach {
-//                if (it.lon != null){
-//                    temp = mapview.map.mapObjects.addPlacemark(
-//                        Point(it.lat!!, it.lon!!),
-//                        ImageProvider.fromAsset(context,it.icon)
-//                    )
-//                    temp.userData = it
-//                    temp.addTapListener(listener)
-//
-//                }
-//            }
             mapview.map.mapObjects.traverse(visitor)
             mark.setIcon(ImageProvider.fromAsset(context,info.activeIcon))
             mapVM.currentObject.postValue(info)

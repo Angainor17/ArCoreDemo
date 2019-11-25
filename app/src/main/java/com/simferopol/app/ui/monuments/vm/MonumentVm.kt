@@ -6,7 +6,6 @@ import androidx.core.text.parseAsHtml
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.GeoObject
-import com.simferopol.app.ui.monuments.MonumentFragmentDirections
 import com.simferopol.app.ui.monuments.MonumentsFragmentDirections
 
 class MonumentVm(monumentVm: GeoObject) : ViewModel() {
@@ -25,9 +24,7 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
        Log.e("3dButton", name)// todo navigate to 3d model screen
     }
 
-    fun onMapClick(view: View) {
-        val action = MonumentFragmentDirections.actionNavMonumentToNavObjectMap(monument)
-        view.findNavController().navigate(action)
+    fun onMapClick(view: View) { //todo navigate to monument map
     }
 
     fun onPlayClick() {
