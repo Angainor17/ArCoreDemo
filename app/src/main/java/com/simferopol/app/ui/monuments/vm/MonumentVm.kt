@@ -1,11 +1,13 @@
 package com.simferopol.app.ui.monuments.vm
 
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.core.text.parseAsHtml
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.GeoObject
+import com.simferopol.app.ui.monuments.MonumentFragmentDirections
 import com.simferopol.app.ui.monuments.MonumentsFragmentDirections
 
 class MonumentVm(monumentVm: GeoObject) : ViewModel() {
@@ -20,8 +22,15 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
         view.findNavController().navigate(action)
     }
 
-    fun onModelClick() {
-       Log.e("3dButton", name)// todo navigate to 3d model screen
+    fun onModelClick(view: View) {
+        val file = "models/skeleton.stl"
+        val fileUri = Uri.parse("assets://" + view.context.packageName + "/" + file).toString()
+        val action = MonumentFragmentDirections.actionNavMonumentToNavModel3d(
+            fileUri,
+            "-1",
+            "true"
+        )
+        view.findNavController().navigate(action)
     }
 
     fun onMapClick(view: View) { //todo navigate to monument map

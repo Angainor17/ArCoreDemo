@@ -44,6 +44,7 @@
         <action
             android:id="@+id/action_nav_monuments_to_nav_monument"
             app:destination="@+id/nav_monument" />
+
     </fragment>
 
     <fragment
@@ -115,13 +116,35 @@
 
         tools:layout="@layout/fragment_about" />
 
-    <fragment
-        android:id="@+id/nav_events"
+    <activity
+        android:id="@+id/nav_ar"
 
-        android:name="com.simferopol.app.ui.events.EventsFragment"
-        android:label="@string/menu_events"
+        android:name="com.simferopol.app.ui.ar.ArFlyerActivity"
+        android:label="@string/menu_ar"
 
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/activity_ar_flyer" />
+
+    <activity
+        android:id="@+id/nav_model_3d"
+
+        android:name="com.simferopol.app.ui.model3d.ModelActivity"
+        android:label="@string/model_3d"
+
+        tools:layout="@layout/activity_3d_model">
+
+        <argument
+            android:name="uri"
+            app:argType="string" />
+
+        <argument
+            android:name="type"
+            app:argType="string" />
+
+        <argument
+            android:name="immersiveMode"
+            app:argType="string" />
+
+    </activity>
 
     <fragment
         android:id="@+id/nav_settings"
@@ -149,6 +172,7 @@
         <action
             android:id="@+id/action_nav_route_to_nav_monument"
             app:destination="@+id/nav_monument" />
+
     </fragment>
 
     <fragment
@@ -159,6 +183,10 @@
         <argument
             android:name="monument"
             app:argType="com.simferopol.api.models.GeoObject" />
+
+        <action
+            android:id="@+id/action_nav_monument_to_nav_model_3d"
+            app:destination="@+id/nav_model_3d" />
 
     </fragment>
 
@@ -189,7 +217,7 @@
 
         <argument
             android:name="storyId"
-            app:argType="integer"/>
+            app:argType="integer" />
 
     </fragment>
 
