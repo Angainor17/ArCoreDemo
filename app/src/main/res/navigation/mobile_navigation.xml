@@ -22,7 +22,12 @@
         tools:layout="@layout/fragment_routes">
         <action
             android:id="@+id/action_nav_routes_to_nav_route"
-            app:destination="@+id/nav_route" />
+
+            app:destination="@+id/nav_route"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -34,7 +39,12 @@
         tools:layout="@layout/fragment_monuments">
         <action
             android:id="@+id/action_nav_monuments_to_nav_monument"
-            app:destination="@+id/nav_monument" />
+
+            app:destination="@+id/nav_monument"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -54,7 +64,12 @@
         tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_nav_category_to_nav_services"
-            app:destination="@+id/nav_services" />
+
+            app:destination="@+id/nav_services"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -70,7 +85,13 @@
 
         <action
             android:id="@+id/action_nav_services_to_nav_service"
-            app:destination="@+id/nav_service" />
+
+            app:destination="@+id/nav_service"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -94,7 +115,12 @@
 
         <action
             android:id="@+id/action_nav_history_to_nav_history_pager"
-            app:destination="@+id/nav_history_pager" />
+
+            app:destination="@+id/nav_history_pager"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -157,7 +183,12 @@
 
         <action
             android:id="@+id/action_nav_route_to_nav_route_map"
-            app:destination="@+id/nav_route_map" />
+
+            app:destination="@+id/nav_route_map"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -171,7 +202,12 @@
 
         <action
             android:id="@+id/action_nav_monument_to_nav_model_3d"
-            app:destination="@+id/nav_model_3d" />
+
+            app:destination="@+id/nav_model_3d"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
