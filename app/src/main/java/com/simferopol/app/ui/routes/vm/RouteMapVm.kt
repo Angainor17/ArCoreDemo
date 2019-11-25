@@ -5,16 +5,9 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.Route
-import com.simferopol.app.ui.map.MapFragmentDirections
 import com.simferopol.app.ui.routes.RouteMapFragmentDirections
-import com.simferopol.app.ui.routes.RoutesFragmentDirections
 import com.simferopol.app.utils.models.ViewState
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
@@ -32,7 +25,6 @@ class RouteMapVm(routeVm: Route) : ViewModel() {
     lateinit var mapview: MapView
     var currentZoom = 14f
     val currentObject = MutableLiveData<GeoObject>()
-    val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
     val viewState = MutableLiveData(ViewState.LOADING)
 
     fun onMonumentClick(view: View, monument: GeoObject) {
@@ -45,22 +37,18 @@ class RouteMapVm(routeVm: Route) : ViewModel() {
         view.findNavController().navigate(action)
     }
 
-    fun onArClick() {
-        Log.e("ar", "click")// todo navigate to AR Screen
-    }
-
     fun onLocateClick() {
         Log.e("locate", "click")// todo locate
     }
 
     fun onZoomInClick() {
-        Log.e("zoomIn", "click")// todo zoomIn
+        Log.e("zoomIn", "click")
         currentZoom += 1f
         mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
     }
 
     fun onZoomOutClick() {
-        Log.e("zoomOut", "click")// todo zoomOut
+        Log.e("zoomOut", "click")
         currentZoom -= 1f
         mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
     }

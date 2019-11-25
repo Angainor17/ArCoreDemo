@@ -6,6 +6,7 @@ import androidx.core.text.parseAsHtml
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.simferopol.api.models.GeoObject
+import com.simferopol.app.ui.services.ServiceFragmentDirections
 import com.simferopol.app.ui.services.ServicesFragmentDirections
 
 class ServiceVm(serviceVm: GeoObject) : ViewModel() {
@@ -25,8 +26,14 @@ class ServiceVm(serviceVm: GeoObject) : ViewModel() {
         view.findNavController().navigate(action)
     }
 
-    fun onMapClick() {
-        Log.e("map", name)// todo navigate to map
+    fun onItemMapClick(view: View) {
+        val action = ServicesFragmentDirections.actionNavServicesToNavMap(service)
+        view.findNavController().navigate(action)
+    }
+
+    fun onMapClick(view: View) {
+        val action = ServiceFragmentDirections.actionNavServiceToNavMap(service)
+        view.findNavController().navigate(action)
     }
 
     fun onPlayClick() {

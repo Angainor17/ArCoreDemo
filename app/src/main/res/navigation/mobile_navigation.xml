@@ -20,6 +20,12 @@
             android:id="@+id/action_nav_map_to_nav_routes"
             app:destination="@+id/nav_routes" />
 
+        <argument
+            android:name="geoObject"
+            android:defaultValue="@null"
+            app:argType="com.simferopol.api.models.GeoObject"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment
@@ -81,6 +87,10 @@
         <action
             android:id="@+id/action_nav_services_to_nav_service"
             app:destination="@+id/nav_service" />
+
+        <action
+            android:id="@+id/action_nav_services_to_nav_map"
+            app:destination="@+id/nav_map" />
     </fragment>
 
     <fragment
@@ -91,6 +101,10 @@
         <argument
             android:name="service"
             app:argType="com.simferopol.api.models.GeoObject" />
+
+        <action
+            android:id="@+id/action_nav_service_to_nav_map"
+            app:destination="@+id/nav_map" />
 
     </fragment>
 
@@ -187,6 +201,10 @@
         <action
             android:id="@+id/action_nav_monument_to_nav_model_3d"
             app:destination="@+id/nav_model_3d" />
+
+        <action
+            android:id="@+id/action_nav_monument_to_nav_map"
+            app:destination="@+id/nav_map" />
 
     </fragment>
 

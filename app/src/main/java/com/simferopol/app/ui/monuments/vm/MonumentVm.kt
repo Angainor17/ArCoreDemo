@@ -33,7 +33,9 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
         view.findNavController().navigate(action)
     }
 
-    fun onMapClick(view: View) { //todo navigate to monument map
+    fun onMapClick(view: View) {
+        val action = MonumentFragmentDirections.actionNavMonumentToNavMap(monument)
+        view.findNavController().navigate(action)
     }
 
     fun onPlayClick() {

@@ -10,6 +10,8 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
+const val YANDEX_MAP_API_KEY = "30d70067-9f77-4a49-b74d-35fe453e79a1"
+
 class App : MultiDexApplication() {
 
     override fun onCreate() {
