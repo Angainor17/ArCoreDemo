@@ -9,9 +9,12 @@ import com.simferopol.app.App
 import com.simferopol.app.providers.res.IResProvider
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.geometry.Polyline
+import com.yandex.mapkit.layers.ObjectEvent
 import com.yandex.mapkit.map.*
 import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.mapkit.user_location.UserLocationObjectListener
+import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.image.ImageProvider
 import org.kodein.di.direct
 import org.kodein.di.generic.instance
@@ -107,4 +110,29 @@ class CustomInputListener(mapView: MapView, infoContainer: View?  = null ) : Inp
         if (infoContainer != null) infoContainer.visibility = View.GONE
 
     }
+}
+
+class CustomUserLocationObjectListener(context: Context): UserLocationObjectListener {
+
+    val context = context
+
+    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
+       Log.e("object", "updated")
+//        var pinIcon = p0.pin
+//        pinIcon.setIcon( ImageProvider.fromAsset(context, "ic_route_point_current.png"))
+//        p0.accuracyCircle.isVisible = false
+
+    }
+
+    override fun onObjectRemoved(p0: UserLocationView) {
+        Log.e("object", "removed")
+    }
+
+    override fun onObjectAdded(p0: UserLocationView) {
+       var pinIcon = p0.pin
+        pinIcon.setIcon( ImageProvider.fromAsset(context, "ic_route_point_current.png"))
+        p0.accuracyCircle.isVisible = false
+        Log.e("object", "added")
+    }
+
 }

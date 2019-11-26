@@ -76,7 +76,6 @@
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/round_map_icon"
-            android:onClick="@{()->vm.onLocateClick()}"
             android:padding="10dp"
             android:src="@mipmap/ic_map_locate"
 

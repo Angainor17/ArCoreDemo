@@ -1,9 +1,16 @@
 package com.simferopol.app.ui.map
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.graphics.PointF
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.simferopol.app.databinding.FragmentMapBinding
@@ -12,15 +19,19 @@ import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.api.models.GeoObject
 import com.simferopol.api.utils.ManagerResult
 import com.simferopol.app.App
+import com.simferopol.app.MY_PERMISSIONS_REQUEST_FINE_LOCATION
 import com.simferopol.app.YANDEX_MAP_API_KEY
 import com.simferopol.app.utils.models.ViewState
 import com.simferopol.app.utils.ui.CustomInputListener
+import com.simferopol.app.utils.ui.CustomUserLocationObjectListener
 import com.simferopol.app.utils.ui.CustomVisitor
 import com.simferopol.app.utils.ui.YandexMapUtils
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.location.*
 import com.yandex.mapkit.map.*
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.mapkit.user_location.UserLocationLayer
 import com.yandex.runtime.image.ImageProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -38,6 +49,10 @@ class MapFragment : Fragment() {
     private val listener = YandexMapObjectTapListener()
     lateinit var inputListener: CustomInputListener
     lateinit var visitor: CustomVisitor
+    lateinit var userLocationLayer: UserLocationLayer
+    lateinit var userLocationObjectListener: CustomUserLocationObjectListener
+    lateinit var locationViewSource: LocationViewSource
+    lateinit var locationManager: LocationManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +90,18 @@ class MapFragment : Fragment() {
             )
         } catch (exception: IllegalStateException) {
         }
+        var mapKit = MapKitFactory.getInstance()
+
+        userLocationObjectListener = CustomUserLocationObjectListener(context!!)
+        userLocationLayer = mapKit.createUserLocationLayer(mapview.mapWindow)
+        userLocationLayer.isVisible = true
+        userLocationLayer.isHeadingEnabled = true
+        userLocationLayer.setObjectListener(userLocationObjectListener)
+
+        binding.geoLocation.setOnClickListener {
+            getLocation()
+        }
+
         return binding.root
     }
 
@@ -118,5 +145,84 @@ class MapFragment : Fragment() {
             binding.footerContainer.visibility = View.VISIBLE
             return true
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_FINE_LOCATION -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.e("permission", "granted")
+                } else { }
+                return
+            }
+            else -> { }
+        }
+    }
+
+    @SuppressLint("NewApi")
+    fun getLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this.activity!!,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this.activity!!,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+            } else {
+                ActivityCompat.requestPermissions(
+                    this.activity!!,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    MY_PERMISSIONS_REQUEST_FINE_LOCATION
+                )
+            }
+        } else {
+            Log.e("permission", "granted")
+            locationManager = MapKitFactory.getInstance().createLocationManager()
+            showUserLocation()
+        }
+    }
+
+    fun showUserLocation() {
+        locationManager!!.subscribeForLocationUpdates(
+            0.0,
+            600,
+            1.0,
+            false,
+            FilteringMode.OFF,
+            object : LocationListener {
+                override fun onLocationStatusUpdated(p0: LocationStatus) {
+                    Log.e("locationStatus", p0.name)
+                }
+
+                override fun onLocationUpdated(p0: Location) {
+                    setAnchor()
+                    mapview.map.move(
+                        CameraPosition(p0.position, mapVM.currentZoom, 0.0f, 0.0f),
+                        Animation(Animation.Type.SMOOTH, 0f),
+                        null
+                    )
+
+                    Log.e(
+                        "location",
+                        "lat=${p0?.position?.latitude ?: ""} " +
+                                "lon=${p0?.position?.longitude ?: ""}"
+                    )
+                }
+            })
+    }
+
+    private fun setAnchor() {
+
+        userLocationLayer.setAnchor(
+            PointF((mapview.width * 0.5).toFloat(), (mapview.height * 0.5).toFloat()),
+            PointF((mapview.width * 0.5).toFloat(), (mapview.height * 0.83).toFloat())
+
+        )
     }
 }
