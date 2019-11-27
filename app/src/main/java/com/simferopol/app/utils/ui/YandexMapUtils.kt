@@ -117,7 +117,7 @@ class CustomUserLocationObjectListener(context: Context): UserLocationObjectList
     val context = context
 
     override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
-       Log.e("object", "updated")
+//       Log.e("object", "updated")
 //        var pinIcon = p0.pin
 //        pinIcon.setIcon( ImageProvider.fromAsset(context, "ic_route_point_current.png"))
 //        p0.accuracyCircle.isVisible = false
@@ -125,7 +125,7 @@ class CustomUserLocationObjectListener(context: Context): UserLocationObjectList
     }
 
     override fun onObjectRemoved(p0: UserLocationView) {
-        Log.e("object", "removed")
+//        Log.e("object", "removed")
     }
 
     override fun onObjectAdded(p0: UserLocationView) {

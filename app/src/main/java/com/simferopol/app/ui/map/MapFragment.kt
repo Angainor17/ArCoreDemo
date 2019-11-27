@@ -27,6 +27,7 @@ import com.simferopol.app.utils.ui.CustomUserLocationObjectListener
 import com.simferopol.app.utils.ui.CustomVisitor
 import com.simferopol.app.utils.ui.YandexMapUtils
 import com.yandex.mapkit.Animation
+import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.location.*
 import com.yandex.mapkit.map.*
@@ -51,8 +52,8 @@ class MapFragment : Fragment() {
     lateinit var visitor: CustomVisitor
     lateinit var userLocationLayer: UserLocationLayer
     lateinit var userLocationObjectListener: CustomUserLocationObjectListener
-    lateinit var locationViewSource: LocationViewSource
     lateinit var locationManager: LocationManager
+    lateinit var mapKit: MapKit
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,13 +91,9 @@ class MapFragment : Fragment() {
             )
         } catch (exception: IllegalStateException) {
         }
-        var mapKit = MapKitFactory.getInstance()
+        mapKit = MapKitFactory.getInstance()
 
-        userLocationObjectListener = CustomUserLocationObjectListener(context!!)
-        userLocationLayer = mapKit.createUserLocationLayer(mapview.mapWindow)
-        userLocationLayer.isVisible = true
-        userLocationLayer.isHeadingEnabled = true
-        userLocationLayer.setObjectListener(userLocationObjectListener)
+
 
         binding.geoLocation.setOnClickListener {
             getLocation()
@@ -131,6 +128,11 @@ class MapFragment : Fragment() {
         }
         mapview.map.addInputListener(inputListener)
         mapVM.viewState.value = ViewState.CONTENT
+        userLocationObjectListener = CustomUserLocationObjectListener(context!!)
+        userLocationLayer = mapKit.createUserLocationLayer(mapview.mapWindow)
+        userLocationLayer.isVisible = true
+        userLocationLayer.isHeadingEnabled = true
+        userLocationLayer.setObjectListener(userLocationObjectListener)
         mapview.onStart()
         MapKitFactory.getInstance().onStart()
     }
@@ -201,7 +203,7 @@ class MapFragment : Fragment() {
                 }
 
                 override fun onLocationUpdated(p0: Location) {
-                    setAnchor()
+                    userLocationLayer.isVisible = true
                     mapview.map.move(
                         CameraPosition(p0.position, mapVM.currentZoom, 0.0f, 0.0f),
                         Animation(Animation.Type.SMOOTH, 0f),
