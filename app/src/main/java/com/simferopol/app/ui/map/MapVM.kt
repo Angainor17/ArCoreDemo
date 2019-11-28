@@ -1,18 +1,18 @@
 package com.simferopol.app.ui.map
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
 import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App
-import com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm
 import com.simferopol.app.utils.models.ViewState
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,8 +32,9 @@ class MapVM : ViewModel(), OnMapReadyCallback {
         Log.e("selectRoute", "click")// todo navigate to select route
     }
 
-    fun onArClick() {
-        Log.e("ar", "click")// todo navigate to AR Screen
+    fun onArClick(view: View) {
+        val action = ObjectMapFragmentDirections.actionNavObjectMapToNavArLocation()
+        view.findNavController().navigate(action)
     }
 
     fun onLocateClick() {

@@ -1,2 +1,2 @@
-include ':app', ':api'
+include ':app', ':api', ':engine'
 rootProject.name='Simferopol'

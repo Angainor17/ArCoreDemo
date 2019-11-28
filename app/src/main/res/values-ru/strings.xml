@@ -8,7 +8,7 @@
     <string name="menu_services">Услуги</string>
     <string name="menu_history">История</string>
     <string name="menu_about">О городе</string>
-    <string name="menu_events">Мероприятия</string>
+    <string name="menu_ar">AR</string>
     <string name="menu_settings">Настройки</string>
     <string name="language">Язык</string>
 
@@ -24,11 +24,25 @@
     <string name="worktime">Время работы</string>
     <string name="select_route">Выберите маршрут</string>
 
+    <string name="sceneform_opengl_version_error">Необходима версия OpenGL ES 3.0 или выше</string>
+    <string name="sceneform_android_version_error">Необходима версия Android 7.1 или выше</string>
+    <string name="image_database_error">Не удалось настроить базу данных изображений</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="model_3d">3D Модель</string>
+
     <plurals name="time_hours">
         <item quantity="one">%s час</item>
         <item quantity="other">%s часов</item>
         <item quantity="few">%s часа</item>
         <item quantity="many">%s часов</item>
     </plurals>
+
+    <string name="arcore_not_installed">Пожалуйста, установите ARCore</string>
+    <string name="arcore_not_updated">Please update ARCore</string>
+    <string name="app_not_updated">Пожалуйста, обновите ARCore</string>
+    <string name="arcore_not_supported">Это устройство не поддерживает AR</string>
+    <string name="camera_and_location_permission_request">Необъодимы разрешения на использования Камеры и GPS</string>
+    <string name="loading_message">Загрузка вашего текущего местоположения…</string>
+    <string name="ar_location">Найти рядом</string>
 
 </resources>

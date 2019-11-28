@@ -44,7 +44,7 @@
                 <com.yandex.mapkit.mapview.MapView
                     android:id="@+id/mapview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
             android:layout_height="45dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/round_map_icon"
-            android:onClick="@{()->vm.onArClick()}"
+            android:onClick="@{(v)->vm.onArClick(find)}"
             android:padding="8dp"
             android:src="@mipmap/ic_ar"
 

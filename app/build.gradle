@@ -8,18 +8,11 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
-def VUFORIA_DIR = 'vuforia/build'
-def VUFORIA_JAR_DIR = "$VUFORIA_DIR/java/Vuforia"
 def buildNumber = 1
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
-
-    sourceSets.main {
-        jni.srcDirs = []
-        jniLibs.srcDir "$VUFORIA_DIR/lib/"
-    }
 
     defaultConfig {
         applicationId "com.simferopol.app"
@@ -32,14 +25,6 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         archivesBaseName = "Simf ${versionName}(${buildNumber})(${new Date().format('dd.MM.yyyy')}) versionCode($versionCode)"
-
-        ndk {
-            abiFilters((project.findProperty('abiList') ?: 'armeabi-v7a, arm64-v8a, x86').split(/,\s*/))
-        }
-    }
-
-    aaptOptions {
-        noCompress 'dat'
     }
 
     buildTypes {
@@ -74,10 +59,14 @@ android {
 }
 
 dependencies {
-    implementation files("$VUFORIA_JAR_DIR/Vuforia.jar")
     implementation project(path: ':api')
+    implementation project(path: ':engine')
 
-    implementation ar.core
+    implementation arCore.core
+    implementation arCore.sceneformCore
+    implementation arCore.sceneform
+    implementation arCore.arCoreLocation
+
     implementation qrCodeView.core
 
     implementation kotlinCore.core
@@ -118,3 +107,10 @@ dependencies {
     androidTestImplementation test.testRunner
     androidTestImplementation test.espresso
 }
+
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+sceneform.asset('sampledata/models/skeleton.fbx',
+        'default',
+        'sampledata/models/skeleton.sfa',
+        'src/main/assets/models/skeleton')
