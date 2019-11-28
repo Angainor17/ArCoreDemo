@@ -18,6 +18,7 @@ fun initStoriesList(view: RecyclerView, list: ArrayList<HistoryVm>) {
             super.onBindViewHolder(holder, position)
             val item = list[position]
             holder.bind(item)
+            list[position].position = position
         }
     }
     adapter.setItems(list)
@@ -30,7 +31,7 @@ fun initStoriesPager(view: ViewPager, list: ArrayList<HistoryVm>, id: Int) {
     val adapter = object : StoriesPagerAdapter() {}
     adapter.setItems(list)
     view.adapter = adapter
-    view.currentItem = id-1
+    view.currentItem = id
 }
 
 @BindingAdapter("app:initEventList")
