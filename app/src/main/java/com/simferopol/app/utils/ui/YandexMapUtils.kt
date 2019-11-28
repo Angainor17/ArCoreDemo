@@ -43,7 +43,12 @@ class YandexMapUtils {
                     ImageProvider.fromAsset(mapview.context, it.icon)
                 )
                 if ((currentObject != null) and (it.id == currentObject?.id ?: false))
-                    (temp as PlacemarkMapObject).setIcon(ImageProvider.fromAsset(mapview.context, it.activeIcon))
+                    (temp as PlacemarkMapObject).setIcon(
+                        ImageProvider.fromAsset(
+                            mapview.context,
+                            it.activeIcon
+                        )
+                    )
                 temp.userData = it
                 temp.addTapListener(listener)
             }
@@ -96,10 +101,10 @@ class CustomVisitor(context: Context, currentObject: GeoObject? = null) : MapObj
     }
 }
 
-class CustomInputListener(mapView: MapView, infoContainer: View?  = null ) : InputListener {
+class CustomInputListener(mapView: MapView, infoContainer: View? = null) : InputListener {
 
-    val mapview = mapView
-    val infoContainer = infoContainer
+    private val mapview = mapView
+    private val infoContainer = infoContainer
 
     override fun onMapLongTap(p0: Map, p1: Point) {
         onMapTap(p0, p1)
@@ -112,27 +117,17 @@ class CustomInputListener(mapView: MapView, infoContainer: View?  = null ) : Inp
     }
 }
 
-class CustomUserLocationObjectListener(context: Context): UserLocationObjectListener {
+class CustomUserLocationObjectListener(context: Context) : UserLocationObjectListener {
 
     val context = context
 
-    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
-//       Log.e("object", "updated")
-//        var pinIcon = p0.pin
-//        pinIcon.setIcon( ImageProvider.fromAsset(context, "ic_route_point_current.png"))
-//        p0.accuracyCircle.isVisible = false
+    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {}
 
-    }
-
-    override fun onObjectRemoved(p0: UserLocationView) {
-//        Log.e("object", "removed")
-    }
+    override fun onObjectRemoved(p0: UserLocationView) {}
 
     override fun onObjectAdded(p0: UserLocationView) {
-       var pinIcon = p0.pin
-        pinIcon.setIcon( ImageProvider.fromAsset(context, "ic_route_point_current.png"))
+        var pinIcon = p0.pin
+        pinIcon.setIcon(ImageProvider.fromAsset(context, "ic_route_point_current.png"))
         p0.accuracyCircle.isVisible = false
-        Log.e("object", "added")
     }
-
 }

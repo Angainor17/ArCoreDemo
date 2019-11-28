@@ -8,11 +8,10 @@ import androidx.navigation.findNavController
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.utils.models.ViewState
 import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.mapview.MapView
 
-class MapVM : ViewModel(){
+class MapVM : ViewModel() {
 
-    lateinit var mapview: MapView
+    lateinit var mapview: com.yandex.mapkit.mapview.MapView
     var currentZoom = 14f
     val currentObject = MutableLiveData<GeoObject>()
     val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
@@ -32,17 +31,13 @@ class MapVM : ViewModel(){
         Log.e("ar", "click")// todo navigate to AR Screen
     }
 
-    fun onLocateClick() {
-        Log.e("locate", "click")// todo locate
-    }
-
     fun onZoomInClick() {
         currentZoom += 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
     }
 
     fun onZoomOutClick() {
         currentZoom -= 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
     }
 }

@@ -37,4 +37,12 @@
         <item quantity="many">%s часов</item>
     </plurals>
 
+    <string name="arcore_not_installed">Пожалуйста, установите ARCore</string>
+    <string name="arcore_not_updated">Please update ARCore</string>
+    <string name="app_not_updated">Пожалуйста, обновите ARCore</string>
+    <string name="arcore_not_supported">Это устройство не поддерживает AR</string>
+    <string name="camera_and_location_permission_request">Необъодимы разрешения на использования Камеры и GPS</string>
+    <string name="loading_message">Загрузка вашего текущего местоположения…</string>
+    <string name="ar_location">Найти рядом</string>
+
 </resources>

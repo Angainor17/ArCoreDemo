@@ -62,7 +62,10 @@ dependencies {
     implementation project(path: ':api')
     implementation project(path: ':engine')
 
+    implementation arCore.core
+    implementation arCore.sceneformCore
     implementation arCore.sceneform
+    implementation arCore.arCoreLocation
 
     implementation qrCodeView.core
 

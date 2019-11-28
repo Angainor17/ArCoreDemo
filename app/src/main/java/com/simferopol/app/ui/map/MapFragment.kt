@@ -51,8 +51,8 @@ class MapFragment : Fragment() {
     lateinit var inputListener: CustomInputListener
     lateinit var visitor: CustomVisitor
     lateinit var userLocationLayer: UserLocationLayer
-    lateinit var userLocationObjectListener: CustomUserLocationObjectListener
-    lateinit var locationManager: LocationManager
+    private lateinit var userLocationObjectListener: CustomUserLocationObjectListener
+    private lateinit var locationManager: LocationManager
     lateinit var mapKit: MapKit
 
     override fun onCreateView(
@@ -69,14 +69,12 @@ class MapFragment : Fragment() {
         inputListener = CustomInputListener(binding.mapview, binding.footerContainer)
         mapview = binding.mapview as MapView
         mapVM.mapview = mapview
-        mapview.getMap().move(
+        mapview.map.move(
             CameraPosition(simfer, mapVM.currentZoom, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
             null
         )
-
         val args: MapFragmentArgs by navArgs()
-
         try {
             mapVM.currentObject.value = args.geoObject
             binding.footerContainer.visibility = View.VISIBLE
@@ -92,13 +90,9 @@ class MapFragment : Fragment() {
         } catch (exception: IllegalStateException) {
         }
         mapKit = MapKitFactory.getInstance()
-
-
-
         binding.geoLocation.setOnClickListener {
             getLocation()
         }
-
         return binding.root
     }
 
@@ -157,10 +151,12 @@ class MapFragment : Fragment() {
             MY_PERMISSIONS_REQUEST_FINE_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Log.e("permission", "granted")
-                } else { }
+                } else {
+                }
                 return
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -190,7 +186,7 @@ class MapFragment : Fragment() {
         }
     }
 
-    fun showUserLocation() {
+    private fun showUserLocation() {
         locationManager!!.subscribeForLocationUpdates(
             0.0,
             600,
@@ -206,25 +202,10 @@ class MapFragment : Fragment() {
                     userLocationLayer.isVisible = true
                     mapview.map.move(
                         CameraPosition(p0.position, mapVM.currentZoom, 0.0f, 0.0f),
-                        Animation(Animation.Type.SMOOTH, 0f),
+                        Animation(Animation.Type.SMOOTH, 1f),
                         null
-                    )
-
-                    Log.e(
-                        "location",
-                        "lat=${p0?.position?.latitude ?: ""} " +
-                                "lon=${p0?.position?.longitude ?: ""}"
                     )
                 }
             })
-    }
-
-    private fun setAnchor() {
-
-        userLocationLayer.setAnchor(
-            PointF((mapview.width * 0.5).toFloat(), (mapview.height * 0.5).toFloat()),
-            PointF((mapview.width * 0.5).toFloat(), (mapview.height * 0.83).toFloat())
-
-        )
     }
 }

@@ -37,19 +37,13 @@ class RouteMapVm(routeVm: Route) : ViewModel() {
         view.findNavController().navigate(action)
     }
 
-    fun onLocateClick() {
-        Log.e("locate", "click")// todo locate
-    }
-
     fun onZoomInClick() {
-        Log.e("zoomIn", "click")
         currentZoom += 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
     }
 
     fun onZoomOutClick() {
-        Log.e("zoomOut", "click")
         currentZoom -= 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target,currentZoom,0.0f, 0.0f))
+        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
     }
 }
