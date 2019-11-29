@@ -58,7 +58,7 @@
                     tools:text="Золотая лихорадка в Енисейске" />
 
                 <ImageView
-                    android:id="@+id/route_button"
+                    android:id="@+id/routeButton"
 
                         android:layout_width="36dp"
                         android:layout_height="36dp"

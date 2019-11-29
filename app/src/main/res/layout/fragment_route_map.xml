@@ -22,71 +22,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+
+        <include
+            layout="@layout/map_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/footerContainer"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:vm="@{vm}" />
 
-            <com.yandex.mapkit.mapview.MapView
-                android:id="@+id/mapview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}" />
-
-            <include
-                layout="@layout/loading_view"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{vm.viewState==ViewState.LOADING? View.VISIBLE: View.GONE}" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/zoomIn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="100dp"
-            android:background="@drawable/round_map_icon"
-            android:elevation="15dp"
-            android:onClick="@{()->vm.onZoomInClick()}"
-            android:padding="10dp"
-            android:src="@mipmap/ic_map_plus"
-
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        <include
+            layout="@layout/map_view_controls"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/footerContainer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
-
-        <ImageView
-            android:id="@+id/zoomOut"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/round_map_icon"
-            android:elevation="15dp"
-            android:onClick="@{()->vm.onZoomOutClick()}"
-            android:padding="10dp"
-            android:src="@mipmap/ic_map_minus"
-
-            app:layout_constraintEnd_toEndOf="@id/zoomIn"
-            app:layout_constraintTop_toBottomOf="@id/zoomIn" />
-
-        <ImageView
-            android:id="@+id/geoLocation"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/round_map_icon"
-            android:elevation="15dp"
-            android:padding="10dp"
-            android:src="@mipmap/ic_map_locate"
-
-            app:layout_constraintEnd_toEndOf="@id/zoomOut"
-            app:layout_constraintTop_toBottomOf="@id/zoomOut" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:vm="@{vm}" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

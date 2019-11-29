@@ -3,19 +3,22 @@ package com.simferopol.app.ui.map
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.api.models.GeoObject
-import com.simferopol.app.utils.models.ViewState
-import com.yandex.mapkit.map.CameraPosition
+import com.simferopol.app.App.Companion.kodein
+import com.simferopol.app.ui.map.base.IMapView
+import com.simferopol.app.utils.ui.YandexMapUtils
+import com.yandex.mapkit.map.MapObjectTapListener
+import kotlinx.coroutines.*
+import org.kodein.di.generic.instance
 
-class MapVM : ViewModel() {
+class MapVM(view: IMapView) : BaseMapVm(view) {
 
-    lateinit var mapview: com.yandex.mapkit.mapview.MapView
-    var currentZoom = 14f
+    private val routeManager by kodein.instance<ApiManager>()
+
     val currentObject = MutableLiveData<GeoObject>()
     val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
-    val viewState = MutableLiveData(ViewState.LOADING)
 
     fun onMonumentClick(view: View) {
         val action = MapFragmentDirections.actionNavMapToNavMonument(currentObject.value!!)
@@ -31,13 +34,22 @@ class MapVM : ViewModel() {
         Log.e("ar", "click")// todo navigate to AR Screen
     }
 
-    fun onZoomInClick() {
-        currentZoom += 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
-    }
-
-    fun onZoomOutClick() {
-        currentZoom -= 1f
-        mapview.map.move(CameraPosition(mapview.map.cameraPosition.target, currentZoom, 0.0f, 0.0f))
+    fun initData(mapObjectTapListener: MapObjectTapListener) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val result = if (currentObject.value != null)
+                routeManager.getGeoObjects(currentObject.value?.categoryId)
+            else routeManager.getGeoObjects(1)
+            if (result.success) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    listOfGeoObjects.value = (ArrayList(result.data?.map { it } ?: ArrayList()))
+                    YandexMapUtils().initMapObjects(
+                        listOfGeoObjects.value!!,
+                        view.findMapView(),
+                        mapObjectTapListener,
+                        currentObject.value
+                    )
+                }
+            }
+        }
     }
 }

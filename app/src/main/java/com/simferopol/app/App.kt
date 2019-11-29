@@ -5,6 +5,7 @@ import androidx.multidex.MultiDexApplication
 import com.simferopol.app.kodein.apiModule
 import com.simferopol.app.kodein.providersModule
 import com.simferopol.app.utils.storages.JsonDataStorage
+import com.yandex.mapkit.MapKitFactory
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -17,6 +18,8 @@ class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        MapKitFactory.setApiKey(YANDEX_MAP_API_KEY)
+        MapKitFactory.initialize(this)
 
         kodein = Kodein {
             import(apiModule)

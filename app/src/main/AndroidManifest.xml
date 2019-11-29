@@ -10,9 +10,7 @@
         android:name="android.hardware.camera.ar"
         android:required="true" />
 
-    <uses-sdk
-        android:minSdkVersion="19"
-        tools:overrideLibrary="uk.co.arcorelocation" />
+    <uses-sdk tools:overrideLibrary="uk.co.arcorelocation" />
 
     <uses-feature android:name="android.hardware.location.gps" />
 
