@@ -7,11 +7,34 @@
 
     <fragment
         android:id="@+id/nav_map"
-
         android:name="com.simferopol.app.ui.map.MapFragment"
         android:label="@string/menu_map"
 
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map">
+
+        <action
+            android:id="@+id/action_nav_map_to_nav_monument"
+            app:destination="@+id/nav_monument"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_nav_map_to_nav_routes"
+            app:destination="@+id/nav_routes"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="geoObject"
+            android:defaultValue="@null"
+            app:argType="com.simferopol.api.models.GeoObject"
+            app:nullable="true" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_routes"
@@ -39,12 +62,12 @@
         tools:layout="@layout/fragment_monuments">
         <action
             android:id="@+id/action_nav_monuments_to_nav_monument"
-
             app:destination="@+id/nav_monument"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -85,9 +108,15 @@
 
         <action
             android:id="@+id/action_nav_services_to_nav_service"
-
             app:destination="@+id/nav_service"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_nav_services_to_nav_map"
+            app:destination="@+id/nav_map"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -102,6 +131,14 @@
         <argument
             android:name="service"
             app:argType="com.simferopol.api.models.GeoObject" />
+
+        <action
+            android:id="@+id/action_nav_service_to_nav_map"
+            app:destination="@+id/nav_map"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -139,6 +176,16 @@
         android:label="@string/menu_ar"
 
         tools:layout="@layout/activity_ar_flyer" />
+
+    <activity
+        android:id="@+id/nav_ar_location"
+
+        android:name="com.simferopol.app.ui.arLocation.view.ARLocationActivity"
+        android:label="@string/ar_location"
+
+        tools:layout="@layout/activity_ar_location">
+
+    </activity>
 
     <activity
         android:id="@+id/nav_model_3d"
@@ -183,12 +230,20 @@
 
         <action
             android:id="@+id/action_nav_route_to_nav_route_map"
-
             app:destination="@+id/nav_route_map"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_nav_route_to_nav_monument"
+            app:destination="@+id/nav_monument"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -202,8 +257,15 @@
 
         <action
             android:id="@+id/action_nav_monument_to_nav_model_3d"
-
             app:destination="@+id/nav_model_3d"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_nav_monument_to_nav_map"
+            app:destination="@+id/nav_map"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -221,6 +283,22 @@
         <argument
             android:name="route"
             app:argType="com.simferopol.api.models.Route" />
+
+        <action
+            android:id="@+id/action_nav_route_map_to_nav_monument"
+            app:destination="@+id/nav_monument"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_nav_route_map_to_nav_route"
+            app:destination="@+id/nav_route"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

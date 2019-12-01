@@ -21,5 +21,10 @@
 
     <color name="black_alpha_07">#B3000000</color>
     <color name="black_alpha_03">#4D000000</color>
+    <color name="grey_alpha_09">#E62B2B2B</color>
+    <color name="grey_alpha_07">#B32b2b2b</color>
+
+    <color name="white_alpha_07">#B3ffffff</color>
+    <color name="white_alpha_08">#C8ffffff</color>
 
 </resources>

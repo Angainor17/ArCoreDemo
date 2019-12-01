@@ -105,4 +105,13 @@
         <item name="fontFamily">@font/circe_regular</item>
     </style>
 
+    <style name="SelectRoute">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/circe_regular</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>

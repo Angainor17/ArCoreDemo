@@ -21,14 +21,14 @@ import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils
 import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils.INITIAL_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils.INVALID_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.PermissionUtils
-import kotlinx.android.synthetic.main.activity_augmented_reality_location.*
+import kotlinx.android.synthetic.main.activity_ar_location.*
 import kotlinx.android.synthetic.main.location_layout_renderable.view.*
 import uk.co.appoly.arcorelocation.LocationMarker
 import uk.co.appoly.arcorelocation.LocationScene
 import java.lang.ref.WeakReference
 import java.util.concurrent.CompletableFuture
 
-class AugmentedRealityLocationActivity : AppCompatActivity() {
+class ARLocationActivity : AppCompatActivity() {
 
     private var arCoreInstallRequested = false
 
@@ -51,7 +51,7 @@ class AugmentedRealityLocationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_augmented_reality_location)
+        setContentView(R.layout.activity_ar_location)
         setupLoadingDialog()
     }
 
@@ -114,7 +114,7 @@ class AugmentedRealityLocationActivity : AppCompatActivity() {
         }
 
         if (userGeolocation == Geolocation.EMPTY_GEOLOCATION) {
-            LocationAsyncTask(WeakReference(this@AugmentedRealityLocationActivity)).execute(
+            LocationAsyncTask(WeakReference(this@ARLocationActivity)).execute(
                 locationScene!!
             )
         }
@@ -303,7 +303,7 @@ class AugmentedRealityLocationActivity : AppCompatActivity() {
         }
     }
 
-    class LocationAsyncTask(private val activityWeakReference: WeakReference<AugmentedRealityLocationActivity>) :
+    class LocationAsyncTask(private val activityWeakReference: WeakReference<ARLocationActivity>) :
         AsyncTask<LocationScene, Void, List<Double>>() {
 
         override fun onPreExecute() {

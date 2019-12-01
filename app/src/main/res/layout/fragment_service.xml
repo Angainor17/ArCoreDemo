@@ -100,6 +100,7 @@
                     android:layout_height="36dp"
                     android:layout_marginEnd="16dp"
                     android:src="@mipmap/ic_location"
+                    android:onClick="@{()->vm.onMapClick(header)}"
 
                     app:layout_constraintBottom_toBottomOf="@+id/titleTv"
                     app:layout_constraintStart_toEndOf="@+id/titleTv"

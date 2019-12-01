@@ -18,6 +18,7 @@ fun initStoriesList(view: RecyclerView, list: ArrayList<HistoryVm>) {
             super.onBindViewHolder(holder, position)
             val item = list[position]
             holder.bind(item)
+            list[position].position = position
         }
     }
     adapter.setItems(list)

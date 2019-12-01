@@ -22,6 +22,7 @@
     <string name="contacts">Контакты</string>
     <string name="site">Сайт</string>
     <string name="worktime">Время работы</string>
+    <string name="select_route">Выберите маршрут</string>
 
     <string name="sceneform_opengl_version_error">Необходима версия OpenGL ES 3.0 или выше</string>
     <string name="sceneform_android_version_error">Необходима версия Android 7.1 или выше</string>
@@ -36,11 +37,12 @@
         <item quantity="many">%s часов</item>
     </plurals>
 
-    <string name="arcore_not_installed">Please install ARCore</string>
+    <string name="arcore_not_installed">Пожалуйста, установите ARCore</string>
     <string name="arcore_not_updated">Please update ARCore</string>
-    <string name="app_not_updated">Please update this app</string>
-    <string name="arcore_not_supported">This device does not support AR</string>
-    <string name="camera_and_location_permission_request">Location and Camera permissions are needed to use this feature</string>
-    <string name="loading_message">Loading your current location…</string>
+    <string name="app_not_updated">Пожалуйста, обновите ARCore</string>
+    <string name="arcore_not_supported">Это устройство не поддерживает AR</string>
+    <string name="camera_and_location_permission_request">Необъодимы разрешения на использования Камеры и GPS</string>
+    <string name="loading_message">Загрузка вашего текущего местоположения…</string>
+    <string name="ar_location">Найти рядом</string>
 
 </resources>

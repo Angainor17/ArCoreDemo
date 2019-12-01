@@ -1,52 +1,55 @@
 package com.simferopol.app.ui.map
 
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.simferopol.app.utils.models.ViewState
+import androidx.navigation.findNavController
+import com.simferopol.api.apiManager.ApiManager
+import com.simferopol.api.models.GeoObject
+import com.simferopol.app.App.Companion.kodein
+import com.simferopol.app.ui.map.base.IMapView
+import com.simferopol.app.utils.ui.YandexMapUtils
+import com.yandex.mapkit.map.MapObjectTapListener
+import kotlinx.coroutines.*
+import org.kodein.di.generic.instance
 
-val simfer = LatLng(44.949684, 34.102521)
-val simferBounds = LatLngBounds(LatLng(44.888679, 34.010726), LatLng(45.009175, 34.191087))
+class MapVM(view: IMapView) : BaseMapVm(view) {
 
-class MapVM : ViewModel(), OnMapReadyCallback {
+    private val routeManager by kodein.instance<ApiManager>()
 
-    var map: GoogleMap? = null
+    val currentObject = MutableLiveData<GeoObject>()
+    val listOfGeoObjects = MutableLiveData(ArrayList<GeoObject>())
 
-    val viewState = MutableLiveData(ViewState.LOADING)
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        viewState.postValue(ViewState.CONTENT)
-
-        initGoogleMapAttrs()
-
-        initMapPosition()
+    fun onMonumentClick(view: View) {
+        val action = MapFragmentDirections.actionNavMapToNavMonument(currentObject.value!!)
+        view.findNavController().navigate(action)
     }
 
-    private fun initGoogleMapAttrs() {
-        map?.mapType = GoogleMap.MAP_TYPE_NORMAL
-
-        map?.uiSettings?.isCompassEnabled = false
-        map?.uiSettings?.isZoomControlsEnabled = false
-        map?.uiSettings?.isMyLocationButtonEnabled = false
-        map?.uiSettings?.isTiltGesturesEnabled = false
-        map?.uiSettings?.isMapToolbarEnabled = false
-        map?.uiSettings?.isRotateGesturesEnabled = false
-        map?.uiSettings?.isScrollGesturesEnabled = true
-
-        map?.isTrafficEnabled = false
-        map?.isBuildingsEnabled = false
-
-        map?.setMinZoomPreference(10f)
+    fun onSelectRouteClick(view: View) {
+        val action = MapFragmentDirections.actionNavMapToNavRoutes()
+        view.findNavController().navigate(action)
     }
 
-    private fun initMapPosition() {
-        map?.setLatLngBoundsForCameraTarget(simferBounds)
-        map?.moveCamera(CameraUpdateFactory.newLatLng(simfer))
-        map?.animateCamera(CameraUpdateFactory.zoomTo(14f), 400, null)
+    fun onArClick() {
+        Log.e("ar", "click")// todo navigate to AR Screen
+    }
+
+    fun initData(mapObjectTapListener: MapObjectTapListener) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val result = if (currentObject.value != null)
+                routeManager.getGeoObjects(currentObject.value?.categoryId)
+            else routeManager.getGeoObjects(1)
+            if (result.success) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    listOfGeoObjects.value = (ArrayList(result.data?.map { it } ?: ArrayList()))
+                    YandexMapUtils().initMapObjects(
+                        listOfGeoObjects.value!!,
+                        view.findMapView(),
+                        mapObjectTapListener,
+                        currentObject.value
+                    )
+                }
+            }
+        }
     }
 }

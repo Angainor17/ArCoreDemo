@@ -25,6 +25,7 @@
     <string name="contacts">Contacts</string>
     <string name="site">Website</string>
     <string name="worktime">Worktime</string>
+    <string name="select_route">Select route</string>
 
     <string name="sceneform_android_version_error">Sceneform requires Android N or later</string>
     <string name="sceneform_opengl_version_error">Sceneform requires OpenGL ES 3.0 or later</string>
@@ -45,6 +46,7 @@
     <string name="arcore_not_supported">This device does not support AR</string>
     <string name="camera_and_location_permission_request">Location and Camera permissions are needed to use this feature</string>
     <string name="loading_message">Loading your current location…</string>
+    <string name="ar_location">Find nearby</string>
 
 
 </resources>
