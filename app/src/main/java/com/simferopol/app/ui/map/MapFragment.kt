@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.view.marginBottom
 import androidx.navigation.fragment.navArgs
 import com.simferopol.api.models.GeoObject
+import com.simferopol.app.R
 import com.simferopol.app.databinding.FragmentMapBinding
 import com.simferopol.app.utils.models.ViewState
 import com.simferopol.app.utils.ui.CustomInputListener
@@ -86,7 +89,11 @@ class MapFragment : BaseMapFragment() {
             mapView.map.mapObjects.traverse(CustomVisitor(context!!))
             mark.setIcon(ImageProvider.fromAsset(context, info.activeIcon))
             mapVM.currentObject.postValue(info)
-            footerContainer.visibility = View.VISIBLE
+            if (footerContainer.visibility != View.VISIBLE) {
+                footerContainer.visibility = View.VISIBLE
+                val animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_bottom)
+                footerContainer.startAnimation(animation)
+            }
             return true
         }
     }
