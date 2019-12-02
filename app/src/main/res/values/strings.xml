@@ -47,6 +47,7 @@
     <string name="camera_and_location_permission_request">Location and Camera permissions are needed to use this feature</string>
     <string name="loading_message">Loading your current location…</string>
     <string name="ar_location">Find nearby</string>
+    <string name="temperature">C</string>
 
 
 </resources>

@@ -3,8 +3,11 @@ package com.simferopol.app.ui.map
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.simferopol.app.R
 import com.simferopol.app.ui.map.base.IMapView
+import com.simferopol.app.utils.CustomToolbar
 import com.simferopol.app.utils.ui.CustomUserLocationObjectListener
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
@@ -15,6 +18,7 @@ import com.yandex.mapkit.location.LocationStatus
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.user_location.UserLocationLayer
+import kotlinx.android.synthetic.main.app_bar_nav_drawer.*
 import kotlinx.android.synthetic.main.map_view.*
 
 abstract class BaseMapFragment : Fragment(), IMapView {
@@ -28,7 +32,6 @@ abstract class BaseMapFragment : Fragment(), IMapView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        userLocationObjectListener = CustomUserLocationObjectListener(context!!)
     }
 
     override fun findMapView(): MapView = mapView
@@ -52,6 +55,19 @@ abstract class BaseMapFragment : Fragment(), IMapView {
         userLocationLayer.isVisible = false
         userLocationLayer.isHeadingEnabled = false
         userLocationLayer.setObjectListener(userLocationObjectListener)
+        (activity as AppCompatActivity).supportActionBar?.setLogo(R.drawable.ic_logo)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        val toolbar = (activity as AppCompatActivity).toolbar as CustomToolbar
+        toolbar.setWeather("-13", "10n")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
+        val toolbar = (activity as AppCompatActivity).toolbar as CustomToolbar
+        toolbar.hideWeather()
     }
 
     override fun showUserLocation() {
