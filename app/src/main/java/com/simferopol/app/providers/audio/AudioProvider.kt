@@ -14,9 +14,9 @@ class AudioProvider : IAudioProvider {
     private val UPDATE_AUDIO_PROGRESS_BAR = 3
     lateinit var progressBar: ProgressBar
     var mediaPlayer: MediaPlayer = MediaPlayer()
-    var status = "init"
+    var status = PlayerStatus.INIT
     private lateinit var audioProgressHandler: Handler
-    lateinit var audioProgressBarThread: Thread
+    private lateinit var audioProgressBarThread: Thread
 
     override fun progressBar(progressBarView: ProgressBar) {
         progressBar = progressBarView
@@ -25,30 +25,31 @@ class AudioProvider : IAudioProvider {
 
     override fun playClickListener(audioUrl: String) {
         when (status) {
-            "paused" -> {
+            PlayerStatus.PAUSED -> {
                 mediaPlayer.seekTo(mediaPlayer.currentPosition)
                 mediaPlayer.start()
-                status = "playing"
+                status = PlayerStatus.PLAYING
             }
-            "init" -> {
+            PlayerStatus.INIT -> {
                 mediaPlayer.setDataSource(audioUrl)
                 mediaPlayer.prepareAsync()
                 mediaPlayer.setOnPreparedListener {
                     it.start()
-                    status = "playing"
+                    status = PlayerStatus.PLAYING
                     progressBar.visibility = View.VISIBLE
                 }
                 audioProgressBarThread = object : Thread() {
                     override fun run() {
                         super.run()
                         try {
-                            while (status != "paused") {
-                                if (audioProgressHandler != null) {
-                                    // Send update audio player progress message to main thread message queue.
-                                    var msg = Message()
-                                    msg.what = UPDATE_AUDIO_PROGRESS_BAR
-                                    audioProgressHandler.sendMessage(msg)
-                                    sleep(1000)
+                            while (status != PlayerStatus.STOPPED) {
+                                if (status != PlayerStatus.PAUSED) {
+                                    if (audioProgressHandler != null) {
+                                        var msg = Message()
+                                        msg.what = UPDATE_AUDIO_PROGRESS_BAR
+                                        audioProgressHandler.sendMessage(msg)
+                                        sleep(1000)
+                                    }
                                 }
                             }
                         } catch (ex: InterruptedException) {
@@ -58,14 +59,15 @@ class AudioProvider : IAudioProvider {
                 }
                 audioProgressBarThread.start()
             }
-            "playing" -> {
+            PlayerStatus.PLAYING -> {
                 mediaPlayer.pause()
-                status = "paused"
+                status = PlayerStatus.PAUSED
             }
         }
     }
 
     override fun stopAudio() {
+        status = PlayerStatus.INIT
         mediaPlayer.stop()
         mediaPlayer.reset()
     }
@@ -78,7 +80,7 @@ class AudioProvider : IAudioProvider {
             if (audioProvider != null) {
                 val audioPlayer = audioProvider.mediaPlayer
                 super.handleMessage(msg)
-                if ((msg.what === UPDATE_AUDIO_PROGRESS_BAR) and (status == "playing")) {
+                if ((msg.what === UPDATE_AUDIO_PROGRESS_BAR) and (status == PlayerStatus.PLAYING)) {
 
                     if (mediaPlayer != null) {
                         val currPlayPosition = audioPlayer.currentPosition
@@ -90,5 +92,9 @@ class AudioProvider : IAudioProvider {
             }
         }
 
+    }
+
+    enum class PlayerStatus {
+        INIT, PAUSED, STOPPED, PLAYING
     }
 }

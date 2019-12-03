@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.simferopol.api.models.GeoObject
+import com.simferopol.app.App
 import com.simferopol.app.databinding.FragmentMapBinding
+import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.utils.models.ViewState
 import com.simferopol.app.utils.ui.CustomInputListener
 import com.simferopol.app.utils.ui.CustomVisitor
@@ -17,8 +19,10 @@ import com.yandex.mapkit.map.MapObject
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.runtime.image.ImageProvider
+import kotlinx.android.synthetic.main.audio_player_element.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.map_view.*
+import org.kodein.di.generic.instance
 
 val simfer = Point(44.949684, 34.102521)
 
@@ -28,6 +32,8 @@ class MapFragment : BaseMapFragment() {
     var mapObjectTapListener = YandexMapObjectTapListener()
     lateinit var inputListener: CustomInputListener
     override fun createVm(): BaseMapVm = mapVM
+    private val audioProvider by App.kodein.instance<IAudioProvider>()
+    lateinit var binding: FragmentMapBinding
 
     override fun getMapObjectTapListener(): MapObjectTapListener = YandexMapObjectTapListener()
 
@@ -36,7 +42,7 @@ class MapFragment : BaseMapFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMapBinding.inflate(inflater, container, false)
+        binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = mapVM
 
@@ -45,7 +51,7 @@ class MapFragment : BaseMapFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        inputListener = CustomInputListener(mapView, footerContainer)
+        inputListener = CustomInputListener(mapView, footerContainer, player, audioProvider)
         mapView.map.move(
             CameraPosition(simfer, mapVM.zoom, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
@@ -64,7 +70,7 @@ class MapFragment : BaseMapFragment() {
                 Animation(Animation.Type.SMOOTH, 0f),
                 null
             )
-            footerContainer.visibility = View.VISIBLE
+            setFooterContainer()
             routeButton.visibility = View.GONE
         }
 
@@ -85,9 +91,30 @@ class MapFragment : BaseMapFragment() {
             val mark = mapObject as PlacemarkMapObject
             mapView.map.mapObjects.traverse(CustomVisitor(context!!))
             mark.setIcon(ImageProvider.fromAsset(context, info.activeIcon))
-            mapVM.currentObject.postValue(info)
-            footerContainer.visibility = View.VISIBLE
+            mapVM.currentObject.value = info
+            setFooterContainer()
             return true
         }
+    }
+
+    private fun setFooterContainer() {
+        footerContainer.visibility = View.VISIBLE
+        binding.player.visibility = View.GONE
+        binding.player.play_button.isActivated = false
+        audioProvider.stopAudio()
+        var audioUrl = mapVM.currentObject.value?.audio
+        if (!audioUrl.isNullOrEmpty()) {
+            binding.player.visibility = View.VISIBLE
+            audioProvider.progressBar(binding.player.progressBar)
+            binding.player.play_button.setOnClickListener {
+                binding.player.play_button.isActivated = !binding.player.play_button.isActivated
+                audioProvider.playClickListener(audioUrl)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        audioProvider.stopAudio()
     }
 }

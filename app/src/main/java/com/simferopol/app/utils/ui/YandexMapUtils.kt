@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App
+import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.providers.res.IResProvider
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.geometry.Polyline
@@ -89,7 +90,9 @@ class CustomVisitor(
 
 class CustomInputListener(
     private val mapView: MapView,
-    private val infoContainer: View? = null
+    private val infoContainer: View? = null,
+    private val player: View? = null,
+    private val audioProvider: IAudioProvider? = null
 ) : InputListener {
 
     override fun onMapLongTap(p0: Map, p1: Point) {
@@ -99,6 +102,8 @@ class CustomInputListener(
     override fun onMapTap(p0: Map, p1: Point) {
         mapView.map.mapObjects.traverse(CustomVisitor(mapView.context))
         if (infoContainer != null) infoContainer.visibility = View.GONE
+        if (player != null) player.visibility = View.GONE
+        audioProvider?.stopAudio()
     }
 }
 
