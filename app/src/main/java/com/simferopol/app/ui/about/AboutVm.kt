@@ -1,6 +1,5 @@
 package com.simferopol.app.ui.about
 
-import android.util.Log
 import androidx.core.text.parseAsHtml
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,7 @@ class AboutVm : ViewModel() {
 
     val contentText = MutableLiveData<String>()
 
+
     init {
         GlobalScope.launch {
             val result = apiManager.getAbout()
@@ -30,9 +30,4 @@ class AboutVm : ViewModel() {
             }
         }
     }
-
-    fun onPlayClick() {
-        Log.e("play", "about")//todo play audio file
-    }
-
 }
