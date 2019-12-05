@@ -28,7 +28,7 @@ class AboutFragment : Fragment() {
         audioProvider.progressBar(binding.player.progressBar)
         binding.player.play_button.setOnClickListener {
             binding.player.play_button.isActivated = !binding.player.play_button.isActivated
-            val audioUrl = aboutVm.about.value?.audio
+            var audioUrl = aboutVm.about.value?.audio
             if (audioUrl != null)
                 audioProvider.playClickListener(aboutVm.about.value!!.audio)
         }

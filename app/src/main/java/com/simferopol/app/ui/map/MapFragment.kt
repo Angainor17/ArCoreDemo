@@ -34,6 +34,7 @@ class MapFragment : BaseMapFragment() {
     private val audioProvider by kodein.instance<IAudioProvider>()
 
     override fun createVm(): BaseMapVm = mapVM
+    lateinit var binding: FragmentMapBinding
 
     override fun getMapObjectTapListener(): MapObjectTapListener = YandexMapObjectTapListener()
 
