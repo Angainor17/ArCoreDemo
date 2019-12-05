@@ -1,7 +1,6 @@
 package com.simferopol.app.utils
 
 import android.app.Activity
-import com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
 import com.google.android.material.snackbar.Snackbar
 import com.simferopol.app.R
 
@@ -56,28 +55,25 @@ class SnackbarHelper {
 
     private fun show(activity: Activity, message: String, dismissBehavior: DismissBehavior) {
         activity.runOnUiThread {
-            messageSnackbar = Snackbar.make(
-                activity.findViewById(R.id.content),
-                message,
-                Snackbar.LENGTH_INDEFINITE
-            )
-            messageSnackbar!!.view.setBackgroundColor(BACKGROUND_COLOR)
+            try {
+                messageSnackbar = Snackbar.make(
+                    activity.findViewById(R.id.content),
+                    message,
+                    Snackbar.LENGTH_INDEFINITE
+                )
 
-            if (dismissBehavior != DismissBehavior.HIDE) {
-                messageSnackbar!!.setAction(activity.getString(R.string.dismiss)) {
-                    messageSnackbar!!.dismiss()
+                messageSnackbar?.view?.setBackgroundColor(BACKGROUND_COLOR)
+
+                if (dismissBehavior != DismissBehavior.HIDE) {
+                    messageSnackbar?.setAction(activity.getString(R.string.dismiss)) {
+                        messageSnackbar?.dismiss()
+                        activity.finish()
+                    }
                 }
-                if (dismissBehavior == DismissBehavior.FINISH) {
-                    messageSnackbar!!.addCallback(
-                        object : BaseCallback<Snackbar?>() {
-                            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                                super.onDismissed(transientBottomBar, event)
-                                activity.finish()
-                            }
-                        })
-                }
+                messageSnackbar?.show()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            messageSnackbar!!.show()
         }
     }
 }
