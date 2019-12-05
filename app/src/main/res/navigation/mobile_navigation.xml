@@ -7,13 +7,24 @@
 
     <fragment
         android:id="@+id/nav_map"
+
         android:name="com.simferopol.app.ui.map.MapFragment"
         android:label="@string/menu_map"
 
         tools:layout="@layout/fragment_map">
 
         <action
+            android:id="@+id/action_nav_map_to_nav_ar_location"
+
+            app:destination="@+id/nav_ar_location"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
             android:id="@+id/action_nav_map_to_nav_monument"
+
             app:destination="@+id/nav_monument"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -22,6 +33,7 @@
 
         <action
             android:id="@+id/action_nav_map_to_nav_routes"
+
             app:destination="@+id/nav_routes"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -183,9 +195,7 @@
         android:name="com.simferopol.app.ui.arLocation.view.ARLocationActivity"
         android:label="@string/ar_location"
 
-        tools:layout="@layout/activity_ar_location">
-
-    </activity>
+        tools:layout="@layout/activity_ar_location"/>
 
     <activity
         android:id="@+id/nav_model_3d"

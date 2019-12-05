@@ -1,10 +1,7 @@
 package com.simferopol.app.ui.ar
 
-import android.app.ActivityManager
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +14,7 @@ import com.simferopol.app.R
 import com.simferopol.app.utils.SnackbarHelper
 import java.io.IOException
 
-private const val MIN_OPENGL_VERSION = 3.0
+const val MIN_OPENGL_VERSION = 3.0
 private const val IMAGE_FILE_NAME = "sampleImage.jpg"
 private const val IMAGE_HIGH_METERS = 2f
 
@@ -25,24 +22,6 @@ private const val IMAGE_HIGH_METERS = 2f
  * Extend the ArFragment to customize the ARCore session configuration to include Augmented Images.
  */
 class AugmentedImageFragment : ArFragment() {
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            SnackbarHelper().showError(
-                activity!!,
-                getString(R.string.sceneform_android_version_error)
-            )
-        }
-        val openGlVersionString =
-            (context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
-                .deviceConfigurationInfo
-                .glEsVersion
-        if (openGlVersionString.toDouble() < MIN_OPENGL_VERSION) {
-            SnackbarHelper()
-                .showError(activity!!, getString(R.string.sceneform_opengl_version_error))
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +34,16 @@ class AugmentedImageFragment : ArFragment() {
         planeDiscoveryController.setInstructionView(null)
         arSceneView.planeRenderer.isEnabled = false
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.let {
+            if (!isAndroidARSupported() || !isOpenGLSupported(it)) {
+                showArCoreError(it)
+            }
+        }
     }
 
     override fun getSessionConfiguration(session: Session): Config {
@@ -83,5 +72,4 @@ class AugmentedImageFragment : ArFragment() {
         config.augmentedImageDatabase = augmentedImageDatabase
         return true
     }
-
 }

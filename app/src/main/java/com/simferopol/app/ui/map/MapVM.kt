@@ -1,6 +1,5 @@
 package com.simferopol.app.ui.map
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -10,7 +9,9 @@ import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.ui.map.base.IMapView
 import com.simferopol.app.utils.ui.YandexMapUtils
 import com.yandex.mapkit.map.MapObjectTapListener
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
 
 class MapVM(view: IMapView) : BaseMapVm(view) {
@@ -30,8 +31,9 @@ class MapVM(view: IMapView) : BaseMapVm(view) {
         view.findNavController().navigate(action)
     }
 
-    fun onArClick() {
-        Log.e("ar", "click")// todo navigate to AR Screen
+    fun onArClick(view: View) {
+        val action = MapFragmentDirections.actionNavMapToNavArLocation()
+        view.findNavController().navigate(action)
     }
 
     fun initData(mapObjectTapListener: MapObjectTapListener) {

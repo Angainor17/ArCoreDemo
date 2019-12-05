@@ -20,6 +20,7 @@ class ServiceVm(serviceVm: GeoObject) : ViewModel() {
     val site = serviceVm.website
     val worktime = serviceVm.worktime
     val slides = serviceVm.slides
+    val audio = serviceVm.audio
 
     fun onClick(view: View) {
         val action = ServicesFragmentDirections.actionNavServicesToNavService(service)

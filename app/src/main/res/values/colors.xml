@@ -27,4 +27,7 @@
     <color name="white_alpha_07">#B3ffffff</color>
     <color name="white_alpha_08">#C8ffffff</color>
 
+    <color name="colorPrimary_03">#4D00B5D1</color>
+    <color name="colorPrimary_08">#CC00B5D1</color>
+
 </resources>

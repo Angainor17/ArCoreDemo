@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-
 import com.google.ar.core.TrackingState
 import com.google.ar.core.exceptions.CameraNotAvailableException
 import com.google.ar.core.exceptions.UnavailableException
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.simferopol.app.R
+import com.simferopol.app.ui.ar.isAndroidARSupported
+import com.simferopol.app.ui.ar.isOpenGLSupported
 import com.simferopol.app.ui.arLocation.model.Geolocation
 import com.simferopol.app.ui.arLocation.model.Venue
 import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils
 import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils.INITIAL_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils.INVALID_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.PermissionUtils
+import com.simferopol.app.utils.base.ArActivity
 import kotlinx.android.synthetic.main.activity_ar_location.*
 import kotlinx.android.synthetic.main.location_layout_renderable.view.*
 import uk.co.appoly.arcorelocation.LocationMarker
@@ -28,16 +28,12 @@ import uk.co.appoly.arcorelocation.LocationScene
 import java.lang.ref.WeakReference
 import java.util.concurrent.CompletableFuture
 
-class ARLocationActivity : AppCompatActivity() {
+class ARLocationActivity : ArActivity() {
 
     private var arCoreInstallRequested = false
-
-    // Our ARCore-Location scene
     private var locationScene: LocationScene? = null
 
-    private var arHandler = Handler(Looper.getMainLooper())
-
-    lateinit var loadingDialog: AlertDialog
+    private lateinit var loadingDialog: AlertDialog
 
     private val resumeArElementsTask = Runnable {
         locationScene?.resume()
@@ -45,7 +41,6 @@ class ARLocationActivity : AppCompatActivity() {
     }
 
     private var userGeolocation = Geolocation.EMPTY_GEOLOCATION
-
     private var venuesSet: MutableSet<Venue> = mutableSetOf()
     private var areAllMarkersLoaded = false
 
@@ -78,9 +73,7 @@ class ARLocationActivity : AppCompatActivity() {
     }
 
     private fun setupSession() {
-        if (arSceneView == null) {
-            return
-        }
+        if (arSceneView == null) return
 
         if (arSceneView.session == null) {
             try {
@@ -99,10 +92,9 @@ class ARLocationActivity : AppCompatActivity() {
 
         if (locationScene == null) {
             locationScene = LocationScene(this, arSceneView)
-            locationScene!!.setMinimalRefreshing(true)
-            locationScene!!.setOffsetOverlapping(true)
-//            locationScene!!.setRemoveOverlapping(true)
-            locationScene!!.anchorRefreshInterval = 2000
+            locationScene?.setMinimalRefreshing(true)
+            locationScene?.setOffsetOverlapping(true)
+            locationScene?.anchorRefreshInterval = 2000
         }
 
         try {
@@ -120,21 +112,19 @@ class ARLocationActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun fetchVenues(deviceLatitude: Double, deviceLongitude: Double) {
         loadingDialog.dismiss()
         userGeolocation = Geolocation(deviceLatitude.toString(), deviceLongitude.toString())
         setPoints()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun setPoints() {
-        val venueList = arrayListOf(
-            Venue("центр", "avenue", 44.590836, 33.511868, ""),
-            Venue("вверх", "avenu2e", 44.592779, 33.513789, ""),
-            Venue("низ", "avenu2e", 44.588130, 33.510529, ""),
-            Venue("право", "avenu2e", 44.588582, 33.516881, ""),
-            Venue("леов", "avenu2e", 44.592768, 33.508040, "")
+    private fun setPoints() {
+        val venueList = arrayListOf(//FIXME test values
+            Venue("центр", "avenue центр", 44.590836, 33.511868, ""),
+            Venue("вверх", "avenu2e вверх", 44.592779, 33.513789, ""),
+            Venue("низ", "avenu2e низ", 44.588130, 33.510529, ""),
+            Venue("право", "avenu2e право", 44.588582, 33.516881, ""),
+            Venue("Лево", "avenue Лево", 44.592768, 33.508040, "")
         )
 
         venuesSet.clear()
@@ -144,52 +134,47 @@ class ARLocationActivity : AppCompatActivity() {
         renderVenues()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun renderVenues() {
         setupAndRenderVenuesMarkers()
         updateVenuesMarkers()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun setupAndRenderVenuesMarkers() {
         venuesSet.forEach { venue ->
             val completableFutureViewRenderable = ViewRenderable.builder()
                 .setView(this, R.layout.location_layout_renderable)
                 .build()
-            CompletableFuture.anyOf(completableFutureViewRenderable)
-                .handle<Any> { _, throwable ->
-                    //here we know the renderable was built or not
-                    if (throwable != null) {
-                        // handle renderable load fail
-                        return@handle null
-                    }
-                    try {
-                        val venueMarker = LocationMarker(
-                            venue.long,
-                            venue.lat,
-                            setVenueNode(venue, completableFutureViewRenderable)
-                        )
-                        arHandler.postDelayed({
-                            attachMarkerToScene(
-                                venueMarker,
-                                completableFutureViewRenderable.get().view
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                CompletableFuture.anyOf(completableFutureViewRenderable)
+                    .handle<Any> { _, throwable ->
+                        if (throwable != null) return@handle null
+                        try {
+                            val venueMarker = LocationMarker(
+                                venue.long,
+                                venue.lat,
+                                setVenueNode(venue, completableFutureViewRenderable)
                             )
-                            if (venuesSet.indexOf(venue) == venuesSet.size - 1) {
-                                areAllMarkersLoaded = true
-                            }
-                        }, 200)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                attachMarkerToScene(
+                                    venueMarker,
+                                    completableFutureViewRenderable.get().view
+                                )
+                                if (venuesSet.indexOf(venue) == venuesSet.size - 1) {
+                                    areAllMarkersLoaded = true
+                                }
+                            }, 200)
 
-                    } catch (ex: Exception) {
-                        //                        showToast(getString(R.string.generic_error_msg))
+                        } catch (ex: Exception) {
+                            //                        showToast(getString(R.string.generic_error_msg))
+                        }
+                        null
                     }
-                    null
-                }
+            }
         }
     }
 
     private fun updateVenuesMarkers() {
-        arSceneView.scene.addOnUpdateListener()
-        {
+        arSceneView.scene.addOnUpdateListener() {
             if (!areAllMarkersLoaded) {
                 return@addOnUpdateListener
             }
@@ -210,11 +195,7 @@ class ARLocationActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun attachMarkerToScene(
-        locationMarker: LocationMarker,
-        layoutRendarable: View
-    ) {
+    private fun attachMarkerToScene(locationMarker: LocationMarker, layoutRendarable: View) {
         resumeArElementsTask.run {
             locationMarker.scalingMode = LocationMarker.ScalingMode.FIXED_SIZE_ON_SCREEN
             locationMarker.scaleModifier = INITIAL_MARKER_SCALE_MODIFIER
@@ -222,7 +203,7 @@ class ARLocationActivity : AppCompatActivity() {
             locationScene?.mLocationMarkers?.add(locationMarker)
             locationMarker.anchorNode?.isEnabled = true
 
-            arHandler.post {
+            Handler(Looper.getMainLooper()).post {
                 locationScene?.refreshAnchors()
                 layoutRendarable.pinContainer.visibility = View.VISIBLE
             }
@@ -255,7 +236,6 @@ class ARLocationActivity : AppCompatActivity() {
         locationMarker.anchorNode = null
     }
 
-
     private fun setVenueNode(
         venue: Venue,
         completableFuture: CompletableFuture<ViewRenderable>
@@ -276,8 +256,12 @@ class ARLocationActivity : AppCompatActivity() {
         return node
     }
 
-
     private fun checkAndRequestPermissions() {
+        if (!isAndroidARSupported() || !isOpenGLSupported(this)) {
+            showUnsupportedError()
+            return
+        }
+
         if (!PermissionUtils.hasLocationAndCameraPermissions(this)) {
             PermissionUtils.requestCameraAndLocationPermissions(this)
         } else {
@@ -321,7 +305,6 @@ class ARLocationActivity : AppCompatActivity() {
             return listOf(deviceLatitude, deviceLongitude)
         }
 
-        @RequiresApi(Build.VERSION_CODES.N)
         override fun onPostExecute(geolocation: List<Double>) {
             activityWeakReference.get()!!.fetchVenues(
                 deviceLatitude = geolocation[0],
