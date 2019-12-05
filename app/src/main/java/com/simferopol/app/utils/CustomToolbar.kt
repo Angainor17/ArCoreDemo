@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.simferopol.api.utils.INT_PATTERN
+import com.simferopol.api.utils.format
 import com.simferopol.app.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.app_bar_nav_drawer.view.*
@@ -66,8 +68,9 @@ class CustomToolbar : Toolbar {
         }
         val imageView = findLogo()
         imageView.let {
-            imageView!!.getLocationOnScreen(location)
-            imageView!!.x = imageView.x + (-location.get(0) + screenWidth / 2 - imageView.width / 2)
+            imageView?.getLocationOnScreen(location)
+            imageView?.x =
+                imageView!!.x + (-location.get(0) + screenWidth / 2 - imageView.width / 2)
         }
     }
 
@@ -84,13 +87,16 @@ class CustomToolbar : Toolbar {
         return screenSize
     }
 
-    fun setWeather(temperature: String, icon: String?) {
+    fun setWeather(temperature: Float, icon: String?) {
         val weatherView = findWeather()
+        val weatherString = temperature.toInt().format(INT_PATTERN)
         weatherView.visibility = View.VISIBLE
+
         val text =
-            temperature + ' ' + String(Character.toChars(0x00B0)) + context.resources.getString(R.string.temperature)
+            weatherString + ' ' + String(Character.toChars(0x00B0)) + context.resources.getString(R.string.temperature)
         weatherView.weatherTemperature.text = text
         val iconUrl = "http://openweathermap.org/img/w/$icon.png"
+
         if (!icon.isNullOrEmpty()) {
             Picasso.get()
                 .load(iconUrl)
@@ -99,7 +105,7 @@ class CustomToolbar : Toolbar {
     }
 
     fun hideWeather() {
-        findWeather()!!.visibility = View.GONE
+        findWeather().visibility = View.GONE
     }
 }
 

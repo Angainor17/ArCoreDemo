@@ -75,6 +75,7 @@ class MapFragment : BaseMapFragment() {
         }
 
         mapVM.initData(mapObjectTapListener)
+        mapVM.initWeather()
     }
 
     override fun onStart() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.simferopol.api.models.Weather
 import com.simferopol.app.R
 import com.simferopol.app.ui.map.base.IMapView
 import com.simferopol.app.utils.CustomToolbar
@@ -30,16 +31,17 @@ abstract class BaseMapFragment : Fragment(), IMapView {
 
     override fun findActivity(): Activity = activity!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun findMapView(): MapView = mapView
 
     override fun onStop() {
         super.onStop()
         mapView.onStop()
         MapKitFactory.getInstance().onStop()
+    }
+
+    override fun setWeather(weather: Weather) {
+        val toolbar = (activity as AppCompatActivity).toolbar as CustomToolbar
+        toolbar.setWeather(weather.getTemperature(), weather.getIconName())
     }
 
     override fun onStart() {
@@ -55,11 +57,10 @@ abstract class BaseMapFragment : Fragment(), IMapView {
         userLocationLayer.isVisible = false
         userLocationLayer.isHeadingEnabled = false
         userLocationLayer.setObjectListener(userLocationObjectListener)
-        (activity as AppCompatActivity).supportActionBar?.setLogo(R.drawable.ic_logo)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        val toolbar = (activity as AppCompatActivity).toolbar as CustomToolbar
-        toolbar.setWeather("-13", "10n")
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar
+        supportActionBar?.setLogo(R.drawable.ic_logo)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onDestroyView() {
