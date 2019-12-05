@@ -3,13 +3,13 @@
     "id": 1,
     "name": "Зеленый Симферополь",
     "preview": "http://simftur.ru/images/routes/5.jpg",
-    "start_lat": 44.97,
-    "start_lon": 34.15,
+    "start_lat": null,
+    "start_lon": null,
     "start_name": null,
     "start_address": null,
     "start_about": null,
-    "finish_lat": 44.94,
-    "finish_lon": 34.2,
+    "finish_lat": null,
+    "finish_lon": null,
     "finish_name": null,
     "finish_address": null,
     "finish_about": null,
@@ -58,8 +58,70 @@
     "finish_address": null,
     "finish_about": null,
     "distance": 10.0,
-    "time": 5.0,
-    "audio": null
+    "time": 8.30,
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 14,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 15,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 31,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 27,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 32,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 39,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 26,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 40,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 41,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 28,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
   },
   {
     "id": 3,
@@ -77,7 +139,39 @@
     "finish_about": null,
     "distance": 2.0,
     "time": 3.0,
-    "audio": null
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 42,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 39,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 43,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 44,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 45,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
   },
   {
     "id": 4,
@@ -95,7 +189,63 @@
     "finish_about": null,
     "distance": 1.2,
     "time": 3.30,
-    "audio": null
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 32,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 34,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 18,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 19,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 16,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 39,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 46,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 26,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 17,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
   },
   {
     "id": 5,
@@ -113,6 +263,256 @@
     "finish_about": null,
     "distance": 3.4,
     "time": 2.30,
-    "audio": null
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 40,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 27,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 47,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 41,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 48,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Губернский город",
+    "preview": "http://simftur.ru/images/routes/10.jpg",
+    "start_lat": null,
+    "start_lon": null,
+    "start_name": null,
+    "start_address": null,
+    "start_about": null,
+    "finish_lat": null,
+    "finish_lon": null,
+    "finish_name": null,
+    "finish_address": null,
+    "finish_about": null,
+    "distance": 4,
+    "time": 3.30,
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 21,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 49,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 46,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 18,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 32,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 27,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 22,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 25,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 36,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 33,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 50,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Симферополь-детям",
+    "preview": "http://simftur.ru/images/routes/11.jpg",
+    "start_lat": null,
+    "start_lon": null,
+    "start_name": null,
+    "start_address": null,
+    "start_about": null,
+    "finish_lat": null,
+    "finish_lon": null,
+    "finish_name": null,
+    "finish_address": null,
+    "finish_about": null,
+    "distance": 18,
+    "time": 6,
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 23,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 30,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 1,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Межконфессиональный маршрут",
+    "preview": "http://simftur.ru/images/routes/13.jpg",
+    "start_lat": null,
+    "start_lon": null,
+    "start_name": null,
+    "start_address": null,
+    "start_about": null,
+    "finish_lat": null,
+    "finish_lon": null,
+    "finish_name": null,
+    "finish_address": null,
+    "finish_about": null,
+    "distance": 3.5,
+    "time": 4,
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 51,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 27,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 47,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Гид по старому городу",
+    "preview": "http://simftur.ru/images/routes/17.jpg",
+    "start_lat": null,
+    "start_lon": null,
+    "start_name": null,
+    "start_address": null,
+    "start_about": null,
+    "finish_lat": null,
+    "finish_lon": null,
+    "finish_name": null,
+    "finish_address": null,
+    "finish_about": null,
+    "distance": 1,
+    "time": 1.20,
+    "audio": null,
+    "geoobjects": [
+      {
+        "id": 52,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 53,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 54,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 55,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 56,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 57,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
   }
 ]
