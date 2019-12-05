@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.simferopol.app.App
 import com.simferopol.app.databinding.FragmentAboutBinding
 import com.simferopol.app.providers.audio.IAudioProvider
+import kotlinx.android.synthetic.main.audio_player_element.view.*
 import org.kodein.di.generic.instance
 
 class AboutFragment : Fragment() {
@@ -27,7 +28,7 @@ class AboutFragment : Fragment() {
         audioProvider.progressBar(binding.player.progressBar)
         binding.player.play_button.setOnClickListener {
             binding.player.play_button.isActivated = !binding.player.play_button.isActivated
-            var audioUrl = aboutVm.about.value?.audio
+            val audioUrl = aboutVm.about.value?.audio
             if (audioUrl != null)
                 audioProvider.playClickListener(aboutVm.about.value!!.audio)
         }

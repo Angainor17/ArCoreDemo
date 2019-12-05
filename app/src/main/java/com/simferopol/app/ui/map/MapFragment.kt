@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.simferopol.api.models.GeoObject
-import com.simferopol.app.App
+import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.databinding.FragmentMapBinding
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.utils.models.ViewState
@@ -29,11 +29,11 @@ val simfer = Point(44.949684, 34.102521)
 class MapFragment : BaseMapFragment() {
 
     private val mapVM = MapVM(this)
-    var mapObjectTapListener = YandexMapObjectTapListener()
-    lateinit var inputListener: CustomInputListener
+    private val mapObjectTapListener = YandexMapObjectTapListener()
+    private lateinit var inputListener: CustomInputListener
+    private val audioProvider by kodein.instance<IAudioProvider>()
+
     override fun createVm(): BaseMapVm = mapVM
-    private val audioProvider by App.kodein.instance<IAudioProvider>()
-    lateinit var binding: FragmentMapBinding
 
     override fun getMapObjectTapListener(): MapObjectTapListener = YandexMapObjectTapListener()
 
@@ -42,7 +42,7 @@ class MapFragment : BaseMapFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMapBinding.inflate(inflater, container, false)
+        val binding = FragmentMapBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.vm = mapVM
 
@@ -99,15 +99,16 @@ class MapFragment : BaseMapFragment() {
 
     private fun setFooterContainer() {
         footerContainer.visibility = View.VISIBLE
-        binding.player.visibility = View.GONE
-        binding.player.play_button.isActivated = false
+        player.visibility = View.GONE
+        find.visibility = View.GONE
+        player.play_button.isActivated = false
         audioProvider.stopAudio()
-        var audioUrl = mapVM.currentObject.value?.audio
+        val audioUrl = mapVM.currentObject.value?.audio
         if (!audioUrl.isNullOrEmpty()) {
-            binding.player.visibility = View.VISIBLE
-            audioProvider.progressBar(binding.player.progressBar)
-            binding.player.play_button.setOnClickListener {
-                binding.player.play_button.isActivated = !binding.player.play_button.isActivated
+            player.visibility = View.VISIBLE
+            audioProvider.progressBar(player.progressBar)
+            player.play_button.setOnClickListener {
+                player.play_button.isActivated = !player.play_button.isActivated
                 audioProvider.playClickListener(audioUrl)
             }
         }
