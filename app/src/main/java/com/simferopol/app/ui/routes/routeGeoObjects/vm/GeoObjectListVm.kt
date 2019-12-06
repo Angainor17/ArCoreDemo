@@ -19,6 +19,8 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
     val distance = route.distance
     val time = route.time
     var geoObjects = route.geoObjects
+    val kids = route.kids
+    val disabled = route.disabled
 
     private val routeManager by kodein.instance<ApiManager>()
 

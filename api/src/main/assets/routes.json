@@ -16,6 +16,8 @@
     "distance": 7.0,
     "time": 6.0,
     "audio": null,
+    "kids": true,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 1,
@@ -60,6 +62,8 @@
     "distance": 10.0,
     "time": 8.30,
     "audio": null,
+    "kids": true,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 14,
@@ -140,6 +144,8 @@
     "distance": 2.0,
     "time": 3.0,
     "audio": null,
+    "kids": true,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 42,
@@ -190,6 +196,8 @@
     "distance": 1.2,
     "time": 3.30,
     "audio": null,
+    "kids": true,
+    "disabled": true,
     "geoobjects": [
       {
         "id": 32,
@@ -264,6 +272,8 @@
     "distance": 3.4,
     "time": 2.30,
     "audio": null,
+    "kids": true,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 40,
@@ -314,6 +324,8 @@
     "distance": 4,
     "time": 3.30,
     "audio": null,
+    "kids": false,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 21,
@@ -400,6 +412,8 @@
     "distance": 18,
     "time": 6,
     "audio": null,
+    "kids": false,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 23,
@@ -438,6 +452,8 @@
     "distance": 3.5,
     "time": 4,
     "audio": null,
+    "kids": false,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 51,
@@ -476,6 +492,8 @@
     "distance": 1,
     "time": 1.20,
     "audio": null,
+    "kids": false,
+    "disabled": false,
     "geoobjects": [
       {
         "id": 52,
@@ -509,6 +527,52 @@
       },
       {
         "id": 57,
+        "about": null,
+        "content": null,
+        "audio": null
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Брега весёлые Салгира",
+    "preview": "http://simftur.ru/images/routes/21.jpg",
+    "start_lat": null,
+    "start_lon": null,
+    "start_name": null,
+    "start_address": null,
+    "start_about": null,
+    "finish_lat": null,
+    "finish_lon": null,
+    "finish_name": null,
+    "finish_address": null,
+    "finish_about": null,
+    "distance": 3.5,
+    "time": 3,
+    "audio": null,
+    "kids": true,
+    "disabled": true,
+    "geoobjects": [
+      {
+        "id": 35,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 22,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 58,
+        "about": null,
+        "content": null,
+        "audio": null
+      },
+      {
+        "id": 3,
         "about": null,
         "content": null,
         "audio": null
