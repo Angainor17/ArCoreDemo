@@ -163,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:text="@{vm.site}"
+                android:autoLink="web"
 
                 app:layout_constraintEnd_toEndOf="@id/description"
                 app:layout_constraintStart_toStartOf="@id/description"
