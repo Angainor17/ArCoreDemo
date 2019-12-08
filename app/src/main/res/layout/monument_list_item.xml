@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="vm"
             type="com.simferopol.app.ui.monuments.vm.MonumentVm" />
@@ -64,11 +64,11 @@
 
             <ImageView
                 android:id="@+id/btn_3d"
-
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/ic_3d"
+                android:visibility="@{vm.model? View.VISIBLE: View.GONE}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/titleTv"
                 app:layout_constraintStart_toEndOf="@+id/titleTv"

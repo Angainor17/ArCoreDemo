@@ -17,7 +17,7 @@ class GeoObject(
     @SerializedName("active_icon")val activeIcon: String?,
     val audio: String?,
     val slides: ArrayList<String>?,
-    val format: String?,
+    val model: Boolean?,
     val worktime: String?,
     val phone: String?,
     val website: String?,
