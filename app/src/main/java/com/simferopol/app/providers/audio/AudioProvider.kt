@@ -31,11 +31,11 @@ class AudioProvider : IAudioProvider {
                 status = PlayerStatus.PLAYING
             }
             PlayerStatus.INIT -> {
+                status = PlayerStatus.PLAYING
                 mediaPlayer.setDataSource(audioUrl)
                 mediaPlayer.prepareAsync()
                 mediaPlayer.setOnPreparedListener {
                     it.start()
-                    status = PlayerStatus.PLAYING
                     progressBar.visibility = View.VISIBLE
                 }
                 audioProgressBarThread = object : Thread() {
