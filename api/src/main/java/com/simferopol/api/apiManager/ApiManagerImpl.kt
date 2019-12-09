@@ -16,6 +16,7 @@ private const val SIMFER_LON = 34.106231f
 
 private const val WEATHER_PREF_KEY = "weather"
 private const val DATE_PREF_KEY = "date"
+private const val LOADED_PREF_KEY = "loaded"
 
 private const val TEMPERATURE_EXPIRED = 12 * 60 * 60 * 1000L
 
@@ -47,6 +48,16 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
 
             return@wrapManagerResult res
         }
+    }
+
+    override suspend fun getLoadedFiles(): ManagerResult<LoadedFiles> {
+        return wrapManagerResult {
+            gson.fromJson<LoadedFiles>(prefs.getJson(LOADED_PREF_KEY) ?: "")
+        }
+    }
+
+    override suspend fun setLoadedFiles(loadedFiles: LoadedFiles) {
+        prefs.put(LOADED_PREF_KEY, loadedFiles)
     }
 
     override suspend fun getRoutes(): ManagerResult<ArrayList<Route>> {

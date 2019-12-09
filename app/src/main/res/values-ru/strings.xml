@@ -11,6 +11,10 @@
     <string name="menu_ar">AR</string>
     <string name="menu_settings">Настройки</string>
     <string name="language">Язык</string>
+    <string name="audio_files">Загрузка аудио файлов</string>
+
+    <string name="monuments">Достопримечательности</string>
+    <string name="history">История</string>
 
     <string name="send_statistic">Отправлять статистику</string>
     <string name="developed_by">Разработано при участии ООО \"Joy-Dev\"</string>

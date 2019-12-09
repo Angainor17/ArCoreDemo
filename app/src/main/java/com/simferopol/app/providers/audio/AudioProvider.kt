@@ -1,11 +1,15 @@
 package com.simferopol.app.providers.audio
 
+import android.app.DownloadManager
+import android.content.Context.DOWNLOAD_SERVICE
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Handler
 import android.os.Message
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import java.io.File
 import java.lang.ref.WeakReference
 
 
@@ -32,12 +36,25 @@ class AudioProvider : IAudioProvider {
             }
             PlayerStatus.INIT -> {
                 status = PlayerStatus.PLAYING
-                mediaPlayer.setDataSource(audioUrl)
-                mediaPlayer.prepareAsync()
-                mediaPlayer.setOnPreparedListener {
-                    it.start()
-                    progressBar.visibility = View.VISIBLE
+                var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
+                var file =
+                    File(progressBar.context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
+                if (!file.exists()) {
+                    mediaPlayer.setDataSource(audioUrl)
+                    mediaPlayer.prepareAsync()
+                    mediaPlayer.setOnPreparedListener {
+                        it.start()
+                        progressBar.visibility = View.VISIBLE
+                    }
+                } else {
+                    mediaPlayer.setDataSource(file.absolutePath)
+                    mediaPlayer.prepareAsync()
+                    mediaPlayer.setOnPreparedListener {
+                        it.start()
+                        progressBar.visibility = View.VISIBLE
+                    }
                 }
+
                 audioProgressBarThread = object : Thread() {
                     override fun run() {
                         super.run()
