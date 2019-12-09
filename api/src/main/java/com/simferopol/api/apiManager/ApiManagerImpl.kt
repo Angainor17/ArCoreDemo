@@ -34,12 +34,12 @@ internal class ApiManagerImpl(private val context: Context) : ApiManager {
             }
 
             val expiredDate = Date(Date().time - TEMPERATURE_EXPIRED)
-
-            if (expiredDate.before(lastWeatherDate)) {
-                return@wrapManagerResult gson.fromJson<Weather>(
-                    prefs.getJson(WEATHER_PREF_KEY) ?: ""
-                )
-            }
+            if (lastWeatherDate != null)
+                if (expiredDate.before(lastWeatherDate)) {
+                    return@wrapManagerResult gson.fromJson<Weather>(
+                        prefs.getJson(WEATHER_PREF_KEY) ?: ""
+                    )
+                }
 
             val res = weatherApi.getWeather(SIMFER_LAT, SIMFER_LON, WEATHER_KEY)
             prefs.put(WEATHER_PREF_KEY, res)
