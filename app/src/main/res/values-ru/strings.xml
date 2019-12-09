@@ -44,5 +44,6 @@
     <string name="camera_and_location_permission_request">Необъодимы разрешения на использования Камеры и GPS</string>
     <string name="loading_message">Загрузка вашего текущего местоположения…</string>
     <string name="ar_location">Найти рядом</string>
+    <string name="temperature">C</string>
 
 </resources>

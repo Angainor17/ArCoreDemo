@@ -108,20 +108,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/play_button"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginTop="110dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_play_button"
-                android:onClick="@{()->vm.onPlayClick()}"
-                android:padding="10dp"
-                android:src="@mipmap/ic_play"
-
-                app:layout_constraintEnd_toEndOf="@id/serviceContainer"
-                app:layout_constraintTop_toTopOf="@id/serviceContainer" />
-
             <TextView
                 android:id="@+id/description"
                 style="@style/Description"
@@ -245,6 +231,16 @@
                 app:tabBackground="@drawable/tab_selector"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp" />
+
+            <include
+                android:id="@+id/player"
+                layout="@layout/audio_player_element"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="106dp"
+                android:visibility="gone"
+
+                app:layout_constraintTop_toTopOf="@+id/header" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

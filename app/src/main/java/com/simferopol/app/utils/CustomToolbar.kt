@@ -2,13 +2,20 @@ package com.simferopol.app.utils
 
 import android.content.Context
 import android.graphics.Point
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Display
+import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.simferopol.api.utils.INT_PATTERN
+import com.simferopol.api.utils.format
 import com.simferopol.app.R
-
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.app_bar_nav_drawer.view.*
 
 class CustomToolbar : Toolbar {
 
@@ -25,6 +32,14 @@ class CustomToolbar : Toolbar {
 
     init {
         screenWidth = getScreenSize().x
+    }
+
+    override fun setLogo(resId: Int) {
+        findLogo()?.setImageResource(resId)
+    }
+
+    override fun setLogo(drawable: Drawable?) {
+        findLogo()?.setImageDrawable(drawable)
     }
 
     override fun setTitle(resId: Int) {
@@ -51,9 +66,17 @@ class CustomToolbar : Toolbar {
             textView.getLocationOnScreen(location)
             textView.x = textView.x + (-location.get(0) + screenWidth / 2 - textView.width / 2)
         }
+        val imageView = findLogo()
+        imageView.let {
+            imageView?.getLocationOnScreen(location)
+            imageView?.x =
+                imageView!!.x + (-location.get(0) + screenWidth / 2 - imageView.width / 2)
+        }
     }
 
     private fun findLabel(): TextView? = findViewById(R.id.title)
+    private fun findLogo(): ImageView? = findViewById(R.id.logo)
+    private fun findWeather(): LinearLayout = findViewById(R.id.weather)
 
     /*** Получение размера экрана */
     private fun getScreenSize(): Point {
@@ -64,6 +87,26 @@ class CustomToolbar : Toolbar {
         return screenSize
     }
 
+    fun setWeather(temperature: Float, icon: String?) {
+        val weatherView = findWeather()
+        val weatherString = temperature.toInt().format(INT_PATTERN)
+        weatherView.visibility = View.VISIBLE
+
+        val text =
+            weatherString + ' ' + String(Character.toChars(0x00B0)) + context.resources.getString(R.string.temperature)
+        weatherView.weatherTemperature.text = text
+        val iconUrl = "http://openweathermap.org/img/w/$icon.png"
+
+        if (!icon.isNullOrEmpty()) {
+            Picasso.get()
+                .load(iconUrl)
+                .into(weatherView.weatherIcon)
+        }
+    }
+
+    fun hideWeather() {
+        findWeather().visibility = View.GONE
+    }
 }
 
 

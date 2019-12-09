@@ -13,8 +13,6 @@ class HistoryPagerFragment : Fragment() {
 
     private val historyListVm = HistoryListVm()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

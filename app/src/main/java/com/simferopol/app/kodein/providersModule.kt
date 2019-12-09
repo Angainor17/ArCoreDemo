@@ -1,6 +1,8 @@
 package com.simferopol.app.kodein
 
 import android.content.Context
+import com.simferopol.app.providers.audio.AudioProvider
+import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.providers.lang.ILocaleProvider
 import com.simferopol.app.providers.lang.LocaleProvider
 import com.simferopol.app.providers.res.IResProvider
@@ -14,5 +16,6 @@ internal val providersModule = Kodein.Module("ProvidersModule") {
 
     bind<IResProvider>() with singleton { ResProvider(instance<Context>().resources) }
     bind<ILocaleProvider>() with singleton { LocaleProvider() }
+    bind<IAudioProvider>() with singleton { AudioProvider() }
 
 }

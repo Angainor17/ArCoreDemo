@@ -29,9 +29,25 @@ fun initStoriesList(view: RecyclerView, list: ArrayList<HistoryVm>) {
 @BindingAdapter("app:initStoriesPager", "app:initPagerPosition")
 fun initStoriesPager(view: ViewPager, list: ArrayList<HistoryVm>, id: Int) {
     val adapter = object : StoriesPagerAdapter() {}
+    view.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) {}
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+        }
+
+        override fun onPageSelected(position: Int) {
+            adapter.onPageChanged()
+        }
+    })
     adapter.setItems(list)
     view.adapter = adapter
     view.currentItem = id
+
+
 }
 
 @BindingAdapter("app:initEventList")

@@ -17,6 +17,7 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     val name = monumentVm.name
     val content = monumentVm.content?.parseAsHtml()
     val model = monumentVm.model
+    val audio = monumentVm.audio
 
     fun onClick(view: View) {
         val action = MonumentsFragmentDirections.actionNavMonumentsToNavMonument(monument)
