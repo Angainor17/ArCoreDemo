@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="vm"
             type="com.simferopol.app.ui.monuments.vm.MonumentVm" />
@@ -78,10 +78,26 @@
                 android:background="@drawable/ic_play_button"
                 android:onClick="@{(v)->vm.onModelClick(v)}"
                 android:padding="10dp"
-
                 android:src="@drawable/icon3d"
-                app:layout_constraintEnd_toEndOf="@id/player"
-                app:layout_constraintTop_toTopOf="@+id/headerContainer" />
+                android:visibility="@{vm.model? View.VISIBLE: View.GONE}"
+
+                app:layout_constraintEnd_toEndOf="@id/monumentContainer"
+                app:layout_constraintTop_toTopOf="@id/monumentContainer" />
+
+            <ImageView
+                android:id="@+id/play_button"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_play_button"
+                android:onClick="@{()->vm.onPlayClick()}"
+                android:padding="10dp"
+                android:src="@mipmap/ic_play"
+                android:visibility="gone"
+
+                app:layout_constraintEnd_toEndOf="@id/monumentContainer"
+                app:layout_constraintTop_toTopOf="@id/monumentContainer" />
 
             <TextView
                 android:id="@+id/description"

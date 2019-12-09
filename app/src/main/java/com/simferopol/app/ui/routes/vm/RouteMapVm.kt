@@ -21,6 +21,8 @@ class RouteMapVm(view: IMapView, routeVm: Route) : BaseMapVm(view) {
     val geoObjects = routeVm.geoObjects
     val start = Point(routeVm.startLat, routeVm.startLon)
     val finish = Point(routeVm.finishLat, routeVm.finishLon)
+    val kids = routeVm.kids
+    val disabled = routeVm.disabled
 
     val currentObject = MutableLiveData<GeoObject>()
 

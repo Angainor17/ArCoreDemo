@@ -2,25 +2,25 @@
   {
     "id": 2,
     "name": "Автовокзал",
-    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/2/busstation.png",
-    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/2/busstation_hover.png"
+    "icon": "file:///android_asset/services/ic_bus.png",
+    "active_icon": "file:///android_asset/services/ic_bus_active.png"
   },
   {
     "id": 3,
     "name": "Гостиницы",
-    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/3/hotels.png",
-    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/3/hotels_hover.png"
+    "icon": "file:///android_asset/services/ic_hotels.png",
+    "active_icon": "file:///android_asset/services/ic_hotels_active.png"
   },
   {
     "id": 4,
     "name": "Еда",
-    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/5/eat.png",
-    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/5/eat_hover.png"
+    "icon": "file:///android_asset/services/ic_eat.png",
+    "active_icon": "file:///android_asset/services/ic_eat_active.png"
   },
   {
     "id": 5,
     "name": "Музеи",
-    "icon": "https://yeniseysk-unesco.ru/uploads/category/icon/6/museums.png",
-    "active_icon": "https://yeniseysk-unesco.ru/uploads/category/active_icon/6/museums_hover.png"
+    "icon": "file:///android_asset/services/ic_museums.png",
+    "active_icon": "file:///android_asset/services/ic_museums_active.png"
   }
 ]

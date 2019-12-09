@@ -2,8 +2,10 @@ package com.simferopol.app.utils.ui
 
 import android.content.Context
 import android.view.View
+import android.view.animation.AnimationUtils
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App
+import com.simferopol.app.R
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.providers.res.IResProvider
 import com.yandex.mapkit.geometry.Point
@@ -15,6 +17,7 @@ import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.image.ImageProvider
+import kotlinx.android.synthetic.main.fragment_map.*
 import org.kodein.di.direct
 import org.kodein.di.generic.instance
 
@@ -104,6 +107,11 @@ class CustomInputListener(
         if (infoContainer != null) infoContainer.visibility = View.GONE
         if (player != null) player.visibility = View.GONE
         audioProvider?.stopAudio()
+        if (infoContainer != null) {
+            val animation = AnimationUtils.loadAnimation(mapView.context, R.anim.slide_out_bottom)
+            infoContainer.startAnimation(animation)
+            infoContainer.visibility = View.GONE
+        }
     }
 }
 

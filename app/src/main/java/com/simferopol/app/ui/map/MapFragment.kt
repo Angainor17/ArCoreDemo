@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.view.marginBottom
 import androidx.navigation.fragment.navArgs
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App.Companion.kodein
+import com.simferopol.app.R
 import com.simferopol.app.databinding.FragmentMapBinding
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.utils.models.ViewState

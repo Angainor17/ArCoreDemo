@@ -99,13 +99,15 @@ class RouteMapFragment : BaseMapFragment(), Session.RouteListener {
     private fun setRoutePoints() {
         val points = ArrayList<RequestPoint>()
         TransportFactory.initialize(context)
-        points.add(RequestPoint(mapVM.start, RequestPointType.WAYPOINT, null))
+        if ((mapVM.start.longitude != 0.0) and (mapVM.start.latitude !=  0.0))
+            points.add(RequestPoint(mapVM.start, RequestPointType.WAYPOINT, null))
         mapVM.geoObjects?.forEach {
-            if (it.lon != null) {
+            if ((it.lon !=  0.0) and (it.lat !=  0.0)) {
                 points.add(RequestPoint(Point(it.lat!!, it.lon!!), RequestPointType.WAYPOINT, null))
             }
         }
-        points.add(RequestPoint(mapVM.finish, RequestPointType.WAYPOINT, null))
+        if ((mapVM.finish.longitude !=  0.0) and (mapVM.finish.latitude !=  0.0))
+            points.add(RequestPoint(mapVM.finish, RequestPointType.WAYPOINT, null))
         if (points.size > 1) {
             val mtRouter = TransportFactory.getInstance().createPedestrianRouter()
             mtRouter.requestRoutes(points, TimeOptions(), this)

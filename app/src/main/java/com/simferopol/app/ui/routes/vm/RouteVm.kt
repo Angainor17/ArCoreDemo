@@ -14,6 +14,8 @@ class RouteVm(routeVm: Route) : ViewModel() {
     val distance = routeVm.distance
     val time = routeVm.time
     val geoObjects = routeVm.geoObjects
+    val kids = routeVm.kids
+    val disabled = routeVm.disabled
 
     fun onClick(view: View) {
         val action = RoutesFragmentDirections.actionNavRoutesToNavRoute(route)

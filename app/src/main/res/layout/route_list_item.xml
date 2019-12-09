@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="vm"
             type="com.simferopol.app.ui.routes.vm.RouteVm" />
@@ -122,6 +122,7 @@
                 android:layout_height="21dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_disabled"
+                android:visibility="@{vm.disabled? View.VISIBLE: View.GONE}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
                 app:layout_constraintStart_toEndOf="@+id/timeTv"
@@ -134,6 +135,7 @@
                 android:layout_height="21dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_kids"
+                android:visibility="@{vm.kids? View.VISIBLE: View.GONE}"
 
                 app:layout_constraintBottom_toBottomOf="@+id/distanceTv"
                 app:layout_constraintStart_toEndOf="@+id/disabled_icon"
