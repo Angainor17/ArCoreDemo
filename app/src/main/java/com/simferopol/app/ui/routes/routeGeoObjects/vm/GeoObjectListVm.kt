@@ -28,7 +28,7 @@ class GeoObjectListVm(val route: Route) : ViewModel() {
 
     init {
         GlobalScope.launch {
-            val result = routeManager.getGeoObjects(1)
+            val result = routeManager.getGeoObjects(null)
             if (result.success) {
                 var tempGeoObject: GeoObject?
                 var tempList = ArrayList<GeoObject>()
