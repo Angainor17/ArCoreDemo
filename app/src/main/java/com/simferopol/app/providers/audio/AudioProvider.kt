@@ -38,7 +38,7 @@ class AudioProvider : IAudioProvider {
                 status = PlayerStatus.PLAYING
                 var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
                 var file =
-                    File(progressBar.context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
+                    File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
                 if (!file.exists()) {
                     mediaPlayer.setDataSource(audioUrl)
                     mediaPlayer.prepareAsync()

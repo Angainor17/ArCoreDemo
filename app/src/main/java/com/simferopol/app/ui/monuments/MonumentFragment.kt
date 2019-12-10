@@ -45,7 +45,8 @@ class MonumentFragment : Fragment() {
                 audioProvider.playClickListener(audioUrl)
             }
             binding.player.play_button.setOnLongClickListener {
-                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility = View.GONE
+                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility =
+                    View.GONE
                 else binding.player.download.visibility = View.VISIBLE
                 true
             }

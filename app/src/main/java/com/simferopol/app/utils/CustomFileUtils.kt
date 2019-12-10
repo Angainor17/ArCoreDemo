@@ -10,7 +10,7 @@ class CustomFileUtils {
         if (!audioUrl.isNullOrEmpty()) {
             var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
             var file =
-                File(context?.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
+                File(context?.filesDir.toString() + "/downloads/" + fileName)
             if (!file.exists()) {
                 var request = DownloadManager.Request(Uri.parse(audioUrl))
                     .setDestinationInExternalFilesDir(
