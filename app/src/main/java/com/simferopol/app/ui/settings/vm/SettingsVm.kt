@@ -17,6 +17,7 @@ import com.simferopol.app.providers.lang.LocaleItem
 import com.simferopol.app.providers.lang.RU_LOCALE
 import com.simferopol.app.providers.res.IResProvider
 import com.simferopol.app.ui.settings.SettingsView
+import com.simferopol.app.utils.CustomFileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -79,7 +80,7 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
             if (result.success) {
                 result.data?.forEach {
                     var audioUrl = it.audio
-                    loadFile(audioUrl)
+                    CustomFileUtils().loadFile(context, audioUrl)
                 }
                 apiManager.setLoadedFiles(loadedFiles.value!!)
             }
@@ -93,7 +94,7 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
             if (result.success) {
                 result.data?.forEach {
                     var audioUrl = it.audio
-                    loadFile(audioUrl)
+                    CustomFileUtils().loadFile(context, audioUrl)
                 }
                 apiManager.setLoadedFiles(loadedFiles.value!!)
             }
@@ -108,26 +109,6 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
                     loadedFiles.value = result.data!!
                 }
             else apiManager.setLoadedFiles(loadedFiles.value!!)
-        }
-    }
-
-    fun loadFile(audioUrl: String?) {
-        if (!audioUrl.isNullOrEmpty()) {
-            var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
-            var file =
-                File(context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
-            if (!file.exists()) {
-                var request = DownloadManager.Request(Uri.parse(audioUrl))
-                    .setDestinationInExternalFilesDir(
-                        context,
-                        "downloads",
-                        fileName
-                    )
-                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                val downloadManager =
-                    context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                var downloadID = downloadManager.enqueue(request)
-            }
         }
     }
 }

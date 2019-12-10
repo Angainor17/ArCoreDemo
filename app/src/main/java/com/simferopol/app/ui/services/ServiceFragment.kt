@@ -10,6 +10,7 @@ import com.simferopol.app.App
 import com.simferopol.app.databinding.FragmentServiceBinding
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.ui.services.vm.ServiceVm
+import com.simferopol.app.utils.CustomFileUtils
 import com.simferopol.app.utils.ui.ImagePagerAdapter
 import kotlinx.android.synthetic.main.audio_player_element.view.*
 import org.kodein.di.generic.instance
@@ -37,6 +38,15 @@ class ServiceFragment : Fragment() {
             binding.player.play_button.setOnClickListener {
                 binding.player.play_button.isActivated = !binding.player.play_button.isActivated
                 audioProvider.playClickListener(audioUrl)
+            }
+            binding.player.play_button.setOnLongClickListener {
+                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility = View.GONE
+                else binding.player.download.visibility = View.VISIBLE
+                true
+            }
+            binding.player.download.setOnClickListener {
+                CustomFileUtils().loadFile(this!!.context!!, audioUrl)
+                it.visibility = View.GONE
             }
         }
 
