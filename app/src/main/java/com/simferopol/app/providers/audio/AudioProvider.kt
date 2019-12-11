@@ -1,11 +1,15 @@
 package com.simferopol.app.providers.audio
 
+import android.app.DownloadManager
+import android.content.Context.DOWNLOAD_SERVICE
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Handler
 import android.os.Message
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import java.io.File
 import java.lang.ref.WeakReference
 
 
@@ -31,13 +35,26 @@ class AudioProvider : IAudioProvider {
                 status = PlayerStatus.PLAYING
             }
             PlayerStatus.INIT -> {
-                mediaPlayer.setDataSource(audioUrl)
-                mediaPlayer.prepareAsync()
-                mediaPlayer.setOnPreparedListener {
-                    it.start()
-                    status = PlayerStatus.PLAYING
-                    progressBar.visibility = View.VISIBLE
+                status = PlayerStatus.PLAYING
+                val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
+                val file =
+                    File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
+                if (!file.exists()) {
+                    mediaPlayer.setDataSource(audioUrl)
+                    mediaPlayer.prepareAsync()
+                    mediaPlayer.setOnPreparedListener {
+                        it.start()
+                        progressBar.visibility = View.VISIBLE
+                    }
+                } else {
+                    mediaPlayer.setDataSource(file.absolutePath)
+                    mediaPlayer.prepareAsync()
+                    mediaPlayer.setOnPreparedListener {
+                        it.start()
+                        progressBar.visibility = View.VISIBLE
+                    }
                 }
+
                 audioProgressBarThread = object : Thread() {
                     override fun run() {
                         super.run()
@@ -45,7 +62,7 @@ class AudioProvider : IAudioProvider {
                             while (status != PlayerStatus.STOPPED) {
                                 if (status != PlayerStatus.PAUSED) {
                                     if (audioProgressHandler != null) {
-                                        var msg = Message()
+                                        val msg = Message()
                                         msg.what = UPDATE_AUDIO_PROGRESS_BAR
                                         audioProgressHandler.sendMessage(msg)
                                         sleep(1000)

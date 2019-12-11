@@ -12,4 +12,6 @@ interface ApiManager {
     suspend fun getStories(): ManagerResult<ArrayList<Story>>
     suspend fun getCategories(): ManagerResult<ArrayList<Category>>
     suspend fun getWeather(): ManagerResult<Weather>
+    suspend fun getLoadedFiles(): ManagerResult<LoadedFiles>
+    suspend fun setLoadedFiles(loadedFiles: LoadedFiles)
 }

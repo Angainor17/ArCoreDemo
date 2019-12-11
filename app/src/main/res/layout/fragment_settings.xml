@@ -41,6 +41,13 @@
             android:layout_width="match_parent"
             style="@style/SettingsSeparatorStyle" />
 
+        <include layout="@layout/settings_audio_view"
+            app:vm="@{vm}" />
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/SettingsSeparatorStyle" />
+
         <include
             layout="@layout/settings_about_app"
 
