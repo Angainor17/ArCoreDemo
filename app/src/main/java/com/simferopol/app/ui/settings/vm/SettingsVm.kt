@@ -74,29 +74,33 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
     }
 
     fun loadMonuments() {
-        loadedFiles.value!!.monuments = true
-        GlobalScope.launch(Dispatchers.IO) {
-            var result = apiManager.getGeoObjects(1)
-            if (result.success) {
-                result.data?.forEach {
-                    var audioUrl = it.audio
-                    CustomFileUtils().loadFile(context, audioUrl)
+        loadedFiles.value?.let {
+            it.monuments = true
+            GlobalScope.launch(Dispatchers.IO) {
+                var result = apiManager.getGeoObjects(1)
+                if (result.success) {
+                    result.data?.forEach { geoObject ->
+                        var audioUrl = geoObject.audio
+                        CustomFileUtils().loadFile(context, audioUrl)
+                    }
+                    apiManager.setLoadedFiles(it)
                 }
-                apiManager.setLoadedFiles(loadedFiles.value!!)
             }
         }
     }
 
     fun loadHistory() {
-        loadedFiles.value!!.history = true
-        GlobalScope.launch(Dispatchers.IO) {
-            var result = apiManager.getStories()
-            if (result.success) {
-                result.data?.forEach {
-                    var audioUrl = it.audio
-                    CustomFileUtils().loadFile(context, audioUrl)
+        loadedFiles.value?.let {
+            it.history = true
+            GlobalScope.launch(Dispatchers.IO) {
+                val result = apiManager.getStories()
+                if (result.success) {
+                    result.data?.forEach { story ->
+                        val audioUrl = story.audio
+                        CustomFileUtils().loadFile(context, audioUrl)
+                    }
+                    apiManager.setLoadedFiles(it)
                 }
-                apiManager.setLoadedFiles(loadedFiles.value!!)
             }
         }
     }
@@ -106,9 +110,11 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
             val result = apiManager.getLoadedFiles()
             if ((result.success) and (result.data != null))
                 GlobalScope.launch(Dispatchers.Main) {
-                    loadedFiles.value = result.data!!
+                    result.data?.let {
+                        loadedFiles.value = it
+                    }
                 }
-            else apiManager.setLoadedFiles(loadedFiles.value!!)
+            else loadedFiles.value?.let { apiManager.setLoadedFiles(it) }
         }
     }
 }

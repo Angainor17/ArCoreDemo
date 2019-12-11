@@ -15,7 +15,6 @@ import org.kodein.di.generic.instance
 class AboutFragment : Fragment() {
 
     private val audioProvider by App.kodein.instance<IAudioProvider>()
-
     private val aboutVm = AboutVm()
 
     override fun onCreateView(
@@ -33,18 +32,19 @@ class AboutFragment : Fragment() {
                 binding.player.visibility = View.VISIBLE
                 audioProvider.progressBar(binding.player.progressBar)
                 binding.player.play_button.isActivated = !binding.player.play_button.isActivated
-                audioProvider.playClickListener(audioUrl!!)
+                audioUrl?.let { audioProvider.playClickListener(it) }
             }
         }
-            binding.player.play_button.setOnLongClickListener {
-                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility = View.GONE
-                else binding.player.download.visibility = View.VISIBLE
-                true
-            }
-            binding.player.download.setOnClickListener {
-                CustomFileUtils().loadFile(this!!.context!!, audioUrl)
-                it.visibility = View.GONE
-            }
+        binding.player.play_button.setOnLongClickListener {
+            if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility =
+                View.GONE
+            else binding.player.download.visibility = View.VISIBLE
+            true
+        }
+        binding.player.download.setOnClickListener {
+            CustomFileUtils().loadFile(it.context, audioUrl)
+            it.visibility = View.GONE
+        }
         return binding.root
     }
 

@@ -36,8 +36,8 @@ class AudioProvider : IAudioProvider {
             }
             PlayerStatus.INIT -> {
                 status = PlayerStatus.PLAYING
-                var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
-                var file =
+                val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
+                val file =
                     File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
                 if (!file.exists()) {
                     mediaPlayer.setDataSource(audioUrl)
@@ -62,7 +62,7 @@ class AudioProvider : IAudioProvider {
                             while (status != PlayerStatus.STOPPED) {
                                 if (status != PlayerStatus.PAUSED) {
                                     if (audioProgressHandler != null) {
-                                        var msg = Message()
+                                        val msg = Message()
                                         msg.what = UPDATE_AUDIO_PROGRESS_BAR
                                         audioProgressHandler.sendMessage(msg)
                                         sleep(1000)

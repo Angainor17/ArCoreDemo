@@ -50,30 +50,33 @@ class NavDrawer : CustomActivity() {
             override fun onReceive(p0: Context?, p1: Intent?) {
                 val downloadManager =
                     p0?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                var action = p1?.action
+                val action = p1?.action
                 if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
                     var downloadId = p1?.getLongExtra(
                         DownloadManager.EXTRA_DOWNLOAD_ID, 0
                     )
-                    var query = DownloadManager.Query()
-                    query.setFilterById(downloadId!!)
-                    var cursor = downloadManager.query(query)
-                    if (cursor?.moveToFirst()!!) {
-                        var columnIndex = cursor
-                            .getColumnIndex(DownloadManager.COLUMN_STATUS)
-                        if (DownloadManager.STATUS_SUCCESSFUL == cursor
-                                .getInt(columnIndex)
-                        ) {
-                            var uriString = cursor
-                                .getString(
-                                    cursor
-                                        .getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
-                                )
-                            var uri = Uri.parse(uriString)
-                            var loaded = File(uri.path)
-                            var dest = File(p0.filesDir.toString() + "/downloads/" + loaded.name)
-                            loaded.copyTo(dest, true)
-                            loaded.delete()
+                    val query = DownloadManager.Query()
+                    query.setFilterById(downloadId)
+                    val cursor = downloadManager.query(query)
+                    cursor?.let {
+                        if (it.moveToFirst()) {
+                            val columnIndex = it
+                                .getColumnIndex(DownloadManager.COLUMN_STATUS)
+                            if (DownloadManager.STATUS_SUCCESSFUL == it
+                                    .getInt(columnIndex)
+                            ) {
+                                val uriString = it
+                                    .getString(
+                                        it
+                                            .getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
+                                    )
+                                val uri = Uri.parse(uriString)
+                                val loaded = File(uri.path)
+                                val dest =
+                                    File(p0.filesDir.toString() + "/downloads/" + loaded.name)
+                                loaded.copyTo(dest, true)
+                                loaded.delete()
+                            }
                         }
                     }
                 }

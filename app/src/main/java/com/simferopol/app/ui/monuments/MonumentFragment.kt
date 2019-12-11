@@ -36,7 +36,7 @@ class MonumentFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.vm = monumentVM
 
-        var audioUrl = monumentVM.audio
+        val audioUrl = monumentVM.audio
         if (!audioUrl.isNullOrEmpty()) {
             binding.player.visibility = View.VISIBLE
             audioProvider.progressBar(binding.player.progressBar)
@@ -51,16 +51,18 @@ class MonumentFragment : Fragment() {
                 true
             }
             binding.player.download.setOnClickListener {
-                CustomFileUtils().loadFile(this!!.context!!, audioUrl)
+                CustomFileUtils().loadFile(it.context, audioUrl)
                 it.visibility = View.GONE
             }
         }
 
         if (!args.monument.slides.isNullOrEmpty()) {
-            val adapter = object : ImagePagerAdapter() {}
-            adapter.setItems(args.monument.slides!!)
-            binding.photosViewpager.adapter = adapter
-            binding.pagerTab.setupWithViewPager(binding.photosViewpager)
+            args.monument.slides?.let {
+                val adapter = object : ImagePagerAdapter() {}
+                adapter.setItems(it)
+                binding.photosViewpager.adapter = adapter
+                binding.pagerTab.setupWithViewPager(binding.photosViewpager)
+            }
         } else binding.photosViewpager.visibility = View.GONE
         return binding.root
     }
