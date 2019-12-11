@@ -27,17 +27,46 @@ android {
         archivesBaseName = "Simf ${versionName}(${buildNumber})(${new Date().format('dd.MM.yyyy')}) versionCode($versionCode)"
     }
 
+    aaptOptions {
+        cruncherEnabled = false
+    }
+
+    signingConfigs {
+        def keystorePropertiesFile = rootProject.file("keystore.properties")
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+        signDebug {
+            storeFile file(keystoreProperties['KEYSTORE_FILE_PATH'])
+            storePassword keystoreProperties['KEYSTORE_PASSWORD']
+            keyAlias keystoreProperties['DEBUG_KEY_ALIAS']
+            keyPassword keystoreProperties['DEBUG_KEY_ALIAS_PASSWORD']
+        }
+
+        signRelease {
+            storeFile file(keystoreProperties['KEYSTORE_FILE_PATH'])
+            storePassword keystoreProperties['KEYSTORE_PASSWORD']
+            keyAlias keystoreProperties['DEBUG_KEY_ALIAS']
+            keyPassword keystoreProperties['DEBUG_KEY_ALIAS_PASSWORD']
+        }
+    }
+
     buildTypes {
         debug {
-            shrinkResources false
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             debuggable = true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "APP_BUILD_NUMBER", "$buildNumber"
         }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+
             buildConfigField "int", "APP_BUILD_NUMBER", "$buildNumber"
         }
     }
@@ -96,9 +125,6 @@ dependencies {
 
     implementation support.recyclerView
     implementation support.design
-
-    implementation google.material
-    implementation google.maps
 
     implementation 'com.yandex.android:mapkit:3.4.0'
     implementation 'com.yandex.android:transport:3.4.0'

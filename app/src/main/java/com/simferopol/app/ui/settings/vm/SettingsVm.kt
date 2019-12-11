@@ -3,11 +3,9 @@ package com.simferopol.app.ui.settings.vm
 import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.simferopol.api.apiManager.ApiManager
-import com.simferopol.api.models.GeoObject
 import com.simferopol.api.models.LoadedFiles
 import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.BuildConfig
@@ -75,10 +73,10 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
     fun loadMonuments() {
         loadedFiles.value!!.monuments = true
         GlobalScope.launch(Dispatchers.IO) {
-            var result = apiManager.getGeoObjects(1)
+            val result = apiManager.getGeoObjects(1)
             if (result.success) {
                 result.data?.forEach {
-                    var audioUrl = it.audio
+                    val audioUrl = it.audio
                     loadFile(audioUrl)
                 }
                 apiManager.setLoadedFiles(loadedFiles.value!!)
@@ -89,10 +87,10 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
     fun loadHistory() {
         loadedFiles.value!!.history = true
         GlobalScope.launch(Dispatchers.IO) {
-            var result = apiManager.getStories()
+            val result = apiManager.getStories()
             if (result.success) {
                 result.data?.forEach {
-                    var audioUrl = it.audio
+                    val audioUrl = it.audio
                     loadFile(audioUrl)
                 }
                 apiManager.setLoadedFiles(loadedFiles.value!!)
@@ -100,7 +98,7 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
         }
     }
 
-    fun initLoadedFiles() {
+    private fun initLoadedFiles() {
         GlobalScope.launch(Dispatchers.IO) {
             val result = apiManager.getLoadedFiles()
             if ((result.success) and (result.data != null))
@@ -111,13 +109,13 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
         }
     }
 
-    fun loadFile(audioUrl: String?) {
+    private fun loadFile(audioUrl: String?) {
         if (!audioUrl.isNullOrEmpty()) {
-            var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
-            var file =
+            val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
+            val file =
                 File(context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
             if (!file.exists()) {
-                var request = DownloadManager.Request(Uri.parse(audioUrl))
+                val request = DownloadManager.Request(Uri.parse(audioUrl))
                     .setDestinationInExternalFilesDir(
                         context,
                         "downloads",

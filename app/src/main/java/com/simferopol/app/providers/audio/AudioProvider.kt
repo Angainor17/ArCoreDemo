@@ -1,9 +1,6 @@
 package com.simferopol.app.providers.audio
 
-import android.app.DownloadManager
-import android.content.Context.DOWNLOAD_SERVICE
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Handler
 import android.os.Message
 import android.util.Log
@@ -12,13 +9,14 @@ import android.widget.ProgressBar
 import java.io.File
 import java.lang.ref.WeakReference
 
+private const val UPDATE_AUDIO_PROGRESS_BAR = 3
 
 class AudioProvider : IAudioProvider {
 
-    private val UPDATE_AUDIO_PROGRESS_BAR = 3
-    lateinit var progressBar: ProgressBar
     var mediaPlayer: MediaPlayer = MediaPlayer()
     var status = PlayerStatus.INIT
+
+    private lateinit var progressBar: ProgressBar
     private lateinit var audioProgressHandler: Handler
     private lateinit var audioProgressBarThread: Thread
 
@@ -36,8 +34,8 @@ class AudioProvider : IAudioProvider {
             }
             PlayerStatus.INIT -> {
                 status = PlayerStatus.PLAYING
-                var fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
-                var file =
+                val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
+                val file =
                     File(progressBar.context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
                 if (!file.exists()) {
                     mediaPlayer.setDataSource(audioUrl)
@@ -61,12 +59,10 @@ class AudioProvider : IAudioProvider {
                         try {
                             while (status != PlayerStatus.STOPPED) {
                                 if (status != PlayerStatus.PAUSED) {
-                                    if (audioProgressHandler != null) {
-                                        var msg = Message()
-                                        msg.what = UPDATE_AUDIO_PROGRESS_BAR
-                                        audioProgressHandler.sendMessage(msg)
-                                        sleep(1000)
-                                    }
+                                    val msg = Message()
+                                    msg.what = UPDATE_AUDIO_PROGRESS_BAR
+                                    audioProgressHandler.sendMessage(msg)
+                                    sleep(1000)
                                 }
                             }
                         } catch (ex: InterruptedException) {
@@ -99,16 +95,13 @@ class AudioProvider : IAudioProvider {
                 super.handleMessage(msg)
                 if ((msg.what === UPDATE_AUDIO_PROGRESS_BAR) and (status == PlayerStatus.PLAYING)) {
 
-                    if (mediaPlayer != null) {
-                        val currPlayPosition = audioPlayer.currentPosition
-                        val totalTime = audioPlayer.duration
-                        progressBar.max = totalTime
-                        progressBar.progress = currPlayPosition
-                    }
+                    val currPlayPosition = audioPlayer.currentPosition
+                    val totalTime = audioPlayer.duration
+                    progressBar.max = totalTime
+                    progressBar.progress = currPlayPosition
                 }
             }
         }
-
     }
 
     enum class PlayerStatus {

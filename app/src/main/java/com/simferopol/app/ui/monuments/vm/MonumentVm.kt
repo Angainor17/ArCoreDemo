@@ -1,7 +1,6 @@
 package com.simferopol.app.ui.monuments.vm
 
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import androidx.core.text.parseAsHtml
 import androidx.lifecycle.ViewModel
@@ -41,6 +40,6 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     }
 
     fun onPlayClick() {
-        Log.e("play", name)// todo play audio file
+
     }
 }
