@@ -49,7 +49,7 @@ class NavDrawer : CustomActivity() {
                     p0?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                 val action = p1?.action
                 if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
-                    var downloadId = p1?.getLongExtra(
+                    val downloadId = p1.getLongExtra(
                         DownloadManager.EXTRA_DOWNLOAD_ID, 0
                     )
                     val query = DownloadManager.Query()
