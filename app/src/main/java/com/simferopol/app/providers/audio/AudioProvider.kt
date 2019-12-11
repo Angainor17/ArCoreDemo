@@ -9,14 +9,13 @@ import android.widget.ProgressBar
 import java.io.File
 import java.lang.ref.WeakReference
 
-private const val UPDATE_AUDIO_PROGRESS_BAR = 3
 
 class AudioProvider : IAudioProvider {
 
+    private val UPDATE_AUDIO_PROGRESS_BAR = 3
+    lateinit var progressBar: ProgressBar
     var mediaPlayer: MediaPlayer = MediaPlayer()
     var status = PlayerStatus.INIT
-
-    private lateinit var progressBar: ProgressBar
     private lateinit var audioProgressHandler: Handler
     private lateinit var audioProgressBarThread: Thread
 
@@ -36,7 +35,7 @@ class AudioProvider : IAudioProvider {
                 status = PlayerStatus.PLAYING
                 val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
                 val file =
-                    File(progressBar.context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
+                    File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
                 if (!file.exists()) {
                     mediaPlayer.setDataSource(audioUrl)
                     mediaPlayer.prepareAsync()
@@ -59,10 +58,12 @@ class AudioProvider : IAudioProvider {
                         try {
                             while (status != PlayerStatus.STOPPED) {
                                 if (status != PlayerStatus.PAUSED) {
-                                    val msg = Message()
-                                    msg.what = UPDATE_AUDIO_PROGRESS_BAR
-                                    audioProgressHandler.sendMessage(msg)
-                                    sleep(1000)
+                                    if (audioProgressHandler != null) {
+                                        val msg = Message()
+                                        msg.what = UPDATE_AUDIO_PROGRESS_BAR
+                                        audioProgressHandler.sendMessage(msg)
+                                        sleep(1000)
+                                    }
                                 }
                             }
                         } catch (ex: InterruptedException) {
@@ -95,13 +96,16 @@ class AudioProvider : IAudioProvider {
                 super.handleMessage(msg)
                 if ((msg.what === UPDATE_AUDIO_PROGRESS_BAR) and (status == PlayerStatus.PLAYING)) {
 
-                    val currPlayPosition = audioPlayer.currentPosition
-                    val totalTime = audioPlayer.duration
-                    progressBar.max = totalTime
-                    progressBar.progress = currPlayPosition
+                    if (mediaPlayer != null) {
+                        val currPlayPosition = audioPlayer.currentPosition
+                        val totalTime = audioPlayer.duration
+                        progressBar.max = totalTime
+                        progressBar.progress = currPlayPosition
+                    }
                 }
             }
         }
+
     }
 
     enum class PlayerStatus {

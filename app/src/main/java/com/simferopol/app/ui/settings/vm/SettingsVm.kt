@@ -1,8 +1,6 @@
 package com.simferopol.app.ui.settings.vm
 
-import android.app.DownloadManager
 import android.content.Context
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.simferopol.api.apiManager.ApiManager
@@ -15,11 +13,11 @@ import com.simferopol.app.providers.lang.LocaleItem
 import com.simferopol.app.providers.lang.RU_LOCALE
 import com.simferopol.app.providers.res.IResProvider
 import com.simferopol.app.ui.settings.SettingsView
+import com.simferopol.app.utils.CustomFileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
-import java.io.File
 
 class SettingsVm(val view: SettingsView) : ViewModel() {
 
@@ -71,61 +69,47 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
     }
 
     fun loadMonuments() {
-        loadedFiles.value!!.monuments = true
-        GlobalScope.launch(Dispatchers.IO) {
-            val result = apiManager.getGeoObjects(1)
-            if (result.success) {
-                result.data?.forEach {
-                    val audioUrl = it.audio
-                    loadFile(audioUrl)
+        loadedFiles.value?.let {
+            it.monuments = true
+            GlobalScope.launch(Dispatchers.IO) {
+                var result = apiManager.getGeoObjects(1)
+                if (result.success) {
+                    result.data?.forEach { geoObject ->
+                        var audioUrl = geoObject.audio
+                        CustomFileUtils().loadFile(context, audioUrl)
+                    }
+                    apiManager.setLoadedFiles(it)
                 }
-                apiManager.setLoadedFiles(loadedFiles.value!!)
             }
         }
     }
 
     fun loadHistory() {
-        loadedFiles.value!!.history = true
-        GlobalScope.launch(Dispatchers.IO) {
-            val result = apiManager.getStories()
-            if (result.success) {
-                result.data?.forEach {
-                    val audioUrl = it.audio
-                    loadFile(audioUrl)
+        loadedFiles.value?.let {
+            it.history = true
+            GlobalScope.launch(Dispatchers.IO) {
+                val result = apiManager.getStories()
+                if (result.success) {
+                    result.data?.forEach { story ->
+                        val audioUrl = story.audio
+                        CustomFileUtils().loadFile(context, audioUrl)
+                    }
+                    apiManager.setLoadedFiles(it)
                 }
-                apiManager.setLoadedFiles(loadedFiles.value!!)
             }
         }
     }
 
-    private fun initLoadedFiles() {
+    fun initLoadedFiles() {
         GlobalScope.launch(Dispatchers.IO) {
             val result = apiManager.getLoadedFiles()
             if ((result.success) and (result.data != null))
                 GlobalScope.launch(Dispatchers.Main) {
-                    loadedFiles.value = result.data!!
+                    result.data?.let {
+                        loadedFiles.value = it
+                    }
                 }
-            else apiManager.setLoadedFiles(loadedFiles.value!!)
-        }
-    }
-
-    private fun loadFile(audioUrl: String?) {
-        if (!audioUrl.isNullOrEmpty()) {
-            val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
-            val file =
-                File(context.getExternalFilesDir(null).toString() + "/downloads/" + fileName)
-            if (!file.exists()) {
-                val request = DownloadManager.Request(Uri.parse(audioUrl))
-                    .setDestinationInExternalFilesDir(
-                        context,
-                        "downloads",
-                        fileName
-                    )
-                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                val downloadManager =
-                    context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                var downloadID = downloadManager.enqueue(request)
-            }
+            else loadedFiles.value?.let { apiManager.setLoadedFiles(it) }
         }
     }
 }

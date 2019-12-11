@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.simferopol.app.ui.about.AboutVm" />
@@ -62,6 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="106dp"
+                android:visibility="@{vm.player? View.VISIBLE: View.GONE}"
+
                 app:layout_constraintTop_toTopOf="@+id/previewImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
