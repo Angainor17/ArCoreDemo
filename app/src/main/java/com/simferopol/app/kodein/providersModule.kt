@@ -16,6 +16,6 @@ internal val providersModule = Kodein.Module("ProvidersModule") {
 
     bind<IResProvider>() with singleton { ResProvider(instance<Context>().resources) }
     bind<ILocaleProvider>() with singleton { LocaleProvider() }
-    bind<IAudioProvider>() with singleton { AudioProvider() }
+    bind<IAudioProvider>() with singleton { AudioProvider(instance()) }
 
 }

@@ -10,7 +10,6 @@ import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.databinding.StoryPagerItemBinding
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.ui.history.vm.HistoryVm
-import com.simferopol.app.utils.CustomFileUtils
 import kotlinx.android.synthetic.main.audio_player_element.view.*
 import org.kodein.di.generic.instance
 
@@ -31,26 +30,12 @@ open class StoriesPagerAdapter : PagerAdapter() {
         binding.pagerTab.setupWithViewPager(container as ViewPager)
         binding.pagerTab.isTabIndicatorFullWidth = true
 
-        binding.player.play_button.isActivated = false
+        binding.player.playButton.isActivated = false
         audioProvider.stopAudio()
         val audioUrl = itemVm.audio
         if (!audioUrl.isNullOrEmpty()) {
             binding.player.visibility = View.VISIBLE
-            audioProvider.progressBar(binding.player.progressBar)
-            binding.player.play_button.setOnClickListener {
-                binding.player.play_button.isActivated = !binding.player.play_button.isActivated
-                audioProvider.playClickListener(audioUrl)
-            }
-            binding.player.play_button.setOnLongClickListener {
-                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility =
-                    View.GONE
-                else binding.player.download.visibility = View.VISIBLE
-                true
-            }
-            binding.player.download.setOnClickListener {
-                CustomFileUtils().loadFile(it.context, audioUrl)
-                it.visibility = View.GONE
-            }
+            audioProvider.initPlayerView(binding.player)
         }
         container.addView(binding.root)
         return binding.root
@@ -67,9 +52,7 @@ open class StoriesPagerAdapter : PagerAdapter() {
         notifyDataSetChanged()
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return list[position].name
-    }
+    override fun getPageTitle(position: Int): CharSequence? = list[position].name
 
     fun onPageChanged() {
         audioProvider.stopAudio()

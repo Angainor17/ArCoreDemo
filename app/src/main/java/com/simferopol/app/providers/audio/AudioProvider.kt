@@ -1,114 +1,115 @@
 package com.simferopol.app.providers.audio
 
+import android.content.Context
 import android.media.MediaPlayer
-import android.os.Handler
-import android.os.Message
-import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ProgressBar
+import com.simferopol.app.utils.loadFile
+import kotlinx.android.synthetic.main.audio_player_element.view.*
 import java.io.File
-import java.lang.ref.WeakReference
 
 
-class AudioProvider : IAudioProvider {
+class AudioProvider(private val context: Context) : IAudioProvider {
 
-    private val UPDATE_AUDIO_PROGRESS_BAR = 3
-    lateinit var progressBar: ProgressBar
-    var mediaPlayer: MediaPlayer = MediaPlayer()
-    var status = PlayerStatus.INIT
-    private lateinit var audioProgressHandler: Handler
-    private lateinit var audioProgressBarThread: Thread
+    private var mediaPlayer: MediaPlayer = MediaPlayer()
+    private var status = PlayerStatus.INIT
 
-    override fun progressBar(progressBarView: ProgressBar) {
-        progressBar = progressBarView
-        audioProgressHandler = AudioHandler(this)
+    private lateinit var progressBar: ProgressBar
+    private lateinit var playButton: View
+
+    private var audioUrl: String = ""
+
+    private val playingHandler = Thread {
+        while (true) {
+            try {
+                Thread.sleep(1000)
+                progressBar.progress = mediaPlayer.currentPosition
+                progressBar.max = mediaPlayer.duration
+            } catch (e: Exception) {
+
+            }
+        }
     }
 
-    override fun playClickListener(audioUrl: String) {
+    override fun initPlayerView(playerView: View) {
+        val isPlayed = status == PlayerStatus.PLAYING
+
+        playButton = playerView.playButton
+        progressBar = playerView.progressBar
+
+        playButton.setOnClickListener {
+            showAudioPlaying(!playButton.isActivated)
+            playClickListener()
+        }
+        mediaPlayer.setOnCompletionListener {
+            if (it.currentPosition >= it.duration) {
+                resetAudio()
+            }
+        }
+
+        playerView.visibility = if (isPlayed) GONE else VISIBLE
+        playButton.visibility = if (isPlayed) GONE else VISIBLE
+        playButton.isActivated = isPlayed
+    }
+
+    private fun resetAudio() {
+        playingHandler.interrupt()
+        mediaPlayer.reset()
+        status = PlayerStatus.INIT
+        showAudioPlaying(false)
+    }
+
+    private fun playClickListener() {
         when (status) {
             PlayerStatus.PAUSED -> {
                 mediaPlayer.seekTo(mediaPlayer.currentPosition)
                 mediaPlayer.start()
                 status = PlayerStatus.PLAYING
+                showAudioPlaying(true)
             }
             PlayerStatus.INIT -> {
+                showAudioPlaying(true)
                 status = PlayerStatus.PLAYING
                 val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
                 val file =
                     File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
-                if (!file.exists()) {
-                    mediaPlayer.setDataSource(audioUrl)
-                    mediaPlayer.prepareAsync()
-                    mediaPlayer.setOnPreparedListener {
-                        it.start()
-                        progressBar.visibility = View.VISIBLE
-                    }
-                } else {
-                    mediaPlayer.setDataSource(file.absolutePath)
-                    mediaPlayer.prepareAsync()
-                    mediaPlayer.setOnPreparedListener {
-                        it.start()
-                        progressBar.visibility = View.VISIBLE
-                    }
+
+                mediaPlayer.setDataSource(if (file.exists() && !file.isDirectory) file.absolutePath else audioUrl)
+                mediaPlayer.prepareAsync()
+                mediaPlayer.setOnPreparedListener {
+                    it.start()
+                    progressBar.visibility = VISIBLE
                 }
 
-                audioProgressBarThread = object : Thread() {
-                    override fun run() {
-                        super.run()
-                        try {
-                            while (status != PlayerStatus.STOPPED) {
-                                if (status != PlayerStatus.PAUSED) {
-                                    if (audioProgressHandler != null) {
-                                        val msg = Message()
-                                        msg.what = UPDATE_AUDIO_PROGRESS_BAR
-                                        audioProgressHandler.sendMessage(msg)
-                                        sleep(1000)
-                                    }
-                                }
-                            }
-                        } catch (ex: InterruptedException) {
-                            Log.e("audioThread", ex.toString())
-                        }
-                    }
+                if (!playingHandler.isAlive) {
+                    playingHandler.start()
                 }
-                audioProgressBarThread.start()
             }
             PlayerStatus.PLAYING -> {
+                showAudioPlaying(false)
                 mediaPlayer.pause()
                 status = PlayerStatus.PAUSED
             }
+            else -> {
+                showAudioPlaying(false)
+            }
         }
+    }
+
+    private fun showAudioPlaying(isPlaying: Boolean) {
+        playButton.isActivated = isPlaying
+    }
+
+    override fun initAudioUrl(audioUrl: String) {
+        this.audioUrl = audioUrl
+        loadFile(context, audioUrl)
     }
 
     override fun stopAudio() {
         status = PlayerStatus.INIT
         mediaPlayer.stop()
         mediaPlayer.reset()
-    }
-
-    inner class AudioHandler(providerInstance: AudioProvider) : Handler() {
-        private val weakReference = WeakReference<AudioProvider>(providerInstance)
-
-        override fun handleMessage(msg: Message) {
-            val audioProvider = weakReference.get()
-            if (audioProvider != null) {
-                val audioPlayer = audioProvider.mediaPlayer
-                super.handleMessage(msg)
-                if ((msg.what === UPDATE_AUDIO_PROGRESS_BAR) and (status == PlayerStatus.PLAYING)) {
-
-                    if (mediaPlayer != null) {
-                        val currPlayPosition = audioPlayer.currentPosition
-                        val totalTime = audioPlayer.duration
-                        progressBar.max = totalTime
-                        progressBar.progress = currPlayPosition
-                    }
-                }
-            }
-        }
-
-    }
-
-    enum class PlayerStatus {
-        INIT, PAUSED, STOPPED, PLAYING
     }
 }

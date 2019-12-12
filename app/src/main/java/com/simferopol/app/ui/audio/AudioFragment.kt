@@ -9,8 +9,8 @@ open class AudioFragment : Fragment() {
 
     val audioProvider by kodein.instance<IAudioProvider>()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         audioProvider.stopAudio()
     }
 }

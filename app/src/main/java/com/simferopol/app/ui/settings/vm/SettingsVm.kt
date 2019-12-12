@@ -13,7 +13,7 @@ import com.simferopol.app.providers.lang.LocaleItem
 import com.simferopol.app.providers.lang.RU_LOCALE
 import com.simferopol.app.providers.res.IResProvider
 import com.simferopol.app.ui.settings.SettingsView
-import com.simferopol.app.utils.CustomFileUtils
+import com.simferopol.app.utils.loadFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -72,11 +72,11 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
         loadedFiles.value?.let {
             it.monuments = true
             GlobalScope.launch(Dispatchers.IO) {
-                var result = apiManager.getGeoObjects(1)
+                val result = apiManager.getGeoObjects(1)
                 if (result.success) {
                     result.data?.forEach { geoObject ->
-                        var audioUrl = geoObject.audio
-                        CustomFileUtils().loadFile(context, audioUrl)
+                        val audioUrl = geoObject.audio
+                        audioUrl?.let { loadFile(context, audioUrl) }
                     }
                     apiManager.setLoadedFiles(it)
                 }
@@ -92,7 +92,7 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
                 if (result.success) {
                     result.data?.forEach { story ->
                         val audioUrl = story.audio
-                        CustomFileUtils().loadFile(context, audioUrl)
+                        audioUrl?.let { loadFile(context, audioUrl) }
                     }
                     apiManager.setLoadedFiles(it)
                 }
@@ -100,7 +100,7 @@ class SettingsVm(val view: SettingsView) : ViewModel() {
         }
     }
 
-    fun initLoadedFiles() {
+    private fun initLoadedFiles() {
         GlobalScope.launch(Dispatchers.IO) {
             val result = apiManager.getLoadedFiles()
             if ((result.success) and (result.data != null))

@@ -1,12 +1,16 @@
 package com.simferopol.app.providers.audio
 
-import android.widget.ProgressBar
+import android.view.View
 
 interface IAudioProvider {
 
-    fun progressBar(progressBarView: ProgressBar)
+    fun initPlayerView(playerView: View)
 
-    fun playClickListener(audioUrl: String)
+    fun initAudioUrl(audioUrl: String)
 
     fun stopAudio()
+}
+
+enum class PlayerStatus {
+    INIT, PAUSED, STOPPED, PLAYING
 }

@@ -17,7 +17,6 @@ import com.yandex.mapkit.map.MapObject
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.runtime.image.ImageProvider
-import kotlinx.android.synthetic.main.audio_player_element.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.map_view.*
 
@@ -96,18 +95,12 @@ class MapFragment : BaseMapFragment() {
 
     private fun setFooterContainer() {
         footerContainer.visibility = View.VISIBLE
-        player.visibility = View.GONE
         find.visibility = View.GONE
-        player.play_button.isActivated = false
-        audioProvider.stopAudio()
+
         val audioUrl = mapVM.currentObject.value?.audio
         if (!audioUrl.isNullOrEmpty()) {
-            player.visibility = View.VISIBLE
-            audioProvider.progressBar(player.progressBar)
-            player.play_button.setOnClickListener {
-                player.play_button.isActivated = !player.play_button.isActivated
-                audioProvider.playClickListener(audioUrl)
-            }
+            audioProvider.initPlayerView(player)
+            audioProvider.initAudioUrl(audioUrl)
         }
     }
 }
