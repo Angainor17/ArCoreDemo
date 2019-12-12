@@ -4,9 +4,9 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.simferopol.api.models.Weather
 import com.simferopol.app.R
+import com.simferopol.app.ui.audio.AudioFragment
 import com.simferopol.app.ui.map.base.IMapView
 import com.simferopol.app.utils.CustomToolbar
 import com.simferopol.app.utils.ui.CustomUserLocationObjectListener
@@ -22,7 +22,7 @@ import com.yandex.mapkit.user_location.UserLocationLayer
 import kotlinx.android.synthetic.main.app_bar_nav_drawer.*
 import kotlinx.android.synthetic.main.map_view.*
 
-abstract class BaseMapFragment : Fragment(), IMapView {
+abstract class BaseMapFragment : AudioFragment(), IMapView {
 
     private lateinit var userLocationLayer: UserLocationLayer
     private lateinit var userLocationObjectListener: CustomUserLocationObjectListener

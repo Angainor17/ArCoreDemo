@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.simferopol.api.models.GeoObject
-import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.databinding.FragmentMapBinding
-import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.utils.models.ViewState
 import com.simferopol.app.utils.ui.CustomInputListener
 import com.simferopol.app.utils.ui.CustomVisitor
@@ -22,7 +20,6 @@ import com.yandex.runtime.image.ImageProvider
 import kotlinx.android.synthetic.main.audio_player_element.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.map_view.*
-import org.kodein.di.generic.instance
 
 val simfer = Point(44.949684, 34.102521)
 
@@ -31,7 +28,6 @@ class MapFragment : BaseMapFragment() {
     private val mapVM = MapVM(this)
     private val mapObjectTapListener = YandexMapObjectTapListener()
     private lateinit var inputListener: CustomInputListener
-    private val audioProvider by kodein.instance<IAudioProvider>()
 
     override fun createVm(): BaseMapVm = mapVM
     lateinit var binding: FragmentMapBinding
@@ -113,10 +109,5 @@ class MapFragment : BaseMapFragment() {
                 audioProvider.playClickListener(audioUrl)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        audioProvider.stopAudio()
     }
 }

@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.simferopol.app.App
 import com.simferopol.app.databinding.FragmentAboutBinding
-import com.simferopol.app.providers.audio.IAudioProvider
+import com.simferopol.app.ui.audio.AudioFragment
 import com.simferopol.app.utils.CustomFileUtils
 import kotlinx.android.synthetic.main.audio_player_element.view.*
-import org.kodein.di.generic.instance
 
-class AboutFragment : Fragment() {
+class AboutFragment : AudioFragment() {
 
-    private val audioProvider by App.kodein.instance<IAudioProvider>()
     private val aboutVm = AboutVm()
 
     override fun onCreateView(
@@ -46,10 +42,5 @@ class AboutFragment : Fragment() {
             it.visibility = View.GONE
         }
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        audioProvider.stopAudio()
     }
 }

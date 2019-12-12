@@ -4,21 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.simferopol.app.App
 import com.simferopol.app.databinding.FragmentMonumentBinding
-import com.simferopol.app.providers.audio.IAudioProvider
+import com.simferopol.app.ui.audio.AudioFragment
 import com.simferopol.app.ui.monuments.vm.MonumentVm
 import com.simferopol.app.utils.CustomFileUtils
 import com.simferopol.app.utils.ui.ImagePagerAdapter
 import kotlinx.android.synthetic.main.audio_player_element.view.*
-import org.kodein.di.generic.instance
 
-
-class MonumentFragment : Fragment() {
-
-    private val audioProvider by App.kodein.instance<IAudioProvider>()
+class MonumentFragment : AudioFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,10 +54,5 @@ class MonumentFragment : Fragment() {
             }
         } else binding.photosViewpager.visibility = View.GONE
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        audioProvider.stopAudio()
     }
 }

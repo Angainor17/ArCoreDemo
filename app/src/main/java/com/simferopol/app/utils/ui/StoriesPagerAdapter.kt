@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.simferopol.app.App
+import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.databinding.StoryPagerItemBinding
 import com.simferopol.app.providers.audio.IAudioProvider
 import com.simferopol.app.ui.history.vm.HistoryVm
@@ -17,7 +17,7 @@ import org.kodein.di.generic.instance
 open class StoriesPagerAdapter : PagerAdapter() {
 
     private val list = ArrayList<HistoryVm>()
-    private val audioProvider by App.kodein.instance<IAudioProvider>()
+    private val audioProvider by kodein.instance<IAudioProvider>()
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean = view == `object`
     override fun getCount(): Int = list.size
@@ -33,7 +33,7 @@ open class StoriesPagerAdapter : PagerAdapter() {
 
         binding.player.play_button.isActivated = false
         audioProvider.stopAudio()
-        var audioUrl = itemVm.audio
+        val audioUrl = itemVm.audio
         if (!audioUrl.isNullOrEmpty()) {
             binding.player.visibility = View.VISIBLE
             audioProvider.progressBar(binding.player.progressBar)
@@ -42,7 +42,8 @@ open class StoriesPagerAdapter : PagerAdapter() {
                 audioProvider.playClickListener(audioUrl)
             }
             binding.player.play_button.setOnLongClickListener {
-                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility = View.GONE
+                if (binding.player.download.visibility == View.VISIBLE) binding.player.download.visibility =
+                    View.GONE
                 else binding.player.download.visibility = View.VISIBLE
                 true
             }
