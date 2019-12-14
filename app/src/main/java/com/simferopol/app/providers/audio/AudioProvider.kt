@@ -16,8 +16,8 @@ class AudioProvider(private val context: Context) : IAudioProvider {
     private var mediaPlayer: MediaPlayer = MediaPlayer()
     private var status = PlayerStatus.INIT
 
-    private lateinit var progressBar: ProgressBar
-    private lateinit var playButton: View
+    private var progressBar: ProgressBar? = null
+    private var playButton: View? = null
 
     private var audioUrl: String = ""
 
@@ -25,8 +25,8 @@ class AudioProvider(private val context: Context) : IAudioProvider {
         while (true) {
             try {
                 Thread.sleep(1000)
-                progressBar.progress = mediaPlayer.currentPosition
-                progressBar.max = mediaPlayer.duration
+                progressBar?.progress = mediaPlayer.currentPosition
+                progressBar?.max = mediaPlayer.duration
             } catch (e: Exception) {
 
             }
@@ -39,8 +39,8 @@ class AudioProvider(private val context: Context) : IAudioProvider {
         playButton = playerView.playButton
         progressBar = playerView.progressBar
 
-        playButton.setOnClickListener {
-            showAudioPlaying(!playButton.isActivated)
+        playButton?.setOnClickListener {
+            showAudioPlaying(playButton?.isActivated ?: false)
             playClickListener()
         }
         mediaPlayer.setOnCompletionListener {
@@ -50,8 +50,8 @@ class AudioProvider(private val context: Context) : IAudioProvider {
         }
 
         playerView.visibility = if (isPlayed) GONE else VISIBLE
-        playButton.visibility = if (isPlayed) GONE else VISIBLE
-        playButton.isActivated = isPlayed
+        playButton?.visibility = VISIBLE
+        playButton?.isActivated = isPlayed
     }
 
     private fun resetAudio() {
@@ -74,13 +74,13 @@ class AudioProvider(private val context: Context) : IAudioProvider {
                 status = PlayerStatus.PLAYING
                 val fileName = audioUrl.substring(audioUrl.lastIndexOf('/') + 1)
                 val file =
-                    File(progressBar.context.filesDir.toString() + "/downloads/" + fileName)
+                    File(context.filesDir.toString() + "/downloads/" + fileName)
 
                 mediaPlayer.setDataSource(if (file.exists() && !file.isDirectory) file.absolutePath else audioUrl)
                 mediaPlayer.prepareAsync()
                 mediaPlayer.setOnPreparedListener {
                     it.start()
-                    progressBar.visibility = VISIBLE
+                    progressBar?.visibility = VISIBLE
                 }
 
                 if (!playingHandler.isAlive) {
@@ -99,7 +99,7 @@ class AudioProvider(private val context: Context) : IAudioProvider {
     }
 
     private fun showAudioPlaying(isPlaying: Boolean) {
-        playButton.isActivated = isPlaying
+        playButton?.isActivated = isPlaying
     }
 
     override fun initAudioUrl(audioUrl: String) {

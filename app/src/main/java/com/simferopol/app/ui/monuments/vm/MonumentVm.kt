@@ -24,7 +24,7 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     }
 
     fun onModelClick(view: View) {
-        val file = "models/skeleton.stl"
+        val file = "models/house.obj"
         val fileUri = Uri.parse("assets://" + view.context.packageName + "/" + file).toString()
         val action = MonumentFragmentDirections.actionNavMonumentToNavModel3d(
             fileUri,
@@ -37,9 +37,5 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     fun onMapClick(view: View) {
         val action = MonumentFragmentDirections.actionNavMonumentToNavMap(monument)
         view.findNavController().navigate(action)
-    }
-
-    fun onPlayClick() {
-
     }
 }

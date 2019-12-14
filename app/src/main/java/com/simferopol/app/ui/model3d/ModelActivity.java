@@ -91,9 +91,6 @@ public class ModelActivity extends Activity {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void setupOnSystemVisibilityChangeListener() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            return;
-        }
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(visibility -> {
             // Note that system bars will only be "visible" if none of the
             // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
@@ -127,13 +124,11 @@ public class ModelActivity extends Activity {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             hideSystemUIKitKat();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        } else {
             hideSystemUIJellyBean();
         }
     }
 
-    // This snippet hides the system bars.
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void hideSystemUIKitKat() {
         // Set the IMMERSIVE flag.
         // Set the content to appear under the system bars so that the content
@@ -145,7 +140,6 @@ public class ModelActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void hideSystemUIJellyBean() {
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

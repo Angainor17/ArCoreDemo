@@ -1068,24 +1068,24 @@ public final class Object3DBuilder {
         float[] identity = new float[16];
         Matrix.setIdentityM(identity,0);
 
-        AnimatedModel skeleton = new AnimatedModel(createNativeByteBuffer(animatedModel.getJointCount()*3*3*4)
+        AnimatedModel object3DData = new AnimatedModel(createNativeByteBuffer(animatedModel.getJointCount()*3*3*4)
                 .asFloatBuffer());
-        skeleton.setVertexNormalsArrayBuffer(createNativeByteBuffer(animatedModel.getJointCount()*3*3*4)
+        object3DData.setVertexNormalsArrayBuffer(createNativeByteBuffer(animatedModel.getJointCount()*3*3*4)
                 .asFloatBuffer());
-        skeleton.setDrawMode(GLES20.GL_TRIANGLES);
-        skeleton.setRootJoint(animatedModel.getRootJoint(), animatedModel.getJointCount(), animatedModel.getBoneCount());
-        skeleton.setJointIds(createNativeByteBuffer(skeleton.getJointCount()*3*3*4).asFloatBuffer());
-        skeleton.doAnimation(animatedModel.getAnimation());
-        skeleton.setVertexWeights(createNativeByteBuffer(skeleton.getJointCount()*3*3*4).asFloatBuffer());
-        skeleton.setPosition(animatedModel.getPosition());
-        skeleton.setScale(animatedModel.getScale());
+        object3DData.setDrawMode(GLES20.GL_TRIANGLES);
+        object3DData.setRootJoint(animatedModel.getRootJoint(), animatedModel.getJointCount(), animatedModel.getBoneCount());
+        object3DData.setJointIds(createNativeByteBuffer(object3DData.getJointCount()*3*3*4).asFloatBuffer());
+        object3DData.doAnimation(animatedModel.getAnimation());
+        object3DData.setVertexWeights(createNativeByteBuffer(object3DData.getJointCount()*3*3*4).asFloatBuffer());
+        object3DData.setPosition(animatedModel.getPosition());
+        object3DData.setScale(animatedModel.getScale());
 
-        Log.i("Object3DBuilder","Building "+skeleton.getJointCount()+" bones...");
-        buildBones(skeleton, skeleton.getRootJoint(), identity, new float[]{0,0,0}, -1, animatedModel.getVertexBuffer());
+        Log.i("Object3DBuilder","Building "+object3DData.getJointCount()+" bones...");
+        buildBones(object3DData, object3DData.getRootJoint(), identity, new float[]{0,0,0}, -1, animatedModel.getVertexBuffer());
 
-        skeleton.setId(animatedModel.getId()+"-skeleton");
+        object3DData.setId(animatedModel.getId()+"-skeleton");
 
-        return skeleton;
+        return object3DData;
     }
 
     private static void buildBones(AnimatedModel animatedModel, Joint joint, float[] parentTransform, float[]

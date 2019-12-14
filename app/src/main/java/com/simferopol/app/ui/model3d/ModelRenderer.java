@@ -398,15 +398,15 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 				// draw skeleton
 				else if (scene.isDrawSkeleton() && objData instanceof AnimatedModel && ((AnimatedModel) objData)
 						.getAnimation() != null){
-					Object3DData skeleton = this.skeleton.get(objData);
-					if (skeleton == null){
-						skeleton = Object3DBuilder.buildSkeleton((AnimatedModel) objData);
-						this.skeleton.put(objData, skeleton);
+					Object3DData object3DData = this.skeleton.get(objData);
+					if (object3DData == null){
+						object3DData = Object3DBuilder.buildSkeleton((AnimatedModel) objData);
+						this.skeleton.put(objData, object3DData);
 					}
-					animator.update(skeleton, scene.isShowBindPose());
-					drawerObject = drawer.getDrawer(skeleton, false, scene.isDrawLighting(), scene
+					animator.update(object3DData, scene.isShowBindPose());
+					drawerObject = drawer.getDrawer(object3DData, false, scene.isDrawLighting(), scene
                             .isDoAnimation(), scene.isDrawColors());
-					drawerObject.draw(skeleton, projectionMatrix, viewMatrix,-1, lightPosInWorldSpace, colorMask, cameraPosInWorldSpace);
+					drawerObject.draw(object3DData, projectionMatrix, viewMatrix,-1, lightPosInWorldSpace, colorMask, cameraPosInWorldSpace);
 				}
 
 				// draw solids

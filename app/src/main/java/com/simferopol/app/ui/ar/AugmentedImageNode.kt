@@ -11,7 +11,7 @@ import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ModelRenderable
 import java.util.concurrent.CompletableFuture
 
-private const val RENDER_3D_MODEL = "models/skeleton.sfb"
+private const val RENDER_3D_MODEL = "models/house.sfb"
 
 /**
  * Node for rendering an augmented image. The image is framed by placing the virtual picture frame
@@ -19,7 +19,7 @@ private const val RENDER_3D_MODEL = "models/skeleton.sfb"
  */
 class AugmentedImageNode(context: Context?) : AnchorNode() {
 
-    private val skeleton: CompletableFuture<ModelRenderable?> = ModelRenderable.builder()
+    private val house: CompletableFuture<ModelRenderable?> = ModelRenderable.builder()
         .setSource(context, Uri.parse(RENDER_3D_MODEL))
         .build()
 
@@ -31,8 +31,8 @@ class AugmentedImageNode(context: Context?) : AnchorNode() {
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     fun setImage(image: AugmentedImage) {
-        if (!skeleton.isDone) {
-            CompletableFuture.allOf(skeleton)
+        if (!house.isDone) {
+            CompletableFuture.allOf(house)
                 .thenAccept { setImage(image) }
                 .exceptionally { null }
         }
@@ -42,6 +42,6 @@ class AugmentedImageNode(context: Context?) : AnchorNode() {
         localPosition[0f, 0.0f] = 0f
         cornerNode.setParent(this)
         cornerNode.localPosition = localPosition
-        cornerNode.renderable = skeleton.getNow(null)
+        cornerNode.renderable = house.getNow(null)
     }
 }
