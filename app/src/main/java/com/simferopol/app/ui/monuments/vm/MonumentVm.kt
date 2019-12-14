@@ -24,7 +24,7 @@ class MonumentVm(monumentVm: GeoObject) : ViewModel() {
     }
 
     fun onModelClick(view: View) {
-        val file = "models/house.obj"
+        val file = "models/house.obj"//FIXME implement custom
         val fileUri = Uri.parse("assets://" + view.context.packageName + "/" + file).toString()
         val action = MonumentFragmentDirections.actionNavMonumentToNavModel3d(
             fileUri,
