@@ -41,6 +41,4 @@ dependencies {
     implementation retrofit.logging
 
     testImplementation test.junit
-    androidTestImplementation test.testRunner
-    androidTestImplementation test.espresso
 }

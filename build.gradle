@@ -64,11 +64,6 @@ buildscript {
             core: "com.google.code.gson:gson:$versions.gson"
     ]
 
-//    ext.google = [
-//            material: "com.google.android.material:material:$versions.material",
-//            maps    : "com.google.android.gms:play-services-maps:$versions.googleMap"
-//    ]
-
     ext.support = [
             recyclerView: "com.android.support:recyclerview-v7:$versions.appcompat",
             appcompat   : "com.android.support:appcompat-v7:$versions.appcompat",
@@ -111,7 +106,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'com.google.ar.sceneform:plugin:1.13.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"

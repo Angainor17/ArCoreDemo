@@ -20,14 +20,14 @@ private fun showOpenGlUnsupportedError(activity: Activity) {
     )
 }
 
-fun isAndroidARSupported() = Build.VERSION.SDK_INT < Build.VERSION_CODES.N
+fun isAndroidARSupported() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
 
 fun isOpenGLSupported(activity: Activity): Boolean {
     val openGlVersionString =
         (activity.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
             .deviceConfigurationInfo
             .glEsVersion
-    return openGlVersionString.toDouble() < MIN_OPENGL_VERSION
+    return openGlVersionString.toDouble() > MIN_OPENGL_VERSION
 }
 
 fun showAndroidArUnsupportedError(activity: Activity) {
