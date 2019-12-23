@@ -4,10 +4,13 @@ import android.location.Location
 import android.os.*
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.google.ar.core.TrackingState
 import com.google.ar.core.exceptions.CameraNotAvailableException
 import com.google.ar.sceneform.Node
@@ -15,6 +18,7 @@ import com.google.ar.sceneform.rendering.ViewRenderable
 import com.simferopol.app.R
 import com.simferopol.app.ui.ar.isAndroidARSupported
 import com.simferopol.app.ui.ar.isOpenGLSupported
+import com.simferopol.app.ui.ar.showArCoreError
 import com.simferopol.app.ui.arLocation.ARLocationVm
 import com.simferopol.app.ui.arLocation.model.Geolocation
 import com.simferopol.app.ui.arLocation.model.Venue
@@ -22,7 +26,6 @@ import com.simferopol.app.ui.arLocation.utils.AugmentedRealityLocationUtils
 import com.simferopol.app.ui.arLocation.utils.INITIAL_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.INVALID_MARKER_SCALE_MODIFIER
 import com.simferopol.app.ui.arLocation.utils.PermissionUtils
-import com.simferopol.app.utils.base.ArActivity
 import kotlinx.android.synthetic.main.activity_ar_location.*
 import kotlinx.android.synthetic.main.location_layout_renderable.view.*
 import uk.co.appoly.arcorelocation.LocationMarker
@@ -32,7 +35,7 @@ import java.util.concurrent.CompletableFuture
 
 const val VISIBLE_MAX_RANGE = 1000f
 
-class ARLocationActivity : ArActivity() {
+class ARLocationFragment : Fragment() {
 
     private lateinit var vm: ARLocationVm
 
@@ -54,9 +57,14 @@ class ARLocationActivity : ArActivity() {
         super.onCreate(savedInstanceState)
         vm = ViewModelProviders.of(this).get(ARLocationVm::class.java)
 
-        setContentView(R.layout.activity_ar_location)
         setupLoadingDialog()
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.activity_ar_location, container, false)
 
     override fun onResume() {
         super.onResume()
@@ -73,9 +81,9 @@ class ARLocationActivity : ArActivity() {
     }
 
     private fun setupLoadingDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(this)
+        val alertDialogBuilder = AlertDialog.Builder(activity!!)
         val dialogHintMainView =
-            LayoutInflater.from(this).inflate(R.layout.loading_dialog, null) as LinearLayout
+            LayoutInflater.from(activity!!).inflate(R.layout.loading_dialog, null) as LinearLayout
         alertDialogBuilder.setView(dialogHintMainView)
         loadingDialog = alertDialogBuilder.create()
         loadingDialog.setCanceledOnTouchOutside(false)
@@ -87,7 +95,7 @@ class ARLocationActivity : ArActivity() {
         if (arSceneView.session == null) {
             try {
                 val session =
-                    AugmentedRealityLocationUtils.setupSession(this, arCoreInstallRequested)
+                    AugmentedRealityLocationUtils.setupSession(activity!!, arCoreInstallRequested)
 
                 if (session == null) {
                     arCoreInstallRequested = true
@@ -96,13 +104,13 @@ class ARLocationActivity : ArActivity() {
                     arSceneView.setupSession(session)
                 }
             } catch (e: Exception) {
-                AugmentedRealityLocationUtils.handleSessionException(this, e)
+                AugmentedRealityLocationUtils.handleSessionException(activity!!, e)
             }
         }
 
         try {
             if (locationScene == null) {
-                locationScene = LocationScene(this, arSceneView)
+                locationScene = LocationScene(activity!!, arSceneView)
                 locationScene?.setMinimalRefreshing(true)
                 locationScene?.setOffsetOverlapping(true)
                 locationScene?.anchorRefreshInterval = 2000
@@ -114,14 +122,14 @@ class ARLocationActivity : ArActivity() {
         try {
             resumeArElementsTask.run()
         } catch (e: CameraNotAvailableException) {
-            Toast.makeText(this, "Unable to get camera", Toast.LENGTH_LONG).show()
-            finish()
+            Toast.makeText(context, "Unable to get camera", Toast.LENGTH_LONG).show()
+            activity?.onBackPressed()
             return
         }
 
         try {
             if (userGeolocation == Geolocation.EMPTY_GEOLOCATION) {
-                LocationAsyncTask(WeakReference(this@ARLocationActivity)).execute(
+                LocationAsyncTask(WeakReference(this@ARLocationFragment)).execute(
                     locationScene!!
                 )
             }
@@ -169,12 +177,12 @@ class ARLocationActivity : ArActivity() {
     private fun setupAndRenderVenuesMarkers() {
         val venuesList = venuesSet.toList()
             .filter {
-            distanceToUser(it) <= VISIBLE_MAX_RANGE
-        }
+                distanceToUser(it) <= VISIBLE_MAX_RANGE
+            }
 
         venuesList.forEach { venue ->
             val completableFutureViewRenderable = ViewRenderable.builder()
-                .setView(this, R.layout.location_layout_renderable)
+                .setView(context, R.layout.location_layout_renderable)
                 .build()
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return@forEach
 
@@ -239,7 +247,7 @@ class ARLocationActivity : ArActivity() {
         }
         locationMarker.setRenderEvent { locationNode ->
             layoutRendarable.distance.text =
-                AugmentedRealityLocationUtils.showDistance(locationNode.distance)
+                AugmentedRealityLocationUtils.showDistance(activity!!, locationNode.distance)
             resumeArElementsTask.run {
                 computeNewScaleModifierBasedOnDistance(locationMarker, locationNode.distance)
             }
@@ -277,22 +285,24 @@ class ARLocationActivity : ArActivity() {
         val markerLayoutContainer = nodeLayout.pinContainer
         venueName.text = venue.name
         markerLayoutContainer.visibility = View.GONE
-        nodeLayout.setOnTouchListener { _, _ ->
-            Toast.makeText(this, venue.address, Toast.LENGTH_SHORT).show()
-            false
+        nodeLayout.setOnClickListener {
+            val action = ARLocationFragmentDirections.actionNavArLocationToNavMonument(
+                venue.geoObject
+            )
+            content.findNavController().navigate(action)
         }
 
         return node
     }
 
     private fun checkAndRequestPermissions() {
-        if (!isAndroidARSupported() || !isOpenGLSupported(this)) {
-            showUnsupportedError()
+        if (activity != null && !isAndroidARSupported() || !isOpenGLSupported(activity!!)) {
+            showArCoreError(activity!!)
             return
         }
 
-        if (!PermissionUtils.hasLocationAndCameraPermissions(this)) {
-            PermissionUtils.requestCameraAndLocationPermissions(this)
+        if (!PermissionUtils.hasLocationAndCameraPermissions(activity!!)) {
+            PermissionUtils.requestCameraAndLocationPermissions(activity!!)
         } else {
             setupSession()
         }
@@ -303,20 +313,20 @@ class ARLocationActivity : ArActivity() {
         permissions: Array<String>,
         results: IntArray
     ) {
-        if (!PermissionUtils.hasLocationAndCameraPermissions(this)) {
+        if (!PermissionUtils.hasLocationAndCameraPermissions(activity!!)) {
             Toast.makeText(
-                this, R.string.camera_and_location_permission_request, Toast.LENGTH_LONG
+                activity!!, R.string.camera_and_location_permission_request, Toast.LENGTH_LONG
             )
                 .show()
-            if (!PermissionUtils.shouldShowRequestPermissionRationale(this)) {
+            if (!PermissionUtils.shouldShowRequestPermissionRationale(activity!!)) {
                 // Permission denied with checking "Do not ask again".
-                PermissionUtils.launchPermissionSettings(this)
+                PermissionUtils.launchPermissionSettings(activity!!)
             }
-            finish()
+            activity?.onBackPressed()
         }
     }
 
-    class LocationAsyncTask(private val activityWeakReference: WeakReference<ARLocationActivity>) :
+    class LocationAsyncTask(private val activityWeakReference: WeakReference<ARLocationFragment>) :
         AsyncTask<LocationScene, Void, List<Double>>() {
 
         override fun onPreExecute() {

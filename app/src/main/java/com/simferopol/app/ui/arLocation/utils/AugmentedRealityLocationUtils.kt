@@ -1,6 +1,7 @@
 package com.simferopol.app.ui.arLocation.utils
 
 import android.app.Activity
+import android.content.Context
 import android.widget.Toast
 import com.google.ar.core.ArCoreApk
 import com.google.ar.core.Config
@@ -81,8 +82,11 @@ object AugmentedRealityLocationUtils {
         else -> 0f
     }
 
-    fun showDistance(distance: Int): String = if (distance >= 1000)
-        String.format("%.2f", (distance.toDouble() / 1000)) + " km"
+    fun showDistance(context: Context, distance: Int): String = if (distance >= 1000)
+        String.format(
+            "%.2f",
+            (distance.toDouble() / 1000)
+        ) + " " + context.getString(R.string.distance_km).toLowerCase()
     else
-        "$distance m"
+        "$distance " + context.getString(R.string.distance_m).toLowerCase()
 }

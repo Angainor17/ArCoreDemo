@@ -1,14 +1,19 @@
 package com.simferopol.app.ui.arLocation.model
 
+import com.simferopol.api.models.GeoObject
+
 data class Venue(
 
-    val name: String,
+    val geoObject: GeoObject,
 
-    val address: String,
+    val name: String = geoObject.name ?: "",
 
-    val lat: Double,
+    val address: String = geoObject.address ?: "",
 
-    val long: Double,
+    val lat: Double = geoObject.lat ?: 0.0,
 
-    val iconURL: String
+    val long: Double = geoObject.lon ?: 0.0,
+
+    val iconURL: String = ""
+
 )

@@ -22,6 +22,7 @@
     <string name="version">Версия</string>
     <string name="build">сборка</string>
     <string name="distance_km">КМ</string>
+    <string name="distance_m">м</string>
     <string name="address">Адрес</string>
     <string name="contacts">Контакты</string>
     <string name="site">Сайт</string>

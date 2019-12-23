@@ -75,19 +75,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.arLocation.view.ARLocationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-
-            tools:overrideLibrary="uk.co.arcorelocation">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />

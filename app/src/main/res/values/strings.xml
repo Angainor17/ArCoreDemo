@@ -25,6 +25,7 @@
     <string name="version">Version</string>
     <string name="build">build</string>
     <string name="distance_km">KM</string>
+    <string name="distance_m">m</string>
     <string name="address">Address</string>
     <string name="contacts">Contacts</string>
     <string name="site">Website</string>

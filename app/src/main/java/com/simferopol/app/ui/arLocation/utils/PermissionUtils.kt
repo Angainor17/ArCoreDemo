@@ -24,25 +24,14 @@ object PermissionUtils {
         return true
     }
 
-    fun hasCameraPermission(activity: Activity): Boolean {
-        return (ActivityCompat.checkSelfPermission(activity, CAMERA_PERMISSION) == PackageManager.PERMISSION_GRANTED)
-    }
-
-    fun requestCameraPermission(activity: Activity) {
-        ActivityCompat.requestPermissions(
-                activity, arrayOf(CAMERA_PERMISSION), CAMERA_PERMISSION_CODE
-        )
-    }
-
     fun requestCameraAndLocationPermissions(activity: Activity) {
         ActivityCompat.requestPermissions(
                 activity, permissions, MULTIPLE_PERMISSION_CODE
         )
     }
 
-    fun shouldShowRequestPermissionRationale(activity: Activity): Boolean {
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity, CAMERA_PERMISSION)
-    }
+    fun shouldShowRequestPermissionRationale(activity: Activity): Boolean =
+        ActivityCompat.shouldShowRequestPermissionRationale(activity, CAMERA_PERMISSION)
 
 
     fun launchPermissionSettings(activity: Activity) {

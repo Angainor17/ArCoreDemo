@@ -189,13 +189,24 @@
 
         tools:layout="@layout/activity_ar_flyer" />
 
-    <activity
+    <fragment
         android:id="@+id/nav_ar_location"
 
-        android:name="com.simferopol.app.ui.arLocation.view.ARLocationActivity"
+        android:name="com.simferopol.app.ui.arLocation.view.ARLocationFragment"
         android:label="@string/ar_location"
 
-        tools:layout="@layout/activity_ar_location"/>
+        tools:layout="@layout/activity_ar_location">
+
+        <action
+            android:id="@+id/action_nav_ar_location_to_nav_monument"
+
+            app:destination="@+id/nav_monument"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
 
     <activity
         android:id="@+id/nav_model_3d"

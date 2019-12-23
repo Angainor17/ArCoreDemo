@@ -22,13 +22,7 @@ class ARLocationVm : ViewModel() {
             if (geoObjects.success) {
 
                 val venues = geoObjects.data?.map {
-                    Venue(
-                        it.name ?: "",
-                        it.address ?: "",
-                        it.lat ?: 0.0,
-                        it.lon ?: 0.0,
-                        ""
-                    )
+                    Venue(it)
                 }
                 venues?.let { venuesLiveData.postValue(ArrayList(it)) }
             }
