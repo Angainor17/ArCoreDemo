@@ -67,7 +67,7 @@ class SnackbarHelper {
                 if (dismissBehavior != DismissBehavior.HIDE) {
                     messageSnackbar?.setAction(activity.getString(R.string.dismiss)) {
                         messageSnackbar?.dismiss()
-                        activity.finish()
+                        activity.onBackPressed()
                     }
                 }
                 messageSnackbar?.show()

@@ -20,6 +20,13 @@ class ArFlyerActivity : ArActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!isAndroidARSupported() || !isOpenGLSupported(this)) {
+            setContentView(R.layout.activity_black)
+            showArCoreError(this)
+            return
+        }
+
         setContentView(R.layout.activity_ar_flyer)
 
         arFragment = supportFragmentManager.findFragmentById(R.id.ux_fragment) as ArFragment

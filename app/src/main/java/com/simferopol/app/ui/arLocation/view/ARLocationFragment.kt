@@ -46,7 +46,7 @@ class ARLocationFragment : Fragment() {
 
     private val resumeArElementsTask = Runnable {
         locationScene?.resume()
-        arSceneView.resume()
+        arSceneView?.resume()
     }
 
     private var userGeolocation = Geolocation.EMPTY_GEOLOCATION
@@ -64,7 +64,15 @@ class ARLocationFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.activity_ar_location, container, false)
+    ): View? {
+        showArCoreError(activity!!)
+        val isArSupported = isAndroidARSupported() && isOpenGLSupported(activity!!)
+        return inflater.inflate(
+            if (isArSupported) R.layout.activity_ar_location else R.layout.activity_black,
+            container,
+            false
+        )
+    }
 
     override fun onResume() {
         super.onResume()
@@ -74,7 +82,7 @@ class ARLocationFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        arSceneView.session?.let {
+        arSceneView?.session?.let {
             locationScene?.pause()
             arSceneView?.pause()
         }
@@ -101,7 +109,7 @@ class ARLocationFragment : Fragment() {
                     arCoreInstallRequested = true
                     return
                 } else {
-                    arSceneView.setupSession(session)
+                    arSceneView?.setupSession(session)
                 }
             } catch (e: Exception) {
                 AugmentedRealityLocationUtils.handleSessionException(activity!!, e)
@@ -215,7 +223,7 @@ class ARLocationFragment : Fragment() {
     }
 
     private fun updateVenuesMarkers() {
-        arSceneView.scene.addOnUpdateListener {
+        arSceneView?.scene?.addOnUpdateListener {
             if (!areAllMarkersLoaded) return@addOnUpdateListener
 
             locationScene?.mLocationMarkers?.forEach { locationMarker ->
