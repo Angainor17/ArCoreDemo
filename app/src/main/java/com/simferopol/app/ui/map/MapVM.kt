@@ -7,8 +7,8 @@ import com.simferopol.api.apiManager.ApiManager
 import com.simferopol.api.models.GeoObject
 import com.simferopol.app.App.Companion.kodein
 import com.simferopol.app.ui.map.base.IMapView
-import com.simferopol.app.utils.ui.YandexMapUtils
-import com.yandex.mapkit.map.MapObjectTapListener
+//import com.simferopol.app.utils.ui.YandexMapUtils
+//import com.yandex.mapkit.map.MapObjectTapListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,8 +27,8 @@ class MapVM(view: IMapView) : BaseMapVm(view) {
     }
 
     fun onSelectRouteClick(view: View) {
-        val action = MapFragmentDirections.actionNavMapToNavRoutes()
-        view.findNavController().navigate(action)
+//        val action = MapFragmentDirections.actionNavMapToNavRoutes()
+//        view.findNavController().navigate(action)
     }
 
     fun onArClick(view: View) {
@@ -36,24 +36,24 @@ class MapVM(view: IMapView) : BaseMapVm(view) {
         view.findNavController().navigate(action)
     }
 
-    fun initData(mapObjectTapListener: MapObjectTapListener) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val result = if (currentObject.value != null)
-                apiManager.getGeoObjects(currentObject.value?.categoryId)
-            else apiManager.getGeoObjects(1)
-            if (result.success) {
-                GlobalScope.launch(Dispatchers.Main) {
-                    listOfGeoObjects.value = (ArrayList(result.data?.map { it } ?: ArrayList()))
-                    YandexMapUtils().initMapObjects(
-                        listOfGeoObjects.value!!,
-                        view.findMapView(),
-                        mapObjectTapListener,
-                        currentObject.value
-                    )
-                }
-            }
-        }
-    }
+//    fun initData(mapObjectTapListener: MapObjectTapListener) {
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val result = if (currentObject.value != null)
+//                apiManager.getGeoObjects(currentObject.value?.categoryId)
+//            else apiManager.getGeoObjects(1)
+//            if (result.success) {
+//                GlobalScope.launch(Dispatchers.Main) {
+//                    listOfGeoObjects.value = (ArrayList(result.data?.map { it } ?: ArrayList()))
+//                    YandexMapUtils().initMapObjects(
+//                        listOfGeoObjects.value!!,
+//                        view.findMapView(),
+//                        mapObjectTapListener,
+//                        currentObject.value
+//                    )
+//                }
+//            }
+//        }
+//    }
 
     fun initWeather() {
         GlobalScope.launch(Dispatchers.IO) {

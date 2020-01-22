@@ -23,8 +23,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_launcher"
+        android:label="ArCore Demo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
@@ -32,8 +31,9 @@
         tools:targetApi="m">
 
         <activity
-            android:name=".ui.splashScreen.SplashScreenActivity"
+            android:name=".DemoActivity"
             android:screenOrientation="portrait"
+            android:label="ArCore Demo"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,9 +43,10 @@
         </activity>
 
         <activity
-            android:name=".navDrawer.NavDrawer"
+            android:name=".ArLocationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

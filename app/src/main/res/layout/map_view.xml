@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -21,14 +20,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.yandex.mapkit.mapview.MapView
-            android:id="@+id/mapView"
+<!--        <com.yandex.mapkit.mapview.MapView-->
+<!--            android:id="@+id/mapView"-->
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}"
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:visibility="@{vm.viewState==ViewState.CONTENT? View.VISIBLE: View.GONE}"-->
 
-            app:zoom="@{vm.currentZoom}" />
+<!--            app:zoom="@{vm.currentZoom}" />-->
 
         <include
             layout="@layout/loading_view"

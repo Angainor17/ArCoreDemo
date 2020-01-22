@@ -8,9 +8,9 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="vm"
-            type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm" />
+<!--        <variable-->
+<!--            name="vm"-->
+<!--            type="com.simferopol.app.ui.routes.routeGeoObjects.vm.GeoObjectVm" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,6 @@
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{()->vm.onItemClick(parent)}"
 
         tools:layout_height="wrap_content">
 
@@ -42,7 +41,7 @@
 
             style="@style/RouteLineStyle"
             android:layout_height="0dp"
-            android:visibility="@{vm.isLast() ? View.GONE: View.VISIBLE }"
+
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/icon"
@@ -54,7 +53,7 @@
 
             style="@style/RouteLineStyle"
             android:layout_height="0dp"
-            android:visibility="@{vm.isFirst() ? View.GONE: View.VISIBLE }"
+
 
             app:layout_constraintBottom_toTopOf="@id/icon"
             app:layout_constraintEnd_toEndOf="@id/icon"
@@ -71,7 +70,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{vm.address}"
+
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
@@ -88,7 +87,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:drawablePadding="8dp"
-            android:text="@{vm.name}"
+
             android:textColor="@color/colorPrimaryDark"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +104,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@{vm.about}"
+
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

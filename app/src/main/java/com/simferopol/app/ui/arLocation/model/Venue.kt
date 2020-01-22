@@ -6,13 +6,13 @@ data class Venue(
 
     val geoObject: GeoObject,
 
-    val name: String = geoObject.name ?: "",
+    var name: String = geoObject.name ?: "",
 
     val address: String = geoObject.address ?: "",
 
-    val lat: Double = geoObject.lat ?: 0.0,
+    var lat: Double = geoObject.lat ?: 0.0,
 
-    val long: Double = geoObject.lon ?: 0.0,
+    var long: Double = geoObject.lon ?: 0.0,
 
     val iconURL: String = ""
 

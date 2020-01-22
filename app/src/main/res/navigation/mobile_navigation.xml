@@ -48,22 +48,22 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_routes"
+<!--    <fragment-->
+<!--        android:id="@+id/nav_routes"-->
 
-        android:name="com.simferopol.app.ui.routes.RoutesFragment"
-        android:label="@string/menu_routes"
+<!--        android:name="com.simferopol.app.ui.routes.RoutesFragment"-->
+<!--        android:label="@string/menu_routes"-->
 
-        tools:layout="@layout/fragment_routes">
-        <action
-            android:id="@+id/action_nav_routes_to_nav_route"
+<!--        tools:layout="@layout/fragment_routes">-->
+<!--        <action-->
+<!--            android:id="@+id/action_nav_routes_to_nav_route"-->
 
-            app:destination="@+id/nav_route"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
+<!--            app:destination="@+id/nav_route"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
+<!--    </fragment>-->
 
     <fragment
         android:id="@+id/nav_monuments"
@@ -238,34 +238,34 @@
 
         tools:layout="@layout/fragment_settings" />
 
-    <fragment
+<!--    <fragment-->
 
-        android:id="@+id/nav_route"
-        android:name="com.simferopol.app.ui.routes.routeGeoObjects.RouteFragment"
+<!--        android:id="@+id/nav_route"-->
+<!--        android:name="com.simferopol.app.ui.routes.routeGeoObjects.RouteFragment"-->
 
-        tools:layout="@layout/fragment_route">
+<!--        tools:layout="@layout/fragment_route">-->
 
-        <argument
-            android:name="route"
-            app:argType="com.simferopol.api.models.Route" />
+<!--        <argument-->
+<!--            android:name="route"-->
+<!--            app:argType="com.simferopol.api.models.Route" />-->
 
-        <action
-            android:id="@+id/action_nav_route_to_nav_route_map"
-            app:destination="@+id/nav_route_map"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+<!--        <action-->
+<!--            android:id="@+id/action_nav_route_to_nav_route_map"-->
+<!--            app:destination="@+id/nav_route_map"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-        <action
-            android:id="@+id/action_nav_route_to_nav_monument"
-            app:destination="@+id/nav_monument"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+<!--        <action-->
+<!--            android:id="@+id/action_nav_route_to_nav_monument"-->
+<!--            app:destination="@+id/nav_monument"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-    </fragment>
+<!--    </fragment>-->
 
     <fragment
 
@@ -294,33 +294,33 @@
 
     </fragment>
 
-    <fragment
+<!--    <fragment-->
 
-        android:id="@+id/nav_route_map"
-        android:name="com.simferopol.app.ui.routes.RouteMapFragment"
+<!--        android:id="@+id/nav_route_map"-->
+<!--        android:name="com.simferopol.app.ui.routes.RouteMapFragment"-->
 
-        tools:layout="@layout/fragment_route_map">
+<!--        tools:layout="@layout/fragment_route_map">-->
 
-        <argument
-            android:name="route"
-            app:argType="com.simferopol.api.models.Route" />
+<!--        <argument-->
+<!--            android:name="route"-->
+<!--            app:argType="com.simferopol.api.models.Route" />-->
 
-        <action
-            android:id="@+id/action_nav_route_map_to_nav_monument"
-            app:destination="@+id/nav_monument"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+<!--        <action-->
+<!--            android:id="@+id/action_nav_route_map_to_nav_monument"-->
+<!--            app:destination="@+id/nav_monument"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-        <action
-            android:id="@+id/action_nav_route_map_to_nav_route"
-            app:destination="@+id/nav_route"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
+<!--        <action-->
+<!--            android:id="@+id/action_nav_route_map_to_nav_route"-->
+<!--            app:destination="@+id/nav_route"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
+<!--    </fragment>-->
 
     <fragment
 

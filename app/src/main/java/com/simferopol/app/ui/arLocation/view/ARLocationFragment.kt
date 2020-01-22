@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.google.ar.core.TrackingState
 import com.google.ar.core.exceptions.CameraNotAvailableException
 import com.google.ar.sceneform.Node
@@ -153,7 +152,10 @@ class ARLocationFragment : Fragment() {
     }
 
     private fun setPoints() {
-        val venueList = vm.venuesLiveData.value
+        val venueList = vm.venuesLiveData.value?.take(4)
+//        val venueList = arrayListOf(
+//            Venue(GeoObject(),"","",44f, )
+//        )
 
         venueList?.let {
             venuesSet.clear()
@@ -184,9 +186,29 @@ class ARLocationFragment : Fragment() {
 
     private fun setupAndRenderVenuesMarkers() {
         val venuesList = venuesSet.toList()
-            .filter {
-                distanceToUser(it) <= VISIBLE_MAX_RANGE
-            }
+//            .filter {
+//                distanceToUser(it) <= VISIBLE_MAX_RANGE
+//            }
+        val userLat = userGeolocation.latitude?.toDouble()!!
+        val userLon = userGeolocation.longitude?.toDouble()!!
+
+        val step = 0.001
+
+        venuesList[0].name = "North"
+        venuesList[0].lat = userLat + step
+        venuesList[0].long = userLon
+
+        venuesList[1].name = "South"
+        venuesList[1].lat = userLat - step
+        venuesList[1].long = userLon
+
+        venuesList[2].name = "West"
+        venuesList[2].lat = userLat
+        venuesList[2].long = userLon - step
+
+        venuesList[3].name = "East"// север
+        venuesList[3].lat = userLat
+        venuesList[3].long = userLon + step
 
         venuesList.forEach { venue ->
             val completableFutureViewRenderable = ViewRenderable.builder()
@@ -293,12 +315,12 @@ class ARLocationFragment : Fragment() {
         val markerLayoutContainer = nodeLayout.pinContainer
         venueName.text = venue.name
         markerLayoutContainer.visibility = View.GONE
-        nodeLayout.setOnClickListener {
-            val action = ARLocationFragmentDirections.actionNavArLocationToNavMonument(
-                venue.geoObject
-            )
-            content.findNavController().navigate(action)
-        }
+//        nodeLayout.setOnClickListener {
+//            val action = ARLocationFragmentDirections.actionNavArLocationToNavMonument(
+//                venue.geoObject
+//            )
+//            content.findNavController().navigate(action)
+//        }
 
         return node
     }
