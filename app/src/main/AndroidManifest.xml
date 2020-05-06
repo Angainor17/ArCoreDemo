@@ -22,7 +22,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ar_core"
         android:label="ArCore Demo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -43,30 +43,7 @@
         </activity>
 
         <activity
-            android:name=".ArLocationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-
-        <activity
             android:name=".ui.ar.ArFlyerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.model3d.ModelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 

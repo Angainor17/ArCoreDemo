@@ -24,9 +24,4 @@ class DemoActivity : AppCompatActivity() {
         val intent = Intent(this, ArFlyerActivity::class.java)
         startActivity(intent)
     }
-
-    fun mapAr() {
-        val intent = Intent(this, ArLocationActivity::class.java)
-        startActivity(intent)
-    }
 }
