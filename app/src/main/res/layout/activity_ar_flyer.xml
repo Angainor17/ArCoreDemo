@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/ux_fragment"
-        android:name="com.simferopol.app.ui.ar.AugmentedImageFragment"
+        android:name="com.ar.app.ui.ar.AugmentedImageFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

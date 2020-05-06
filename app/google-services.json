@@ -1,16 +1,16 @@
 {
   "project_info": {
     "project_number": "1010939257834",
-    "firebase_url": "https://simferopol.firebaseio.com",
-    "project_id": "simferopol",
-    "storage_bucket": "simferopol.appspot.com"
+    "firebase_url": "https://ar.firebaseio.com",
+    "project_id": "arCoreDemo",
+    "storage_bucket": "ar.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:1010939257834:android:3576699b34afd009250893",
         "android_client_info": {
-          "package_name": "com.simferopol.app"
+          "package_name": "com.ar.app"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1010939257834-isltdpuoq8f2rr8fu1l419kco4r694dv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.simferopol.app",
+            "package_name": "com.ar.app",
             "certificate_hash": "255c9e5b956babeaded0a8134f3014dee0b25b2d"
           }
         },

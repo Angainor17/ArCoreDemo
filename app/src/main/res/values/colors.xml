@@ -3,31 +3,7 @@
     <color name="colorPrimary">#00b5d1</color>
     <color name="colorPrimaryDark">#2b2b2b</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="white">#FFFFFF</color>
-
-    <color name="separatorColor">#7A7A7A</color>
-    <color name="lightGray">#A3A3A3</color>
-    <color name="textGray">#808183</color>
-
-    <color name="orangeSelected">#e35205</color>
-    <color name="unselectedColor">#e7e7e7</color>
 
     <color name="black">#000000</color>
-    <color name="colorSubTitle">#ff2b2a2c</color>
-    <color name="iconLight">#bfc0c0</color>
-
-    <color name="orangeUnselected">#ffc55324</color>
-    <color name="orangeSelectedLight">#ffff7f41</color>
-
-    <color name="black_alpha_07">#B3000000</color>
-    <color name="black_alpha_03">#4D000000</color>
-    <color name="grey_alpha_09">#E62B2B2B</color>
-    <color name="grey_alpha_07">#B32b2b2b</color>
-
-    <color name="white_alpha_07">#B3ffffff</color>
-    <color name="white_alpha_08">#C8ffffff</color>
-
-    <color name="colorPrimary_03">#4D00B5D1</color>
-    <color name="colorPrimary_08">#CC00B5D1</color>
 
 </resources>

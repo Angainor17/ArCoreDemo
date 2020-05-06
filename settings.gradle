@@ -1,2 +1,2 @@
-include ':app', ':engine'
-rootProject.name='Simferopol'
+include ':app'
+rootProject.name='ArCoreDemo'

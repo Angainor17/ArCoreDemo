@@ -1,2 +1,1 @@
--keep class com.simferopol.api.models.*
 -keep class com.google.ar.core.*

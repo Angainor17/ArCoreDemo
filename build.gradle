@@ -38,7 +38,6 @@ buildscript {
             coroutine       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutine",
             kotlinxCoroutine: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1",
             reflection      : "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
-
     ]
 
     ext.arCore = [
@@ -108,7 +107,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath 'com.google.ar.sceneform:plugin:1.13.0'
+        classpath 'com.google.ar.sceneform:plugin:1.15.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
     }
